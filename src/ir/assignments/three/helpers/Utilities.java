@@ -47,13 +47,16 @@ public class Utilities {
 			to tokenize input file.
 		*/
 		ArrayList<String> returnList = new ArrayList<String>();
+		StopWords stopWords = new StopWords();
 		String nextWord;
 		try {
 			Scanner s = new Scanner(input).useDelimiter("[^A-Za-z0-9']");
 			while(s.hasNext()) {
 				nextWord = s.next().toLowerCase();
-				if (nextWord.length() > 0) {
-					returnList.add(nextWord);
+				if (!stopWords.isAStopword(nextWord)) {
+					if (nextWord.length() > 0) {
+						returnList.add(nextWord);
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -184,7 +187,6 @@ public class Utilities {
 		String totalString = "Total " + type + " count: %d\n";
 		String uniqueString = "Unique " + type +  " count: %d\n";
 		String wordCountString;
-		StopWords stopWords = new StopWords();
 
 		Collections.sort(frequencies, new FreqComparator());
 		for (Frequency freq: frequencies) {
@@ -203,10 +205,8 @@ public class Utilities {
 			freqWriter.write(String.format(totalString, total_count));
 			freqWriter.write(String.format(uniqueString, unique_count));
 			for (Frequency freq: frequencies) {
-				if (!stopWords.isAStopword(freq.getText().toLowerCase())) {
-					freqWriter.write(String.format(wordCountString, freq.getText(), freq.getFrequency()));
-					freqWriter.flush();
-				}
+				freqWriter.write(String.format(wordCountString, freq.getText(), freq.getFrequency()));
+				freqWriter.flush();
 			}
 		} catch (IOException e) {
 			System.err.println(e);
