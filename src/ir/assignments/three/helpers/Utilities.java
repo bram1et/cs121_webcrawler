@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
 import java.lang.Math;
+import ir.assignments.three.helpers.StopWords;
 
 
 import ir.assignments.three.helpers.Frequency;
@@ -183,6 +184,7 @@ public class Utilities {
 		String totalString = "Total " + type + " count: %d\n";
 		String uniqueString = "Unique " + type +  " count: %d\n";
 		String wordCountString;
+		StopWords stopWords = new StopWords();
 
 		Collections.sort(frequencies, new FreqComparator());
 		for (Frequency freq: frequencies) {
@@ -201,8 +203,10 @@ public class Utilities {
 			freqWriter.write(String.format(totalString, total_count));
 			freqWriter.write(String.format(uniqueString, unique_count));
 			for (Frequency freq: frequencies) {
-				freqWriter.write(String.format(wordCountString, freq.getText(), freq.getFrequency()));
-				freqWriter.flush();
+				if (!stopWords.isAStopword(freq.getText().toLowerCase())) {
+					freqWriter.write(String.format(wordCountString, freq.getText(), freq.getFrequency()));
+					freqWriter.flush();
+				}
 			}
 		} catch (IOException e) {
 			System.err.println(e);

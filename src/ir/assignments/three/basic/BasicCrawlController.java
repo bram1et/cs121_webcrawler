@@ -65,13 +65,13 @@ public class BasicCrawlController {
      * You can set the maximum crawl depth here. The default value is -1 for
      * unlimited depth
      */
-    config.setMaxDepthOfCrawling(2);
+    config.setMaxDepthOfCrawling(-1);
 
     /*
      * You can set the maximum number of pages to crawl. The default value
      * is -1 for unlimited number of pages
      */
-    config.setMaxPagesToFetch(1000);
+    config.setMaxPagesToFetch(-1);
 
     /**
      * Do you want crawler4j to crawl also binary data ?
@@ -110,8 +110,8 @@ public class BasicCrawlController {
      * URLs that are fetched and then the crawler starts following links
      * which are found in these pages
      */
-//    controller.addSeed("http://www.ics.uci.edu/");
-    controller.addSeed("http://www.ics.uci.edu/community/alumni/stayconnected/index.php");
+    controller.addSeed("http://www.ics.uci.edu/");
+//    controller.addSeed("http://www.ics.uci.edu/community/alumni/stayconnected/index.php");
 
     /*
      * Start the crawl. This is a blocking operation, meaning that your code
