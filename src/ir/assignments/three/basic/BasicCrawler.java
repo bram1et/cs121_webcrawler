@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 import java.util.List;
 import java.nio.file.*;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.io.*;
 
 /**
@@ -71,7 +72,8 @@ public class BasicCrawler extends WebCrawler {
     String anchor = page.getWebURL().getAnchor();
     String logFileName = "log.txt";
     String freqFileName = url.hashCode() + ".txt";
-    Path filePath = Paths.get("./" + logFileName);
+    String pathString = Paths.get("").toAbsolutePath().toString();
+    Path filePath = Paths.get(pathString + "/" + logFileName);
     File file = new File(filePath.toString());
     Charset charset = Charset.forName("UTF-8");
     Utilities utilities = new Utilities();
@@ -111,8 +113,9 @@ public class BasicCrawler extends WebCrawler {
       }
       List<String> words = utilities.tokenizeString(text);
       List<Frequency> frequencies = wordFrequencyCounter.computeWordFrequencies(words);
-      utilities.printFrequenciesToFile(frequencies, "./freqFiles/" + freqFileName, url);
-      System.exit(0);
+      String freqFilePath = pathString + "/freqFiles/" + freqFileName;
+      File freqFile = new File(freqFilePath);
+      utilities.printFrequenciesToFile(frequencies, pathString + "/freqFiles/" + freqFileName, url);
 
     }
 
