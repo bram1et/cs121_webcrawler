@@ -71,24 +71,26 @@ public class BasicCrawler extends WebCrawler {
     String subDomain = page.getWebURL().getSubDomain();
     String parentUrl = page.getWebURL().getParentUrl();
     String anchor = page.getWebURL().getAnchor();
-    String logFileName = "log.txt";
+//    String logFileName = "log.txt";
     String subdomainFileName = "subdomainsTemp.txt";
+    System.out.println(anchor);
+//    String logFileName = "log.txt";
     String freqFileName = url.hashCode() + ".txt";
     String pathString = Paths.get("").toAbsolutePath().toString();
-    Path filePath = Paths.get(pathString + "/" + logFileName);
-    File file = new File(filePath.toString());
+//    Path filePath = Paths.get(pathString + "/" + logFileName);
+//    File file = new File(filePath.toString());
     Charset charset = Charset.forName("UTF-8");
     Utilities utilities = new Utilities();
     WordFrequencyCounter wordFrequencyCounter = new WordFrequencyCounter();
 
 
-    if (!file.exists()) {
-      try {
-        file.createNewFile();
-      } catch (IOException e) {
-        System.err.println(e);
-      }
-    }
+//    if (!file.exists()) {
+//      try {
+//        file.createNewFile();
+//      } catch (IOException e) {
+//        System.err.println(e);
+//      }
+//    }
 
 
     if (page.getParseData() instanceof HtmlParseData) {
@@ -102,7 +104,7 @@ public class BasicCrawler extends WebCrawler {
       /**
        * Writing urls to log file. Might be helpful...
        */
-      try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(logFileName, true))) {
+      try (BufferedWriter logWriter = new BufferedWriter(new FileWriter(this.logFile.getName(), true))) {
         logWriter.write("URL: " + url);
         logWriter.newLine();
         logWriter.write("Text length:" + text.length());

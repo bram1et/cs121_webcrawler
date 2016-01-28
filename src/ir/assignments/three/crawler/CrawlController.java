@@ -232,7 +232,6 @@ public class CrawlController extends Configurable {
 
                     logger.info("Waiting for 10 seconds before final clean up...");
                     sleep(10);
-
                     frontier.close();
                     docIdServer.close();
                     pageFetcher.shutDown();

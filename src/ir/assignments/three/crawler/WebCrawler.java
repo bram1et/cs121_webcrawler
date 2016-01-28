@@ -38,9 +38,16 @@ import uk.org.lidalia.slf4jext.Level;
 import uk.org.lidalia.slf4jext.Logger;
 import uk.org.lidalia.slf4jext.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * WebCrawler class in the Runnable class that is executed by each crawler thread.
@@ -102,6 +109,8 @@ public class WebCrawler implements Runnable {
    */
   private boolean isWaitingForNewURLs;
 
+  protected File logFile;
+
   /**
    * Initializes the current instance of the crawler
    *
@@ -112,6 +121,7 @@ public class WebCrawler implements Runnable {
    */
   public void init(int id, CrawlController crawlController) {
     this.myId = id;
+    this.logFile = null;
     this.pageFetcher = crawlController.getPageFetcher();
     this.robotstxtServer = crawlController.getRobotstxtServer();
     this.docIdServer = crawlController.getDocIdServer();
@@ -142,6 +152,20 @@ public class WebCrawler implements Runnable {
   public void onStart() {
     // Do nothing by default
     // Sub-classed can override this to add their custom functionality
+
+    String timeStampText = new SimpleDateFormat("MMddyy_hhmmss").format(Calendar.getInstance().getTime());
+    String logFileName = timeStampText + "log.txt";
+    String pathString = Paths.get("").toAbsolutePath().toString();
+    Path filePath = Paths.get(pathString + "/logs/" + logFileName);
+    this.logFile = new File(filePath.toString());
+
+    if (!this.logFile.exists()) {
+      try {
+        this.logFile.createNewFile();
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+    }
   }
 
   /**

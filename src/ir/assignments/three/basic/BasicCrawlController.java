@@ -25,11 +25,40 @@ import ir.assignments.three.robotstxt.RobotstxtServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.TimeUnit;
+
+import java.io.*;
+
 /**
  * @author Yasser Ganjisaffar [lastname at gmail dot com]
  */
 public class BasicCrawlController {
 //  private static Logger logger = LoggerFactory.getLogger(BasicCrawlController.class);
+
+  private static long startTime;
+  private static long endTime;
+  private static long totalTime;
+  private static long totalTimeSeconds;
+  private static int sitesCrawled;
+
+  private static void stuffToDoBeforeCrawl() {
+    startTime = System.nanoTime();
+  }
+
+  private static void stuffToDoAfterCrawl() {
+    endTime = System.nanoTime();
+    totalTime = endTime - startTime;
+    totalTimeSeconds = TimeUnit.NANOSECONDS.toSeconds(totalTime);
+    sitesCrawled = new File("./freqFiles").listFiles().length;
+    System.out.println("Crawled sites: " + sitesCrawled);
+    if (totalTimeSeconds < 60) {
+      System.out.println("It took about " + totalTimeSeconds + " seconds");
+    } else if (totalTimeSeconds >= 60 && totalTimeSeconds < 3600) {
+      System.out.println("It took about " + TimeUnit.SECONDS.toMinutes(totalTimeSeconds) + " minute(s)");
+    } else {
+      System.out.println("It took about " + TimeUnit.SECONDS.toHours(totalTimeSeconds) + " hour(s)");
+    }
+  }
 
   public static void main(String[] args) throws Exception {
 //    if (args.length != 2) {
@@ -71,7 +100,7 @@ public class BasicCrawlController {
      * You can set the maximum number of pages to crawl. The default value
      * is -1 for unlimited number of pages
      */
-    config.setMaxPagesToFetch(-1);
+    config.setMaxPagesToFetch(5);
 
     /**
      * Do you want crawler4j to crawl also binary data ?
@@ -111,14 +140,14 @@ public class BasicCrawlController {
      * which are found in these pages
      */
     controller.addSeed("http://www.ics.uci.edu/");
-    controller.addSeed("http://calendar.ics.uci.edu/calendar.php");
-    controller.addSeed("https://intranet.ics.uci.edu/");
-//    controller.addSeed("http://www.ics.uci.edu/community/alumni/stayconnected/index.php");
 
     /*
      * Start the crawl. This is a blocking operation, meaning that your code
      * will reach the line after this only when crawling is finished.
      */
+    stuffToDoBeforeCrawl();
     controller.start(BasicCrawler.class, numberOfCrawlers);
+    stuffToDoAfterCrawl();
+
   }
 }
