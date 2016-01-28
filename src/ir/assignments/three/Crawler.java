@@ -1,6 +1,7 @@
 package ir.assignments.three;
 
 import java.util.Collection;
+import ir.assignments.three.basic.BasicCrawlController;
 
 public class Crawler {
 	/**
@@ -13,6 +14,11 @@ public class Crawler {
 	 */
 	public static Collection<String> crawl(String seedURL) {
 		// TODO implement me
+		try {
+			BasicCrawlController.crawl();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 		return null;
 	}
 }

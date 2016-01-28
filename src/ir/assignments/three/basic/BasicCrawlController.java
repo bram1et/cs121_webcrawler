@@ -60,7 +60,7 @@ public class BasicCrawlController {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void crawl() throws Exception{
 //    if (args.length != 2) {
 //      logger.info("Needed parameters: ");
 //      logger.info("\t rootFolder (it will contain intermediate crawl data)");
@@ -149,5 +149,9 @@ public class BasicCrawlController {
     controller.start(BasicCrawler.class, numberOfCrawlers);
     stuffToDoAfterCrawl();
 
+  }
+
+  public static void main(String[] args) throws Exception {
+    crawl();
   }
 }
