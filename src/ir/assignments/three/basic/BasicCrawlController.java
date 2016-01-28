@@ -111,6 +111,8 @@ public class BasicCrawlController {
      * which are found in these pages
      */
     controller.addSeed("http://www.ics.uci.edu/");
+    controller.addSeed("http://calendar.ics.uci.edu/calendar.php");
+    controller.addSeed("https://intranet.ics.uci.edu/");
 //    controller.addSeed("http://www.ics.uci.edu/community/alumni/stayconnected/index.php");
 
     /*

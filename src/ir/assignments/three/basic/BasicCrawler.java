@@ -24,6 +24,7 @@ import ir.assignments.three.url.WebURL;
 import ir.assignments.three.helpers.Utilities;
 import ir.assignments.three.helpers.WordFrequencyCounter;
 import ir.assignments.three.helpers.Frequency;
+import ir.assignments.three.helpers.DomainGetter;
 import org.apache.http.Header;
 import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 
@@ -71,6 +72,7 @@ public class BasicCrawler extends WebCrawler {
     String parentUrl = page.getWebURL().getParentUrl();
     String anchor = page.getWebURL().getAnchor();
     String logFileName = "log.txt";
+    String subdomainFileName = "subdomainsTemp.txt";
     String freqFileName = url.hashCode() + ".txt";
     String pathString = Paths.get("").toAbsolutePath().toString();
     Path filePath = Paths.get(pathString + "/" + logFileName);
@@ -111,6 +113,18 @@ public class BasicCrawler extends WebCrawler {
       } catch (IOException e) {
         System.err.println(e);
       }
+
+      try (BufferedWriter subDomainWriter = new BufferedWriter(new FileWriter(subdomainFileName, true))) {
+        DomainGetter domainGetter = new DomainGetter();
+        String subDomainString = domainGetter.getDomainName(subDomain);
+        if (!subDomainString.equals("www")) {
+          subDomainWriter.write(subDomainString);
+          subDomainWriter.newLine();
+        }
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+
       List<String> words = utilities.tokenizeString(text);
       List<Frequency> frequencies = wordFrequencyCounter.computeWordFrequencies(words);
       String freqFilePath = pathString + "/freqFiles/" + freqFileName;
