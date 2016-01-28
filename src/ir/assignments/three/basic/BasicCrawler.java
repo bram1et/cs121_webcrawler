@@ -114,8 +114,7 @@ public class BasicCrawler extends WebCrawler {
       List<String> words = utilities.tokenizeString(text);
       List<Frequency> frequencies = wordFrequencyCounter.computeWordFrequencies(words);
       String freqFilePath = pathString + "/freqFiles/" + freqFileName;
-      File freqFile = new File(freqFilePath);
-      utilities.printFrequenciesToFile(frequencies, pathString + "/freqFiles/" + freqFileName, url);
+      utilities.printFrequenciesToFile(frequencies, freqFilePath, url);
 
     }
 

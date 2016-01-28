@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
 import java.lang.Math;
+import ir.assignments.three.helpers.StopWords;
 
 
 import ir.assignments.three.helpers.Frequency;
@@ -69,14 +70,18 @@ public class Utilities {
 			to tokenize input file.
 		*/
 		ArrayList<String> returnList = new ArrayList<String>();
+		StopWords stopWords = new StopWords();
 		String nextWord;
 		try {
 			Scanner s = new Scanner(input).useDelimiter("[^A-Za-z0-9']");
 			while(s.hasNext()) {
 				nextWord = s.next().toLowerCase();
-				if (nextWord.length() > 0) {
-					returnList.add(nextWord);
+				if (!stopWords.isAStopword(nextWord)) {
+					if (nextWord.length() > 0) {
+						returnList.add(nextWord);
+					}
 				}
+
 			}
 		} catch (Exception e) {
 			System.out.println("File not Found :(");
@@ -196,7 +201,7 @@ public class Utilities {
 		longest_word += 2;
 		wordCountString = "%-" + longest_word +"s%1d\n";
 
-		try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(fileName, true))) {
+		try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(fileName))) {
 			freqWriter.write(url + "\n");
 			freqWriter.write(String.format(totalString, total_count));
 			freqWriter.write(String.format(uniqueString, unique_count));
