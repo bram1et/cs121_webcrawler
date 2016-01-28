@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.nio.charset.StandardCharsets;
 
-import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
+//import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
 import ir.assignments.three.crawler.exceptions.ParseException;
 import ir.assignments.three.util.Net;
 import org.apache.tika.language.LanguageIdentifier;

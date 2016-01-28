@@ -52,7 +52,7 @@ public class CrawlConfig {
    * user-agent string that is used for representing your crawler to web
    * servers. See http://en.wikipedia.org/wiki/User_agent for more details
    */
-  private String userAgentString = "UCI Inf141-CS121 crawler 75542500";
+  private String userAgentString = "UCI Inf141-CS121 crawler 75542500 28239807";
 
   /**
    * Politeness delay in milliseconds (delay between sending two requests to
