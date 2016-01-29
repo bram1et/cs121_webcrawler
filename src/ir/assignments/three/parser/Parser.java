@@ -89,8 +89,6 @@ public class Parser extends Configurable {
       HtmlContentHandler contentHandler = new HtmlContentHandler();
       try (InputStream inputStream = new ByteArrayInputStream(page.getContentData())) {
         String myString = IOUtils.toString(inputStream, "UTF-8").replace("<", " <").replace(">", "> ");
-//        System.out.println(myString);
-//        System.exit(0);
         InputStream modifiedInputStream= new ByteArrayInputStream(myString.getBytes(StandardCharsets.UTF_8));
         htmlParser.parse(modifiedInputStream, contentHandler, metadata, parseContext);
       } catch (Exception e) {

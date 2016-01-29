@@ -40,7 +40,6 @@ import java.io.*;
  * @author Yasser Ganjisaffar [lastname at gmail dot com]
  */
 public class BasicCrawler extends WebCrawler {
-
   private final static Pattern BINARY_FILES_EXTENSIONS =
         Pattern.compile(".*\\.(bmp|gif|jpe?g|png|tiff?|pdf|ico|xaml|pict|rif|pptx?|ps" +
         "|mid|mp2|mp3|mp4|wav|wma|au|aiff|flac|ogg|3gp|aac|amr|au|vox" +
@@ -62,6 +61,7 @@ public class BasicCrawler extends WebCrawler {
    * This function is called when a page is fetched and ready to be processed
    * by your program.
    */
+
   @Override
   public void visit(Page page) {
     int docid = page.getWebURL().getDocid();
@@ -74,12 +74,10 @@ public class BasicCrawler extends WebCrawler {
     String subdomainFileName = "subdomainsTemp.txt";
     String freqFileName = url.hashCode() + ".txt";
     String pathString = Paths.get("").toAbsolutePath().toString();
-
-
     if (page.getParseData() instanceof HtmlParseData) {
       HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
       String text = htmlParseData.getText();
-      String html = htmlParseData.getHtml();
+//      String html = htmlParseData.getHtml();
       Set<WebURL> links = htmlParseData.getOutgoingUrls();
 
 
@@ -87,7 +85,7 @@ public class BasicCrawler extends WebCrawler {
       /**
        * Writing urls to log file. Might be helpful...
        */
-      try (BufferedWriter logWriter = new BufferedWriter(new FileWriter("./logs/" + this.logFile.getName(), true))) {
+      try (BufferedWriter logWriter = new BufferedWriter(new FileWriter("./logs/" + logFileName, true))) {
         logWriter.write("URL: " + url);
         logWriter.newLine();
         logWriter.write("Text length:" + text.length());

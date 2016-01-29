@@ -30,7 +30,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -73,6 +78,8 @@ public class CrawlController extends Configurable {
 
   protected final Object waitingLock = new Object();
   protected final Environment env;
+
+  private String logFileName;
 
   public CrawlController(CrawlConfig config, PageFetcher pageFetcher, RobotstxtServer robotstxtServer) throws Exception {
     super(config);
@@ -117,6 +124,21 @@ public class CrawlController extends Configurable {
 
     finished = false;
     shuttingDown = false;
+
+    String timeStampText = new SimpleDateFormat("MMddyy_hhmm").format(Calendar.getInstance().getTime());
+    this.logFileName = timeStampText + "log.txt";
+    String pathString = Paths.get("").toAbsolutePath().toString();
+    Path filePath = Paths.get(pathString + "/logs/" + logFileName);
+    File logFile = new File(filePath.toString());
+
+    if (logFile.exists()) {
+      try {
+        logFile.createNewFile();
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+    }
+
   }
 
   /**
@@ -159,6 +181,7 @@ public class CrawlController extends Configurable {
         Thread thread = new Thread(crawler, "Crawler " + i);
         crawler.setThread(thread);
         crawler.init(i, this);
+        crawler.setLogFileName(logFileName);
         thread.start();
         crawlers.add(crawler);
         threads.add(thread);

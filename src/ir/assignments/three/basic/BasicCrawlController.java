@@ -22,6 +22,7 @@ import ir.assignments.three.crawler.CrawlController;
 import ir.assignments.three.fetcher.PageFetcher;
 import ir.assignments.three.robotstxt.RobotstxtConfig;
 import ir.assignments.three.robotstxt.RobotstxtServer;
+import ir.assignments.three.util.IO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +42,13 @@ public class BasicCrawlController {
   private static long totalTimeSeconds;
   private static int sitesCrawled;
 
+  public long getStartTime() {
+    return startTime;
+  }
+
   private static void stuffToDoBeforeCrawl() {
+    File freqFiles = new File("./freqFiles");
+    IO.deleteFolderContents(freqFiles);
     startTime = System.nanoTime();
   }
 
@@ -88,7 +95,7 @@ public class BasicCrawlController {
      * Be polite: Make sure that we don't send more than 1 request per
      * second (1000 milliseconds between requests).
      */
-    config.setPolitenessDelay(1000);
+    config.setPolitenessDelay(600);
 
     /*
      * You can set the maximum crawl depth here. The default value is -1 for
@@ -100,7 +107,7 @@ public class BasicCrawlController {
      * You can set the maximum number of pages to crawl. The default value
      * is -1 for unlimited number of pages
      */
-    config.setMaxPagesToFetch(5);
+    config.setMaxPagesToFetch(10);
 
     /**
      * Do you want crawler4j to crawl also binary data ?
@@ -125,6 +132,8 @@ public class BasicCrawlController {
      * rootFolder manually.
      */
     config.setResumableCrawling(false);
+
+    config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410");
 
     /*
      * Instantiate the controller for this crawl.
