@@ -48,7 +48,7 @@ public class BasicCrawlController {
 
   private static void stuffToDoBeforeCrawl() {
     File freqFiles = new File("./freqFiles");
-    IO.deleteFolderContents(freqFiles);
+//    IO.deleteFolderContents(freqFiles);
     startTime = System.nanoTime();
   }
 
@@ -107,7 +107,7 @@ public class BasicCrawlController {
      * You can set the maximum number of pages to crawl. The default value
      * is -1 for unlimited number of pages
      */
-    config.setMaxPagesToFetch(10);
+    config.setMaxPagesToFetch(-1);
 
     /**
      * Do you want crawler4j to crawl also binary data ?
@@ -131,7 +131,7 @@ public class BasicCrawlController {
      * want to start a fresh crawl, you need to delete the contents of
      * rootFolder manually.
      */
-    config.setResumableCrawling(false);
+    config.setResumableCrawling(true);
 
     config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410");
 
