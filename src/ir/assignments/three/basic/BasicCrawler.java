@@ -54,10 +54,10 @@ public class BasicCrawler extends WebCrawler {
   @Override
   public boolean shouldVisit(Page page, WebURL url) {
     String href = url.getURL().toLowerCase();
-//    Boolean eppsteinPics = href.contains("~eppstein/pix/");
-//    Boolean duttGroup = href.contains("duttgroup.ics.uci.edu/doku.php/") && (href.contains("projects?do=media&image") || href.contains("photos?do=media&image"));
+    Boolean eppsteinPics = href.contains("~eppstein/pix/");
+    Boolean duttGroup = href.contains("duttgroup.ics.uci.edu/doku.php/") && href.contains("do=media&image");
     Boolean uciDomain = href.contains(".ics.uci.edu");
-    return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && uciDomain;// && !duttGroup && !eppsteinPics;
+    return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && uciDomain && !duttGroup && !eppsteinPics;
   }
 
   /**

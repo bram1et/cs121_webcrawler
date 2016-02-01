@@ -30,6 +30,10 @@ public final class Frequency {
 	public void incrementFrequency() {
 		frequency++;
 	}
+
+	public void increaseFrequencyByAmount(Integer amount) {
+		frequency += amount;
+	}
 	
 	@Override
 	public String toString() {
