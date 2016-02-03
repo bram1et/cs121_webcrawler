@@ -2,6 +2,7 @@ package ir.assignments.three;
 
 import java.util.Collection;
 import ir.assignments.three.basic.BasicCrawlController;
+import ir.assignments.three.helpers.LogChecker;
 
 public class Crawler {
 	/**
@@ -13,12 +14,14 @@ public class Crawler {
 	 * collection containing all URLs visited during the crawl.
 	 */
 	public static Collection<String> crawl(String seedURL) {
-		// TODO implement me
+		LogChecker logChecker = new LogChecker();
 		try {
 			BasicCrawlController.crawl();
 		} catch (Exception e) {
 			System.err.println(e);
 		}
-		return null;
+		return logChecker.getURLsFromLogs();
 	}
+
+
 }

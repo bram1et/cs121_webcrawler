@@ -11,7 +11,7 @@ import ir.assignments.three.util.Util;
 /**
  * Created by Chris on 1/31/16.
  */
-public class wordCounter {
+public class WordCounter {
     private static HashMap<String, Frequency> getWordCounts() {
         HashMap<String, Frequency> wordFrequencies = new HashMap<String, Frequency>();
         String frequencyFlder = "freqFiles";

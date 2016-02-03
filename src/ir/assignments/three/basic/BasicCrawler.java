@@ -54,10 +54,11 @@ public class BasicCrawler extends WebCrawler {
   @Override
   public boolean shouldVisit(Page page, WebURL url) {
     String href = url.getURL().toLowerCase();
-    Boolean eppsteinPics = href.contains("~eppstein/pix/");
-    Boolean duttGroup = href.contains("duttgroup.ics.uci.edu/doku.php/") && href.contains("do=media&image");
-    Boolean uciDomain = href.contains(".ics.uci.edu");
-    return !BINARY_FILES_EXTENSIONS.matcher(href).matches() && uciDomain && !duttGroup && !eppsteinPics;
+    Boolean notEppsteinPics = !href.contains("~eppstein/pix/");
+    Boolean notDuttGroup = !href.contains("duttgroup.ics.uci.edu/doku.php/") && !href.contains("do=media&image");
+    Boolean uciDomain = href.contains(".ics.uci.edu/");
+    Boolean okayToVisit = !BINARY_FILES_EXTENSIONS.matcher(href).matches() && uciDomain && notDuttGroup && notEppsteinPics;
+    return okayToVisit;
   }
 
   /**
@@ -77,6 +78,10 @@ public class BasicCrawler extends WebCrawler {
     String subdomainFileName = "subdomainsTemp.txt";
     String freqFileName = url.hashCode() + ".txt";
     String pathString = Paths.get("").toAbsolutePath().toString();
+    if ( url.contains("duttgroup.ics.uci.edu/doku.php/") && url.contains("do=media&image")) {
+      System.out.println("Skipping: " + url);
+      return;
+    }
     if (page.getParseData() instanceof HtmlParseData) {
       HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
       String text = htmlParseData.getText();
