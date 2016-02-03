@@ -23,8 +23,8 @@ import ir.assignments.three.fetcher.PageFetcher;
 import ir.assignments.three.robotstxt.RobotstxtConfig;
 import ir.assignments.three.robotstxt.RobotstxtServer;
 import ir.assignments.three.util.IO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -212,7 +212,7 @@ public class BasicCrawlController {
      */
     config.setResumableCrawling(true);
 
-    config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410");
+    config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410 49859223");
 
     /*
      * Instantiate the controller for this crawl.
