@@ -24,7 +24,7 @@ import ir.assignments.three.url.WebURL;
 import ir.assignments.three.helpers.Utilities;
 import ir.assignments.three.helpers.WordFrequencyCounter;
 import ir.assignments.three.helpers.Frequency;
-import ir.assignments.three.helpers.DomainGetter;
+import ir.assignments.three.helpers.SubdomainHelper;
 import org.apache.http.Header;
 import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 
@@ -105,9 +105,13 @@ public class BasicCrawler extends WebCrawler {
         System.err.println(e);
       }
 
-      try (BufferedWriter subDomainWriter = new BufferedWriter(new FileWriter(subdomainFileName, true))) {
-        DomainGetter domainGetter = new DomainGetter();
-        String subDomainString = domainGetter.getDomainName(subDomain);
+      /**
+       * Write subdomains to a file that will be used to find the
+       * number of unique pages detected in each subdomain
+       */
+      try (BufferedWriter subDomainWriter = new BufferedWriter(new FileWriter(subdomainFileName))) {
+        SubdomainHelper subdomainHelper = new SubdomainHelper();
+        String subDomainString = subdomainHelper.getSubdomain(subDomain);
         if (!subDomainString.equals("www")) {
           subDomainWriter.write(subDomainString);
           subDomainWriter.newLine();
@@ -120,7 +124,6 @@ public class BasicCrawler extends WebCrawler {
       List<Frequency> frequencies = WordFrequencyCounter.computeWordFrequencies(words);
       String freqFilePath = pathString + "/freqFiles/" + freqFileName;
       Utilities.printFrequenciesToFile(frequencies, freqFilePath, url);
-
     }
 
     Header[] responseHeaders = page.getFetchResponseHeaders();

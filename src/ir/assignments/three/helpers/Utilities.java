@@ -144,7 +144,16 @@ public class Utilities {
 			}
 		}
 	}
-	
+
+	public static class AlphabeticalComparator implements Comparator<Frequency> {
+		/*
+			Comparator created to sort a frequency list alphabetically
+		*/
+		public int compare(Frequency freq1, Frequency freq2) {
+			return freq1.getText().compareTo(freq2.getText());
+		}
+	}
+
 	public static void printFrequencies(List<Frequency> frequencies) {
 		/*
 			Sorts list of frequencies then iterates through sorted list
@@ -210,6 +219,34 @@ public class Utilities {
 				freqWriter.flush();
 			}
 		} catch (IOException e) {
+			System.err.println(e);
+		}
+	}
+
+	public static void printSubdomainFrequenciesToFile(List<Frequency> frequencies, String fileName) {
+		int total_subdomains = 0;
+		int longest_word = 0;
+		String protocol = "http://";
+		String domain = ".ics.uci.edu";
+
+		Collections.sort(frequencies, new AlphabeticalComparator());
+		for (Frequency freq : frequencies) {
+			total_subdomains++;
+			longest_word = Math.max(longest_word, freq.getText().length());
+		}
+		longest_word += protocol.length() + domain.length() + 2;
+		String wordCountString = "%-" + longest_word +"s%1d\n";
+
+		try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(fileName))) {
+			freqWriter.write("Number of subdomains found: " + total_subdomains + "\n\n");
+			freqWriter.write(String.format("%-" + longest_word + "s%s", "subdomain","unique pages in subdomain"));
+			freqWriter.write("\n--------------------------------------------------------\n");
+			for (Frequency freq: frequencies) {
+				freqWriter.write(String.format(wordCountString, protocol + freq.getText()+ domain + ", ", freq.getFrequency()));
+				freqWriter.flush();
+			}
+		}
+		catch (IOException e) {
 			System.err.println(e);
 		}
 	}
