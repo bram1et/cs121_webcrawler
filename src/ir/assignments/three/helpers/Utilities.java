@@ -226,7 +226,6 @@ public class Utilities {
 	public static void printSubdomainFrequenciesToFile(List<Frequency> frequencies, String fileName) {
 		int total_subdomains = 0;
 		int longest_word = 0;
-		String protocol = "http://";
 		String domain = ".ics.uci.edu";
 
 		Collections.sort(frequencies, new AlphabeticalComparator());
@@ -234,7 +233,7 @@ public class Utilities {
 			total_subdomains++;
 			longest_word = Math.max(longest_word, freq.getText().length());
 		}
-		longest_word += protocol.length() + domain.length() + 2;
+		longest_word += domain.length() + 2;
 		String wordCountString = "%-" + longest_word +"s%1d\n";
 
 		try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(fileName))) {
@@ -242,7 +241,7 @@ public class Utilities {
 			freqWriter.write(String.format("%-" + longest_word + "s%s", "subdomain","unique pages in subdomain"));
 			freqWriter.write("\n--------------------------------------------------------\n");
 			for (Frequency freq: frequencies) {
-				freqWriter.write(String.format(wordCountString, protocol + freq.getText()+ domain + ", ", freq.getFrequency()));
+				freqWriter.write(String.format(wordCountString, freq.getText()+ domain + ", ", freq.getFrequency()));
 				freqWriter.flush();
 			}
 		}
