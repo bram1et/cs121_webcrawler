@@ -16,12 +16,13 @@ public class Crawler {
 	public static Collection<String> crawl(String seedURL) {
 		LogChecker logChecker = new LogChecker();
 		try {
-			BasicCrawlController.crawl();
+			BasicCrawlController.crawl(seedURL);
 		} catch (Exception e) {
 			System.err.println(e);
 		}
-		return logChecker.getURLsFromLogs();
+		return LogChecker.getURLsFromLogs();
 	}
-
-
+	public static void main (String[] args) {
+		crawl("http://www.ics.uci.edu/");
+	}
 }

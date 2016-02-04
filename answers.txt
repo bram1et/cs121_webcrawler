@@ -1,2 +1,9 @@
 Put your answers to the questions here, on in a similarly named .doc or .pdf file.
+1. amount of time: 3684 minutes (61.4 hours)
+2. # of unique pages: 141,073 pages
+3. # of subdomains found: 107 (see Subdomains.txt)
+4: longest page (in words): http://archive.ics.uci.edu/ml/machine-learning-databases/movies-mld/data/actors.html - 78960 words
+5: most common words: see CommonWords.txt
+
 Longest Text: http://archive.ics.uci.edu/ml/machine-learning-databases/movies-mld/data/actors.html 621814
+

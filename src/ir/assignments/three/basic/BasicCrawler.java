@@ -27,6 +27,7 @@ import ir.assignments.three.helpers.Frequency;
 import ir.assignments.three.helpers.SubdomainHelper;
 import org.apache.http.Header;
 import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
+import org.apache.poi.util.SystemOutLogger;
 
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -88,7 +89,6 @@ public class BasicCrawler extends WebCrawler {
 //      String html = htmlParseData.getHtml();
       Set<WebURL> links = htmlParseData.getOutgoingUrls();
 
-
       System.out.println("URL: " + url);
       /**
        * Writing urls to log file. Might be helpful...
@@ -100,6 +100,9 @@ public class BasicCrawler extends WebCrawler {
         logWriter.newLine();
         logWriter.write("Number of outgoing links: " + links.size());
         logWriter.newLine();
+        logWriter.write("Anchor Text: " + anchor);
+        logWriter.newLine();
+        logWriter.write("Outlinks: " + links.toString());
         logWriter.flush();
       } catch (IOException e) {
         System.err.println(e);

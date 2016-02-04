@@ -16,6 +16,8 @@ public class WordCounter {
         HashMap<String, Frequency> wordFrequencies = new HashMap<String, Frequency>();
         String frequencyFlder = "freqFiles";
         String fileName = "";
+        String maxURL = "";
+        Integer maxTotal = 0;
         File dir = new File(frequencyFlder);
         File[] directoryListing = dir.listFiles();
         float numFiles =  directoryListing.length;
@@ -25,13 +27,17 @@ public class WordCounter {
                 fileName = freqFile.toString();
                 if (freqFile.isFile() && !fileName.contains(".DS_Store")) {
                     fileCount += 1;
-                    System.out.print(freqFile.toString());
                     System.out.println(100 * fileCount / numFiles);
                     try {
                         Scanner sc = new Scanner(freqFile);
                         String url = sc.nextLine();
-                        String total = sc.nextLine();
+                        String total = sc.nextLine().split(": ")[1];
                         String unique = sc.nextLine();
+
+                        if (Integer.parseInt(total) > maxTotal) {
+                            maxTotal = Integer.parseInt(total);
+                            maxURL = url;
+                        }
                         while (sc.hasNext()) {
                             List<String> wordAndCount = Utilities.tokenizeString(sc.nextLine());
                             if (wordAndCount.size() == 2) {
@@ -59,7 +65,7 @@ public class WordCounter {
         } else {
             System.err.println("Hmmm...");
         }
-
+        System.out.println(maxURL + ": " + maxTotal);
         return wordFrequencies;
     }
 

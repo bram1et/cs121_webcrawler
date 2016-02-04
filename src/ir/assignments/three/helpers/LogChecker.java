@@ -1,7 +1,6 @@
 package ir.assignments.three.helpers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +46,7 @@ public class LogChecker {
         System.out.println(maxURL + " " + maxLength);
     }
 
-    public List<String> getURLsFromLogs() {
+    public static List<String> getURLsFromLogs() {
         List<String> urls = new ArrayList<String>();
         String logFolder = "logs";
         String fileName = "";
@@ -75,6 +74,5 @@ public class LogChecker {
     }
 
     public static void main(String[] args) {
-        getLongestText();
     }
 }
