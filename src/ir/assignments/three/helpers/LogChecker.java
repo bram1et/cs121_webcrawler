@@ -52,6 +52,7 @@ public class LogChecker {
         String fileName = "";
         File dir = new File(logFolder);
         File[] directoryListing = dir.listFiles();
+        Integer count = 0;
         if (directoryListing != null) {
             for (File logFile : directoryListing) {
                 fileName = logFile.toString();
@@ -63,6 +64,8 @@ public class LogChecker {
                             String textLength = sc.nextLine();
                             String numURLs = sc.nextLine();
                             urls.add(url);
+                            count += 1;
+                            System.out.println(count);
                         }
                     } catch (FileNotFoundException e) {
                         System.err.println(e.toString());
@@ -73,6 +76,26 @@ public class LogChecker {
         return urls;
     }
 
+    public static void getSubdomains(List<String> urls) {
+        String subdomainFileName = "subdomainsTemp.txt";
+        String subDomain = "";
+        for (String url : urls) {
+            try (BufferedWriter subDomainWriter = new BufferedWriter(new FileWriter(subdomainFileName, true))) {
+                subDomain = url.split(".ics.uci.edu")[0];
+                System.out.println(subDomain);
+                if (subDomain.length() < 30) {
+                    subDomainWriter.write(subDomain);
+                    subDomainWriter.newLine();
+                    subDomainWriter.flush();
+                }
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
     public static void main(String[] args) {
+        List<String> urls = getURLsFromLogs();
+        getSubdomains(urls);
     }
 }

@@ -5,5 +5,3 @@ Put your answers to the questions here, on in a similarly named .doc or .pdf fil
 4: longest page (in words): http://archive.ics.uci.edu/ml/machine-learning-databases/movies-mld/data/actors.html - 78960 words
 5: most common words: see CommonWords.txt
 
-Longest Text: http://archive.ics.uci.edu/ml/machine-learning-databases/movies-mld/data/actors.html 621814
-

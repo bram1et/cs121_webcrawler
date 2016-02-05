@@ -174,7 +174,7 @@ public class BasicCrawlController {
      * Be polite: Make sure that we don't send more than 1 request per
      * second (1000 milliseconds between requests).
      */
-    config.setPolitenessDelay(600);
+    config.setPolitenessDelay(1200);
 
     /*
      * You can set the maximum crawl depth here. The default value is -1 for
@@ -210,7 +210,7 @@ public class BasicCrawlController {
      * want to start a fresh crawl, you need to delete the contents of
      * rootFolder manually.
      */
-    config.setResumableCrawling(true);
+    config.setResumableCrawling(false);
 
     config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410 49859223");
 
