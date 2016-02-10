@@ -1,111 +1,1141 @@
-Number of subdomains found: 107
+Number of subdomains found: 1137
 
-subdomain                       unique pages in subdomain
+subdomain                                                unique pages in subdomain
 --------------------------------------------------------
-alderis.ics.uci.edu,            7
-alumni.ics.uci.edu,             6
-ambassadors.ics.uci.edu,        1
-archive.ics.uci.edu,            46572
-asterix.ics.uci.edu,            50
-asterixdb.ics.uci.edu,          34
-auge.ics.uci.edu,               16
-calendar.ics.uci.edu,           809
-cbcl.ics.uci.edu,               883
-ccsw.ics.uci.edu,               8
-cert.ics.uci.edu,               17
-cgvw.ics.uci.edu,               63
-checkin.ics.uci.edu,            40
-chime.ics.uci.edu,              1
-cml.ics.uci.edu,                12
-cocoa.ics.uci.edu,              1
-codeexchange.ics.uci.edu,       1
-computableplant.ics.uci.edu,    95
-council.ics.uci.edu,            1627
-cradl.ics.uci.edu,              27
-csp.ics.uci.edu,                1
-db.ics.uci.edu,                 13
-dblp.ics.uci.edu,               2
-djp3.ics.uci.edu,               537
-drzaius.ics.uci.edu,            48
-dsm.ics.uci.edu,                2
-duttgroup.ics.uci.edu,          51986
-dynamo.ics.uci.edu,             31
-elms.ics.uci.edu,               1
-emj.ics.uci.edu,                33
-emme.ics.uci.edu,               15
-esl.ics.uci.edu,                5
-evoke.ics.uci.edu,              130
-fano.ics.uci.edu,               8588
-flamingo.ics.uci.edu,           569
-frost.ics.uci.edu,              31
-ftp.ics.uci.edu,                70
-gats.ics.uci.edu,               2
-grape.ics.uci.edu,              577
-graphics.ics.uci.edu,           7
-graphmod.ics.uci.edu,           256
-hcc.ics.uci.edu,                3
-hci.ics.uci.edu,                3
-hobbes.ics.uci.edu,             10
-hombao.ics.uci.edu,             19
-http.ics.uci.edu,               80350
-https.ics.uci.edu,              60226
-i.ics.uci.edu,                  6
-intranet.ics.uci.edu,           11
-ipubmed.ics.uci.edu,            4
-isg.ics.uci.edu,                12
-joplin.ics.uci.edu,             1
-jujube.ics.uci.edu,             7
-kdd.ics.uci.edu,                1
-krispies.ics.uci.edu,           1
-lolth.ics.uci.edu,              1
-luci.ics.uci.edu,               1614
-mailboss.ics.uci.edu,           1
-mailman.ics.uci.edu,            2374
-malek.ics.uci.edu,              3
-mapgrid.ics.uci.edu,            1
-metaviz.ics.uci.edu,            1
-mlearn.ics.uci.edu,             2
-mondego.ics.uci.edu,            50
-motifmap.ics.uci.edu,           1
-ngs.ics.uci.edu,                313
-niagara.ics.uci.edu,            1
-omni.ics.uci.edu,               2
-pasteur.ics.uci.edu,            2
-pc2.ics.uci.edu,                537
-pertea.ics.uci.edu,             1
-piki.ics.uci.edu,               1
-ppopp2013.ics.uci.edu,          1
-pregelix.ics.uci.edu,           12
-psearch.ics.uci.edu,            3
-radicle.ics.uci.edu,            1
-rambo.ics.uci.edu,              1
-riscit.ics.uci.edu,             2
-sconce.ics.uci.edu,             6
-sdcl.ics.uci.edu,               151
-seal.ics.uci.edu,               19
-sensorium.ics.uci.edu,          6
-sherlock.ics.uci.edu,           7
-sli.ics.uci.edu,                1172
-sourcerer.ics.uci.edu,          2
-sprout.ics.uci.edu,             52
-student.ics.uci.edu,            1627
-support.ics.uci.edu,            18
-swiki.ics.uci.edu,              207
-tastier.ics.uci.edu,            1
-testlab.ics.uci.edu,            9
-timesheet.ics.uci.edu,          4
-tps.ics.uci.edu,                7
-transformativeplay.ics.uci.edu, 155
-ugradforms.ics.uci.edu,         1
-vcp.ics.uci.edu,                28
-vip.ics.uci.edu,                2
-vision.ics.uci.edu,             187
-w3.ics.uci.edu,                 1
-wearablegames.ics.uci.edu,      10
-webmail.ics.uci.edu,            1
-wics.ics.uci.edu,               595
-wildhog.ics.uci.edu,            1
-woda15.ics.uci.edu,             1
-www.ics.uci.edu,                20306
-www1.ics.uci.edu,               1
-xtune.ics.uci.edu,              6
+One Gram.ics.uci.edu,                                    -1
+Three Gram.ics.uci.edu,                                  -1
+Two Gram.ics.uci.edu,                                    -1
+alderis.ics.uci.edu,                                     7
+alderis https.ics.uci.edu,                               7
+alderis https duttgroup.ics.uci.edu,                     7
+alumni.ics.uci.edu,                                      6
+alumni http.ics.uci.edu,                                 3
+alumni http www.ics.uci.edu,                             3
+alumni https.ics.uci.edu,                                3
+alumni https duttgroup.ics.uci.edu,                      1
+alumni https mailman.ics.uci.edu,                        2
+ambassadors.ics.uci.edu,                                 1
+ambassadors https.ics.uci.edu,                           1
+ambassadors https mailman.ics.uci.edu,                   1
+archive.ics.uci.edu,                                     46572
+archive http.ics.uci.edu,                                46543
+archive http archive.ics.uci.edu,                        46214
+archive http calendar.ics.uci.edu,                       2
+archive http cert.ics.uci.edu,                           4
+archive http cml.ics.uci.edu,                            1
+archive http i.ics.uci.edu,                              3
+archive http kdd.ics.uci.edu,                            1
+archive http rambo.ics.uci.edu,                          1
+archive http sli.ics.uci.edu,                            5
+archive http vcp.ics.uci.edu,                            28
+archive http www.ics.uci.edu,                            284
+archive https.ics.uci.edu,                               29
+archive https intranet.ics.uci.edu,                      3
+archive https ngs.ics.uci.edu,                           25
+archive https student.ics.uci.edu,                       1
+asterix.ics.uci.edu,                                     50
+asterix http.ics.uci.edu,                                39
+asterix http asterix.ics.uci.edu,                        4
+asterix http calendar.ics.uci.edu,                       6
+asterix http emme.ics.uci.edu,                           1
+asterix http mondego.ics.uci.edu,                        2
+asterix http www.ics.uci.edu,                            26
+asterix https.ics.uci.edu,                               11
+asterix https asterix.ics.uci.edu,                       6
+asterix https asterixdb.ics.uci.edu,                     3
+asterix https grape.ics.uci.edu,                         2
+asterixdb.ics.uci.edu,                                   34
+asterixdb http.ics.uci.edu,                              16
+asterixdb http asterixdb.ics.uci.edu,                    4
+asterixdb http calendar.ics.uci.edu,                     6
+asterixdb http flamingo.ics.uci.edu,                     1
+asterixdb http www.ics.uci.edu,                          5
+asterixdb https.ics.uci.edu,                             18
+asterixdb https asterix.ics.uci.edu,                     2
+asterixdb https cbcl.ics.uci.edu,                        1
+asterixdb https grape.ics.uci.edu,                       10
+asterixdb https mailman.ics.uci.edu,                     5
+auge.ics.uci.edu,                                        16
+auge http.ics.uci.edu,                                   10
+auge http auge.ics.uci.edu,                              4
+auge http www.ics.uci.edu,                               6
+auge https.ics.uci.edu,                                  6
+auge https cbcl.ics.uci.edu,                             6
+calendar.ics.uci.edu,                                    809
+calendar http.ics.uci.edu,                               508
+calendar http archive.ics.uci.edu,                       2
+calendar http asterix.ics.uci.edu,                       7
+calendar http asterixdb.ics.uci.edu,                     2
+calendar http calendar.ics.uci.edu,                      161
+calendar http ccsw.ics.uci.edu,                          1
+calendar http codeexchange.ics.uci.edu,                  1
+calendar http computableplant.ics.uci.edu,               1
+calendar http emj.ics.uci.edu,                           5
+calendar http emme.ics.uci.edu,                          4
+calendar http esl.ics.uci.edu,                           1
+calendar http flamingo.ics.uci.edu,                      5
+calendar http frost.ics.uci.edu,                         1
+calendar http hci.ics.uci.edu,                           1
+calendar http ipubmed.ics.uci.edu,                       1
+calendar http isg.ics.uci.edu,                           1
+calendar http mapgrid.ics.uci.edu,                       1
+calendar http mondego.ics.uci.edu,                       3
+calendar http ngs.ics.uci.edu,                           5
+calendar http niagara.ics.uci.edu,                       1
+calendar http pregelix.ics.uci.edu,                      3
+calendar http sdcl.ics.uci.edu,                          16
+calendar http sherlock.ics.uci.edu,                      1
+calendar http sli.ics.uci.edu,                           2
+calendar http wics.ics.uci.edu,                          1
+calendar http wildhog.ics.uci.edu,                       1
+calendar http www.ics.uci.edu,                           280
+calendar https.ics.uci.edu,                              301
+calendar https asterix.ics.uci.edu,                      5
+calendar https asterixdb.ics.uci.edu,                    2
+calendar https calendar.ics.uci.edu,                     112
+calendar https duttgroup.ics.uci.edu,                    121
+calendar https grape.ics.uci.edu,                        11
+calendar https swiki.ics.uci.edu,                        3
+calendar https transformativeplay.ics.uci.edu,           36
+calendar https www.ics.uci.edu,                          11
+cbcl.ics.uci.edu,                                        883
+cbcl http.ics.uci.edu,                                   388
+cbcl http asterixdb.ics.uci.edu,                         1
+cbcl http auge.ics.uci.edu,                              8
+cbcl http computableplant.ics.uci.edu,                   1
+cbcl http djp3.ics.uci.edu,                              38
+cbcl http drzaius.ics.uci.edu,                           2
+cbcl http ftp.ics.uci.edu,                               2
+cbcl http graphmod.ics.uci.edu,                          1
+cbcl http luci.ics.uci.edu,                              66
+cbcl http mondego.ics.uci.edu,                           1
+cbcl http sli.ics.uci.edu,                               9
+cbcl http sprout.ics.uci.edu,                            1
+cbcl http w3.ics.uci.edu,                                1
+cbcl http www.ics.uci.edu,                               257
+cbcl https.ics.uci.edu,                                  495
+cbcl https cbcl.ics.uci.edu,                             476
+cbcl https duttgroup.ics.uci.edu,                        3
+cbcl https mailman.ics.uci.edu,                          12
+cbcl https sli.ics.uci.edu,                              3
+cbcl https student.ics.uci.edu,                          1
+ccsw.ics.uci.edu,                                        8
+ccsw http.ics.uci.edu,                                   8
+ccsw http calendar.ics.uci.edu,                          2
+ccsw http ccsw.ics.uci.edu,                              2
+ccsw http sdcl.ics.uci.edu,                              1
+ccsw http www.ics.uci.edu,                               3
+cert.ics.uci.edu,                                        17
+cert http.ics.uci.edu,                                   16
+cert http archive.ics.uci.edu,                           2
+cert http cert.ics.uci.edu,                              9
+cert http cml.ics.uci.edu,                               1
+cert http www.ics.uci.edu,                               4
+cert https.ics.uci.edu,                                  1
+cert https intranet.ics.uci.edu,                         1
+cgvw.ics.uci.edu,                                        63
+cgvw http.ics.uci.edu,                                   44
+cgvw http cgvw.ics.uci.edu,                              11
+cgvw http sli.ics.uci.edu,                               10
+cgvw http www.ics.uci.edu,                               23
+cgvw https.ics.uci.edu,                                  19
+cgvw https ngs.ics.uci.edu,                              13
+cgvw https seal.ics.uci.edu,                             6
+checkin.ics.uci.edu,                                     40
+checkin http.ics.uci.edu,                                3
+checkin http ftp.ics.uci.edu,                            1
+checkin http sli.ics.uci.edu,                            1
+checkin http www.ics.uci.edu,                            1
+checkin https.ics.uci.edu,                               37
+checkin https checkin.ics.uci.edu,                       13
+checkin https duttgroup.ics.uci.edu,                     2
+checkin https mailman.ics.uci.edu,                       3
+checkin https sli.ics.uci.edu,                           1
+checkin https swiki.ics.uci.edu,                         18
+chime.ics.uci.edu,                                       1
+chime http.ics.uci.edu,                                  1
+chime http ngs.ics.uci.edu,                              1
+cml.ics.uci.edu,                                         12
+cml http.ics.uci.edu,                                    12
+cml http archive.ics.uci.edu,                            1
+cml http mlearn.ics.uci.edu,                             1
+cml http sli.ics.uci.edu,                                1
+cml http vision.ics.uci.edu,                             2
+cml http www.ics.uci.edu,                                7
+cocoa.ics.uci.edu,                                       1
+cocoa krispies.ics.uci.edu,                              1
+cocoa krispies http.ics.uci.edu,                         1
+codeexchange.ics.uci.edu,                                1
+codeexchange http.ics.uci.edu,                           1
+codeexchange http hci.ics.uci.edu,                       1
+computableplant.ics.uci.edu,                             95
+computableplant http.ics.uci.edu,                        30
+computableplant http calendar.ics.uci.edu,               1
+computableplant http computableplant.ics.uci.edu,        19
+computableplant http emj.ics.uci.edu,                    1
+computableplant http sli.ics.uci.edu,                    1
+computableplant http www.ics.uci.edu,                    7
+computableplant http xtune.ics.uci.edu,                  1
+computableplant https.ics.uci.edu,                       65
+computableplant https cbcl.ics.uci.edu,                  3
+computableplant https duttgroup.ics.uci.edu,             47
+computableplant https mailman.ics.uci.edu,               2
+computableplant https sli.ics.uci.edu,                   4
+computableplant https student.ics.uci.edu,               1
+computableplant https transformativeplay.ics.uci.edu,    1
+computableplant https www.ics.uci.edu,                   7
+council.ics.uci.edu,                                     1627
+council http.ics.uci.edu,                                27
+council http drzaius.ics.uci.edu,                        1
+council http graphmod.ics.uci.edu,                       1
+council http luci.ics.uci.edu,                           4
+council http sli.ics.uci.edu,                            15
+council http www.ics.uci.edu,                            6
+council https.ics.uci.edu,                               1600
+council https duttgroup.ics.uci.edu,                     684
+council https mailman.ics.uci.edu,                       11
+council https sli.ics.uci.edu,                           19
+council https student.ics.uci.edu,                       885
+council https www.ics.uci.edu,                           1
+cradl.ics.uci.edu,                                       27
+cradl http.ics.uci.edu,                                  27
+cradl http cradl.ics.uci.edu,                            2
+cradl http www.ics.uci.edu,                              25
+csp.ics.uci.edu,                                         1
+csp http.ics.uci.edu,                                    1
+csp http graphmod.ics.uci.edu,                           1
+db.ics.uci.edu,                                          13
+db http.ics.uci.edu,                                     12
+db http archive.ics.uci.edu,                             9
+db http sli.ics.uci.edu,                                 1
+db http www.ics.uci.edu,                                 2
+db https.ics.uci.edu,                                    1
+db https mailman.ics.uci.edu,                            1
+dblp.ics.uci.edu,                                        2
+dblp http.ics.uci.edu,                                   2
+dblp http dblp.ics.uci.edu,                              1
+dblp http www.ics.uci.edu,                               1
+djp3.ics.uci.edu,                                        537
+djp3 pc2.ics.uci.edu,                                    537
+djp3 pc2 http.ics.uci.edu,                               502
+djp3 pc2 https.ics.uci.edu,                              35
+drzaius.ics.uci.edu,                                     48
+drzaius http.ics.uci.edu,                                20
+drzaius http drzaius.ics.uci.edu,                        3
+drzaius http frost.ics.uci.edu,                          3
+drzaius http ftp.ics.uci.edu,                            6
+drzaius http luci.ics.uci.edu,                           1
+drzaius http sli.ics.uci.edu,                            1
+drzaius http www.ics.uci.edu,                            6
+drzaius https.ics.uci.edu,                               28
+drzaius https mailman.ics.uci.edu,                       27
+drzaius https sli.ics.uci.edu,                           1
+dsm.ics.uci.edu,                                         2
+dsm http.ics.uci.edu,                                    2
+dsm http vision.ics.uci.edu,                             1
+dsm http www.ics.uci.edu,                                1
+duttgroup.ics.uci.edu,                                   51986
+duttgroup http.ics.uci.edu,                              281
+duttgroup http alderis.ics.uci.edu,                      7
+duttgroup http alumni.ics.uci.edu,                       1
+duttgroup http calendar.ics.uci.edu,                     17
+duttgroup http computableplant.ics.uci.edu,              53
+duttgroup http dynamo.ics.uci.edu,                       25
+duttgroup http emj.ics.uci.edu,                          4
+duttgroup http emme.ics.uci.edu,                         2
+duttgroup http esl.ics.uci.edu,                          3
+duttgroup http evoke.ics.uci.edu,                        1
+duttgroup http joplin.ics.uci.edu,                       1
+duttgroup http transformativeplay.ics.uci.edu,           1
+duttgroup http vision.ics.uci.edu,                       1
+duttgroup http wics.ics.uci.edu,                         4
+duttgroup http www.ics.uci.edu,                          161
+duttgroup https.ics.uci.edu,                             51705
+duttgroup https calendar.ics.uci.edu,                    109
+duttgroup https cbcl.ics.uci.edu,                        3
+duttgroup https checkin.ics.uci.edu,                     4
+duttgroup https duttgroup.ics.uci.edu,                   50264
+duttgroup https grape.ics.uci.edu,                       13
+duttgroup https intranet.ics.uci.edu,                    1
+duttgroup https mailman.ics.uci.edu,                     43
+duttgroup https student.ics.uci.edu,                     681
+duttgroup https swiki.ics.uci.edu,                       57
+duttgroup https transformativeplay.ics.uci.edu,          71
+duttgroup https wearablegames.ics.uci.edu,               5
+duttgroup https www.ics.uci.edu,                         454
+dynamo.ics.uci.edu,                                      31
+dynamo http.ics.uci.edu,                                 6
+dynamo http dynamo.ics.uci.edu,                          5
+dynamo http www.ics.uci.edu,                             1
+dynamo https.ics.uci.edu,                                25
+dynamo https duttgroup.ics.uci.edu,                      25
+elms.ics.uci.edu,                                        1
+elms http.ics.uci.edu,                                   1
+elms http www.ics.uci.edu,                               1
+emj.ics.uci.edu,                                         33
+emj http.ics.uci.edu,                                    26
+emj http calendar.ics.uci.edu,                           8
+emj http computableplant.ics.uci.edu,                    1
+emj http emj.ics.uci.edu,                                1
+emj http www.ics.uci.edu,                                16
+emj https.ics.uci.edu,                                   7
+emj https duttgroup.ics.uci.edu,                         6
+emj https intranet.ics.uci.edu,                          1
+emme.ics.uci.edu,                                        15
+emme http.ics.uci.edu,                                   13
+emme http calendar.ics.uci.edu,                          2
+emme http emme.ics.uci.edu,                              3
+emme http www.ics.uci.edu,                               8
+emme https.ics.uci.edu,                                  2
+emme https duttgroup.ics.uci.edu,                        2
+esl.ics.uci.edu,                                         5
+esl http.ics.uci.edu,                                    3
+esl http calendar.ics.uci.edu,                           1
+esl http esl.ics.uci.edu,                                1
+esl http www.ics.uci.edu,                                1
+esl https.ics.uci.edu,                                   2
+esl https duttgroup.ics.uci.edu,                         2
+evoke.ics.uci.edu,                                       130
+evoke http.ics.uci.edu,                                  129
+evoke http cocoa.ics.uci.edu,                            1
+evoke http dsm.ics.uci.edu,                              1
+evoke http evoke.ics.uci.edu,                            66
+evoke http graphics.ics.uci.edu,                         2
+evoke http sconce.ics.uci.edu,                           1
+evoke http vision.ics.uci.edu,                           17
+evoke http www.ics.uci.edu,                              41
+evoke https.ics.uci.edu,                                 1
+evoke https duttgroup.ics.uci.edu,                       1
+fano.ics.uci.edu,                                        8588
+fano http.ics.uci.edu,                                   8588
+fano http fano.ics.uci.edu,                              8195
+fano http wics.ics.uci.edu,                              28
+fano http www.ics.uci.edu,                               365
+flamingo.ics.uci.edu,                                    569
+flamingo http.ics.uci.edu,                               545
+flamingo http calendar.ics.uci.edu,                      8
+flamingo http cradl.ics.uci.edu,                         2
+flamingo http fano.ics.uci.edu,                          1
+flamingo http flamingo.ics.uci.edu,                      247
+flamingo http hci.ics.uci.edu,                           1
+flamingo http mondego.ics.uci.edu,                       1
+flamingo http ngs.ics.uci.edu,                           3
+flamingo http sprout.ics.uci.edu,                        3
+flamingo http wics.ics.uci.edu,                          20
+flamingo http www.ics.uci.edu,                           259
+flamingo https.ics.uci.edu,                              24
+flamingo https grape.ics.uci.edu,                        24
+frost.ics.uci.edu,                                       31
+frost http.ics.uci.edu,                                  12
+frost http drzaius.ics.uci.edu,                          3
+frost http frost.ics.uci.edu,                            4
+frost http ftp.ics.uci.edu,                              1
+frost http www.ics.uci.edu,                              4
+frost https.ics.uci.edu,                                 19
+frost https cbcl.ics.uci.edu,                            1
+frost https mailman.ics.uci.edu,                         17
+frost https seal.ics.uci.edu,                            1
+ftp.ics.uci.edu,                                         70
+ftp http.ics.uci.edu,                                    34
+ftp http drzaius.ics.uci.edu,                            6
+ftp http frost.ics.uci.edu,                              3
+ftp http ftp.ics.uci.edu,                                9
+ftp http sli.ics.uci.edu,                                4
+ftp http www.ics.uci.edu,                                12
+ftp https.ics.uci.edu,                                   36
+ftp https mailman.ics.uci.edu,                           32
+ftp https sli.ics.uci.edu,                               1
+ftp https support.ics.uci.edu,                           1
+ftp https swiki.ics.uci.edu,                             1
+ftp https timesheet.ics.uci.edu,                         1
+gats.ics.uci.edu,                                        2
+gats http.ics.uci.edu,                                   2
+gats http ngs.ics.uci.edu,                               1
+gats http www.ics.uci.edu,                               1
+grape.ics.uci.edu,                                       577
+grape http.ics.uci.edu,                                  205
+grape http asterixdb.ics.uci.edu,                        8
+grape http calendar.ics.uci.edu,                         8
+grape http flamingo.ics.uci.edu,                         25
+grape http jujube.ics.uci.edu,                           1
+grape http psearch.ics.uci.edu,                          2
+grape http sprout.ics.uci.edu,                           1
+grape http wics.ics.uci.edu,                             9
+grape http www.ics.uci.edu,                              151
+grape https.ics.uci.edu,                                 372
+grape https asterix.ics.uci.edu,                         4
+grape https asterixdb.ics.uci.edu,                       4
+grape https duttgroup.ics.uci.edu,                       18
+grape https grape.ics.uci.edu,                           334
+grape https mailman.ics.uci.edu,                         1
+grape https ngs.ics.uci.edu,                             8
+grape https support.ics.uci.edu,                         1
+grape https www.ics.uci.edu,                             2
+graphics.ics.uci.edu,                                    7
+graphics http.ics.uci.edu,                               7
+graphics http evoke.ics.uci.edu,                         1
+graphics http vision.ics.uci.edu,                        4
+graphics http www.ics.uci.edu,                           2
+graphmod.ics.uci.edu,                                    256
+graphmod http.ics.uci.edu,                               237
+graphmod http csp.ics.uci.edu,                           1
+graphmod http drzaius.ics.uci.edu,                       1
+graphmod http graphmod.ics.uci.edu,                      136
+graphmod http sli.ics.uci.edu,                           1
+graphmod http www.ics.uci.edu,                           98
+graphmod https.ics.uci.edu,                              19
+graphmod https cbcl.ics.uci.edu,                         4
+graphmod https grape.ics.uci.edu,                        1
+graphmod https student.ics.uci.edu,                      1
+graphmod https www.ics.uci.edu,                          13
+hcc.ics.uci.edu,                                         3
+hcc http.ics.uci.edu,                                    3
+hcc http sli.ics.uci.edu,                                1
+hcc http www.ics.uci.edu,                                2
+hci.ics.uci.edu,                                         3
+hci http.ics.uci.edu,                                    3
+hci http hombao.ics.uci.edu,                             1
+hci http www.ics.uci.edu,                                2
+hobbes.ics.uci.edu,                                      10
+hobbes http.ics.uci.edu,                                 9
+hobbes http auge.ics.uci.edu,                            1
+hobbes http www.ics.uci.edu,                             8
+hobbes https.ics.uci.edu,                                1
+hobbes https grape.ics.uci.edu,                          1
+hombao.ics.uci.edu,                                      19
+hombao http.ics.uci.edu,                                 19
+hombao http calendar.ics.uci.edu,                        1
+hombao http hombao.ics.uci.edu,                          6
+hombao http luci.ics.uci.edu,                            1
+hombao http vision.ics.uci.edu,                          1
+hombao http www.ics.uci.edu,                             10
+http.ics.uci.edu,                                        80350
+http alderis.ics.uci.edu,                                7
+http alderis https.ics.uci.edu,                          7
+http alumni.ics.uci.edu,                                 6
+http alumni http.ics.uci.edu,                            3
+http alumni https.ics.uci.edu,                           3
+http ambassadors.ics.uci.edu,                            1
+http ambassadors https.ics.uci.edu,                      1
+http archive.ics.uci.edu,                                46572
+http archive http.ics.uci.edu,                           46543
+http archive https.ics.uci.edu,                          29
+http asterix.ics.uci.edu,                                27
+http asterix http.ics.uci.edu,                           27
+http asterixdb.ics.uci.edu,                              24
+http asterixdb http.ics.uci.edu,                         11
+http asterixdb https.ics.uci.edu,                        13
+http auge.ics.uci.edu,                                   16
+http auge http.ics.uci.edu,                              10
+http auge https.ics.uci.edu,                             6
+http calendar.ics.uci.edu,                               539
+http calendar http.ics.uci.edu,                          503
+http calendar https.ics.uci.edu,                         36
+http ccsw.ics.uci.edu,                                   8
+http ccsw http.ics.uci.edu,                              8
+http cert.ics.uci.edu,                                   17
+http cert http.ics.uci.edu,                              16
+http cert https.ics.uci.edu,                             1
+http cgvw.ics.uci.edu,                                   63
+http cgvw http.ics.uci.edu,                              44
+http cgvw https.ics.uci.edu,                             19
+http chime.ics.uci.edu,                                  1
+http chime http.ics.uci.edu,                             1
+http cml.ics.uci.edu,                                    12
+http cml http.ics.uci.edu,                               12
+http cocoa.ics.uci.edu,                                  1
+http cocoa krispies.ics.uci.edu,                         1
+http codeexchange.ics.uci.edu,                           1
+http codeexchange http.ics.uci.edu,                      1
+http computableplant.ics.uci.edu,                        95
+http computableplant http.ics.uci.edu,                   30
+http computableplant https.ics.uci.edu,                  65
+http cradl.ics.uci.edu,                                  27
+http cradl http.ics.uci.edu,                             27
+http csp.ics.uci.edu,                                    1
+http csp http.ics.uci.edu,                               1
+http dblp.ics.uci.edu,                                   2
+http dblp http.ics.uci.edu,                              2
+http djp3.ics.uci.edu,                                   537
+http djp3 pc2.ics.uci.edu,                               537
+http drzaius.ics.uci.edu,                                48
+http drzaius http.ics.uci.edu,                           20
+http drzaius https.ics.uci.edu,                          28
+http dsm.ics.uci.edu,                                    2
+http dsm http.ics.uci.edu,                               2
+http dynamo.ics.uci.edu,                                 31
+http dynamo http.ics.uci.edu,                            6
+http dynamo https.ics.uci.edu,                           25
+http emj.ics.uci.edu,                                    33
+http emj http.ics.uci.edu,                               26
+http emj https.ics.uci.edu,                              7
+http emme.ics.uci.edu,                                   15
+http emme http.ics.uci.edu,                              13
+http emme https.ics.uci.edu,                             2
+http esl.ics.uci.edu,                                    5
+http esl http.ics.uci.edu,                               3
+http esl https.ics.uci.edu,                              2
+http evoke.ics.uci.edu,                                  130
+http evoke http.ics.uci.edu,                             129
+http evoke https.ics.uci.edu,                            1
+http fano.ics.uci.edu,                                   8588
+http fano http.ics.uci.edu,                              8588
+http flamingo.ics.uci.edu,                               569
+http flamingo http.ics.uci.edu,                          545
+http flamingo https.ics.uci.edu,                         24
+http frost.ics.uci.edu,                                  31
+http frost http.ics.uci.edu,                             12
+http frost https.ics.uci.edu,                            19
+http ftp.ics.uci.edu,                                    70
+http ftp http.ics.uci.edu,                               34
+http ftp https.ics.uci.edu,                              36
+http graphics.ics.uci.edu,                               7
+http graphics http.ics.uci.edu,                          7
+http graphmod.ics.uci.edu,                               256
+http graphmod http.ics.uci.edu,                          237
+http graphmod https.ics.uci.edu,                         19
+http hcc.ics.uci.edu,                                    3
+http hcc http.ics.uci.edu,                               3
+http hci.ics.uci.edu,                                    3
+http hci http.ics.uci.edu,                               3
+http hobbes.ics.uci.edu,                                 10
+http hobbes http.ics.uci.edu,                            9
+http hobbes https.ics.uci.edu,                           1
+http hombao.ics.uci.edu,                                 19
+http hombao http.ics.uci.edu,                            19
+http i.ics.uci.edu,                                      6
+http i sensorium.ics.uci.edu,                            6
+http ipubmed.ics.uci.edu,                                4
+http ipubmed http.ics.uci.edu,                           4
+http isg.ics.uci.edu,                                    12
+http isg http.ics.uci.edu,                               12
+http joplin.ics.uci.edu,                                 1
+http joplin https.ics.uci.edu,                           1
+http jujube.ics.uci.edu,                                 7
+http jujube http.ics.uci.edu,                            6
+http jujube https.ics.uci.edu,                           1
+http kdd.ics.uci.edu,                                    1
+http kdd http.ics.uci.edu,                               1
+http lolth.ics.uci.edu,                                  1
+http lolth https.ics.uci.edu,                            1
+http luci.ics.uci.edu,                                   1614
+http luci http.ics.uci.edu,                              1522
+http luci https.ics.uci.edu,                             92
+http malek.ics.uci.edu,                                  1
+http malek http.ics.uci.edu,                             1
+http mapgrid.ics.uci.edu,                                1
+http mapgrid http.ics.uci.edu,                           1
+http metaviz.ics.uci.edu,                                1
+http metaviz http.ics.uci.edu,                           1
+http mlearn.ics.uci.edu,                                 2
+http mlearn http.ics.uci.edu,                            2
+http mondego.ics.uci.edu,                                50
+http mondego http.ics.uci.edu,                           50
+http motifmap.ics.uci.edu,                               1
+http motifmap https.ics.uci.edu,                         1
+http ngs.ics.uci.edu,                                    142
+http ngs http.ics.uci.edu,                               137
+http ngs https.ics.uci.edu,                              5
+http niagara.ics.uci.edu,                                1
+http niagara http.ics.uci.edu,                           1
+http omni.ics.uci.edu,                                   2
+http omni http.ics.uci.edu,                              2
+http pasteur.ics.uci.edu,                                2
+http pasteur http.ics.uci.edu,                           2
+http pertea.ics.uci.edu,                                 1
+http pertea http.ics.uci.edu,                            1
+http piki.ics.uci.edu,                                   1
+http piki http.ics.uci.edu,                              1
+http ppopp2013.ics.uci.edu,                              1
+http ppopp2013 http.ics.uci.edu,                         1
+http pregelix.ics.uci.edu,                               12
+http pregelix http.ics.uci.edu,                          12
+http psearch.ics.uci.edu,                                3
+http psearch http.ics.uci.edu,                           3
+http radicle.ics.uci.edu,                                1
+http radicle http.ics.uci.edu,                           1
+http rambo.ics.uci.edu,                                  1
+http rambo http.ics.uci.edu,                             1
+http riscit.ics.uci.edu,                                 2
+http riscit http.ics.uci.edu,                            2
+http sconce.ics.uci.edu,                                 6
+http sconce http.ics.uci.edu,                            6
+http sdcl.ics.uci.edu,                                   151
+http sdcl http.ics.uci.edu,                              151
+http seal.ics.uci.edu,                                   1
+http seal http.ics.uci.edu,                              1
+http sherlock.ics.uci.edu,                               7
+http sherlock http.ics.uci.edu,                          7
+http sli.ics.uci.edu,                                    675
+http sli http.ics.uci.edu,                               620
+http sli https.ics.uci.edu,                              55
+http sourcerer.ics.uci.edu,                              2
+http sourcerer http.ics.uci.edu,                         2
+http sprout.ics.uci.edu,                                 52
+http sprout http.ics.uci.edu,                            49
+http sprout https.ics.uci.edu,                           3
+http tastier.ics.uci.edu,                                1
+http tastier http.ics.uci.edu,                           1
+http testlab.ics.uci.edu,                                9
+http testlab http.ics.uci.edu,                           7
+http testlab https.ics.uci.edu,                          2
+http tps.ics.uci.edu,                                    7
+http tps http.ics.uci.edu,                               7
+http transformativeplay.ics.uci.edu,                     1
+http transformativeplay https.ics.uci.edu,               1
+http vcp.ics.uci.edu,                                    28
+http vcp http.ics.uci.edu,                               28
+http vip.ics.uci.edu,                                    2
+http vip http.ics.uci.edu,                               2
+http vision.ics.uci.edu,                                 187
+http vision http.ics.uci.edu,                            185
+http vision https.ics.uci.edu,                           2
+http w3.ics.uci.edu,                                     1
+http w3 https.ics.uci.edu,                               1
+http wics.ics.uci.edu,                                   595
+http wics http.ics.uci.edu,                              573
+http wics https.ics.uci.edu,                             22
+http wildhog.ics.uci.edu,                                1
+http wildhog http.ics.uci.edu,                           1
+http woda15.ics.uci.edu,                                 1
+http woda15 http.ics.uci.edu,                            1
+http www.ics.uci.edu,                                    18968
+http www db.ics.uci.edu,                                 13
+http www http.ics.uci.edu,                               17931
+http www https.ics.uci.edu,                              1023
+http www1.ics.uci.edu,                                   1
+http www1 http.ics.uci.edu,                              1
+http xtune.ics.uci.edu,                                  6
+http xtune http.ics.uci.edu,                             2
+http xtune https.ics.uci.edu,                            4
+https.ics.uci.edu,                                       60226
+https asterix.ics.uci.edu,                               23
+https asterix http.ics.uci.edu,                          12
+https asterix https.ics.uci.edu,                         11
+https asterixdb.ics.uci.edu,                             10
+https asterixdb http.ics.uci.edu,                        5
+https asterixdb https.ics.uci.edu,                       5
+https calendar.ics.uci.edu,                              270
+https calendar http.ics.uci.edu,                         5
+https calendar https.ics.uci.edu,                        265
+https cbcl.ics.uci.edu,                                  883
+https cbcl http.ics.uci.edu,                             388
+https cbcl https.ics.uci.edu,                            495
+https checkin.ics.uci.edu,                               40
+https checkin http.ics.uci.edu,                          3
+https checkin https.ics.uci.edu,                         37
+https duttgroup.ics.uci.edu,                             51986
+https duttgroup http.ics.uci.edu,                        281
+https duttgroup https.ics.uci.edu,                       51705
+https elms.ics.uci.edu,                                  1
+https elms http.ics.uci.edu,                             1
+https gats.ics.uci.edu,                                  2
+https gats http.ics.uci.edu,                             2
+https grape.ics.uci.edu,                                 577
+https grape http.ics.uci.edu,                            205
+https grape https.ics.uci.edu,                           372
+https intranet.ics.uci.edu,                              11
+https intranet http.ics.uci.edu,                         9
+https intranet https.ics.uci.edu,                        2
+https mailboss.ics.uci.edu,                              1
+https mailboss https.ics.uci.edu,                        1
+https mailman.ics.uci.edu,                               2374
+https mailman http.ics.uci.edu,                          306
+https mailman https.ics.uci.edu,                         2068
+https malek.ics.uci.edu,                                 2
+https malek http.ics.uci.edu,                            2
+https ngs.ics.uci.edu,                                   171
+https ngs http.ics.uci.edu,                              106
+https ngs https.ics.uci.edu,                             65
+https seal.ics.uci.edu,                                  18
+https seal http.ics.uci.edu,                             16
+https seal https.ics.uci.edu,                            2
+https sli.ics.uci.edu,                                   497
+https sli http.ics.uci.edu,                              128
+https sli https.ics.uci.edu,                             369
+https student.ics.uci.edu,                               1627
+https student council.ics.uci.edu,                       1627
+https support.ics.uci.edu,                               18
+https support http.ics.uci.edu,                          13
+https support https.ics.uci.edu,                         5
+https swiki.ics.uci.edu,                                 207
+https swiki http.ics.uci.edu,                            5
+https swiki https.ics.uci.edu,                           202
+https timesheet.ics.uci.edu,                             4
+https timesheet http.ics.uci.edu,                        2
+https timesheet https.ics.uci.edu,                       2
+https transformativeplay.ics.uci.edu,                    154
+https transformativeplay http.ics.uci.edu,               3
+https transformativeplay https.ics.uci.edu,              151
+https ugradforms.ics.uci.edu,                            1
+https ugradforms http.ics.uci.edu,                       1
+https wearablegames.ics.uci.edu,                         10
+https wearablegames https.ics.uci.edu,                   10
+https webmail.ics.uci.edu,                               1
+https webmail http.ics.uci.edu,                          1
+https www.ics.uci.edu,                                   1338
+https www http.ics.uci.edu,                              74
+https www https.ics.uci.edu,                             1264
+i sensorium.ics.uci.edu,                                 6
+i sensorium http.ics.uci.edu,                            5
+i sensorium https.ics.uci.edu,                           1
+intranet.ics.uci.edu,                                    11
+intranet http.ics.uci.edu,                               9
+intranet http archive.ics.uci.edu,                       1
+intranet http cert.ics.uci.edu,                          1
+intranet http mlearn.ics.uci.edu,                        1
+intranet http sli.ics.uci.edu,                           1
+intranet http www.ics.uci.edu,                           5
+intranet https.ics.uci.edu,                              2
+intranet https duttgroup.ics.uci.edu,                    1
+intranet https student.ics.uci.edu,                      1
+ipubmed.ics.uci.edu,                                     4
+ipubmed http.ics.uci.edu,                                4
+ipubmed http ipubmed.ics.uci.edu,                        1
+ipubmed http www.ics.uci.edu,                            3
+isg.ics.uci.edu,                                         12
+isg http.ics.uci.edu,                                    12
+isg http calendar.ics.uci.edu,                           2
+isg http isg.ics.uci.edu,                                4
+isg http pregelix.ics.uci.edu,                           3
+isg http www.ics.uci.edu,                                3
+joplin.ics.uci.edu,                                      1
+joplin https.ics.uci.edu,                                1
+joplin https duttgroup.ics.uci.edu,                      1
+jujube.ics.uci.edu,                                      7
+jujube http.ics.uci.edu,                                 6
+jujube http jujube.ics.uci.edu,                          1
+jujube http ngs.ics.uci.edu,                             1
+jujube http www.ics.uci.edu,                             4
+jujube https.ics.uci.edu,                                1
+jujube https grape.ics.uci.edu,                          1
+kdd.ics.uci.edu,                                         1
+kdd http.ics.uci.edu,                                    1
+kdd http archive.ics.uci.edu,                            1
+krispies.ics.uci.edu,                                    1
+krispies http.ics.uci.edu,                               1
+krispies http www.ics.uci.edu,                           1
+lolth.ics.uci.edu,                                       1
+lolth https.ics.uci.edu,                                 1
+lolth https www.ics.uci.edu,                             1
+luci.ics.uci.edu,                                        1614
+luci http.ics.uci.edu,                                   1522
+luci http djp3.ics.uci.edu,                              12
+luci http drzaius.ics.uci.edu,                           1
+luci http emj.ics.uci.edu,                               1
+luci http hombao.ics.uci.edu,                            1
+luci http luci.ics.uci.edu,                              1447
+luci http mondego.ics.uci.edu,                           10
+luci http sconce.ics.uci.edu,                            1
+luci http sli.ics.uci.edu,                               1
+luci http www.ics.uci.edu,                               48
+luci https.ics.uci.edu,                                  92
+luci https cbcl.ics.uci.edu,                             74
+luci https mailman.ics.uci.edu,                          9
+luci https sli.ics.uci.edu,                              6
+luci https student.ics.uci.edu,                          3
+mailboss.ics.uci.edu,                                    1
+mailboss https.ics.uci.edu,                              1
+mailboss https cbcl.ics.uci.edu,                         1
+mailman.ics.uci.edu,                                     2374
+mailman http.ics.uci.edu,                                306
+mailman http alumni.ics.uci.edu,                         1
+mailman http ambassadors.ics.uci.edu,                    1
+mailman http asterixdb.ics.uci.edu,                      1
+mailman http computableplant.ics.uci.edu,                4
+mailman http drzaius.ics.uci.edu,                        26
+mailman http frost.ics.uci.edu,                          17
+mailman http ftp.ics.uci.edu,                            29
+mailman http graphmod.ics.uci.edu,                       1
+mailman http luci.ics.uci.edu,                           9
+mailman http sli.ics.uci.edu,                            3
+mailman http www.ics.uci.edu,                            214
+mailman https.ics.uci.edu,                               2068
+mailman https cbcl.ics.uci.edu,                          14
+mailman https checkin.ics.uci.edu,                       3
+mailman https duttgroup.ics.uci.edu,                     39
+mailman https mailman.ics.uci.edu,                       1924
+mailman https sli.ics.uci.edu,                           44
+mailman https student.ics.uci.edu,                       10
+mailman https support.ics.uci.edu,                       2
+mailman https swiki.ics.uci.edu,                         22
+mailman https timesheet.ics.uci.edu,                     2
+mailman https transformativeplay.ics.uci.edu,            6
+mailman https wearablegames.ics.uci.edu,                 1
+mailman https www.ics.uci.edu,                           1
+malek.ics.uci.edu,                                       3
+malek http.ics.uci.edu,                                  3
+malek http ngs.ics.uci.edu,                              1
+malek http www.ics.uci.edu,                              2
+mapgrid.ics.uci.edu,                                     1
+mapgrid http.ics.uci.edu,                                1
+mapgrid http www.ics.uci.edu,                            1
+metaviz.ics.uci.edu,                                     1
+metaviz http.ics.uci.edu,                                1
+metaviz http calendar.ics.uci.edu,                       1
+mlearn.ics.uci.edu,                                      2
+mlearn http.ics.uci.edu,                                 2
+mlearn http cml.ics.uci.edu,                             1
+mlearn http www.ics.uci.edu,                             1
+mondego.ics.uci.edu,                                     50
+mondego http.ics.uci.edu,                                50
+mondego http asterix.ics.uci.edu,                        1
+mondego http calendar.ics.uci.edu,                       7
+mondego http evoke.ics.uci.edu,                          1
+mondego http flamingo.ics.uci.edu,                       1
+mondego http luci.ics.uci.edu,                           10
+mondego http mondego.ics.uci.edu,                        8
+mondego http sdcl.ics.uci.edu,                           1
+mondego http www.ics.uci.edu,                            21
+motifmap.ics.uci.edu,                                    1
+motifmap https.ics.uci.edu,                              1
+motifmap https cbcl.ics.uci.edu,                         1
+ngs.ics.uci.edu,                                         313
+ngs http.ics.uci.edu,                                    243
+ngs http archive.ics.uci.edu,                            29
+ngs http calendar.ics.uci.edu,                           3
+ngs http cgvw.ics.uci.edu,                               15
+ngs http flamingo.ics.uci.edu,                           4
+ngs http hobbes.ics.uci.edu,                             1
+ngs http ngs.ics.uci.edu,                                33
+ngs http sli.ics.uci.edu,                                1
+ngs http wics.ics.uci.edu,                               6
+ngs http www.ics.uci.edu,                                151
+ngs https.ics.uci.edu,                                   70
+ngs https gats.ics.uci.edu,                              1
+ngs https grape.ics.uci.edu,                             12
+ngs https malek.ics.uci.edu,                             2
+ngs https ngs.ics.uci.edu,                               52
+ngs https www.ics.uci.edu,                               3
+niagara.ics.uci.edu,                                     1
+niagara http.ics.uci.edu,                                1
+niagara http ngs.ics.uci.edu,                            1
+omni.ics.uci.edu,                                        2
+omni http.ics.uci.edu,                                   2
+omni http evoke.ics.uci.edu,                             1
+omni http www.ics.uci.edu,                               1
+pasteur.ics.uci.edu,                                     2
+pasteur http.ics.uci.edu,                                2
+pasteur http pasteur.ics.uci.edu,                        1
+pasteur http wics.ics.uci.edu,                           1
+pc2.ics.uci.edu,                                         537
+pc2 http.ics.uci.edu,                                    502
+pc2 http djp3.ics.uci.edu,                               442
+pc2 http luci.ics.uci.edu,                               13
+pc2 http sli.ics.uci.edu,                                8
+pc2 http www.ics.uci.edu,                                39
+pc2 https.ics.uci.edu,                                   35
+pc2 https cbcl.ics.uci.edu,                              35
+pertea.ics.uci.edu,                                      1
+pertea http.ics.uci.edu,                                 1
+pertea http www.ics.uci.edu,                             1
+piki.ics.uci.edu,                                        1
+piki http.ics.uci.edu,                                   1
+piki http calendar.ics.uci.edu,                          1
+ppopp2013.ics.uci.edu,                                   1
+ppopp2013 http.ics.uci.edu,                              1
+ppopp2013 http www.ics.uci.edu,                          1
+pregelix.ics.uci.edu,                                    12
+pregelix http.ics.uci.edu,                               12
+pregelix http calendar.ics.uci.edu,                      5
+pregelix http isg.ics.uci.edu,                           2
+pregelix http pregelix.ics.uci.edu,                      4
+pregelix http www.ics.uci.edu,                           1
+psearch.ics.uci.edu,                                     3
+psearch http.ics.uci.edu,                                3
+psearch http asterix.ics.uci.edu,                        1
+psearch http calendar.ics.uci.edu,                       1
+psearch http www.ics.uci.edu,                            1
+radicle.ics.uci.edu,                                     1
+radicle http.ics.uci.edu,                                1
+radicle http www.ics.uci.edu,                            1
+rambo.ics.uci.edu,                                       1
+rambo http.ics.uci.edu,                                  1
+rambo http www.ics.uci.edu,                              1
+riscit.ics.uci.edu,                                      2
+riscit http.ics.uci.edu,                                 2
+riscit http www.ics.uci.edu,                             2
+sconce.ics.uci.edu,                                      6
+sconce http.ics.uci.edu,                                 6
+sconce http evoke.ics.uci.edu,                           2
+sconce http www.ics.uci.edu,                             4
+sdcl.ics.uci.edu,                                        151
+sdcl http.ics.uci.edu,                                   151
+sdcl http calendar.ics.uci.edu,                          12
+sdcl http ccsw.ics.uci.edu,                              2
+sdcl http cradl.ics.uci.edu,                             1
+sdcl http sdcl.ics.uci.edu,                              14
+sdcl http wics.ics.uci.edu,                              3
+sdcl http www.ics.uci.edu,                               119
+seal.ics.uci.edu,                                        19
+seal http.ics.uci.edu,                                   17
+seal http calendar.ics.uci.edu,                          1
+seal http cgvw.ics.uci.edu,                              4
+seal http dblp.ics.uci.edu,                              1
+seal http frost.ics.uci.edu,                             1
+seal http ngs.ics.uci.edu,                               1
+seal http sli.ics.uci.edu,                               4
+seal http www.ics.uci.edu,                               5
+seal https.ics.uci.edu,                                  2
+seal https ngs.ics.uci.edu,                              2
+sensorium.ics.uci.edu,                                   6
+sensorium http.ics.uci.edu,                              5
+sensorium http archive.ics.uci.edu,                      1
+sensorium http cert.ics.uci.edu,                         1
+sensorium http www.ics.uci.edu,                          3
+sensorium https.ics.uci.edu,                             1
+sensorium https sli.ics.uci.edu,                         1
+sherlock.ics.uci.edu,                                    7
+sherlock http.ics.uci.edu,                               7
+sherlock http calendar.ics.uci.edu,                      1
+sherlock http www.ics.uci.edu,                           6
+sli.ics.uci.edu,                                         1172
+sli http.ics.uci.edu,                                    748
+sli http archive.ics.uci.edu,                            6
+sli http calendar.ics.uci.edu,                           3
+sli http cgvw.ics.uci.edu,                               9
+sli http cml.ics.uci.edu,                                1
+sli http computableplant.ics.uci.edu,                    2
+sli http djp3.ics.uci.edu,                               5
+sli http ftp.ics.uci.edu,                                8
+sli http graphmod.ics.uci.edu,                           2
+sli http hcc.ics.uci.edu,                                1
+sli http i.ics.uci.edu,                                  1
+sli http luci.ics.uci.edu,                               5
+sli http sli.ics.uci.edu,                                524
+sli http sprout.ics.uci.edu,                             1
+sli http testlab.ics.uci.edu,                            3
+sli http www.ics.uci.edu,                                177
+sli https.ics.uci.edu,                                   424
+sli https cbcl.ics.uci.edu,                              14
+sli https intranet.ics.uci.edu,                          2
+sli https mailman.ics.uci.edu,                           49
+sli https ngs.ics.uci.edu,                               1
+sli https seal.ics.uci.edu,                              1
+sli https sli.ics.uci.edu,                               322
+sli https student.ics.uci.edu,                           28
+sli https support.ics.uci.edu,                           3
+sli https swiki.ics.uci.edu,                             4
+sourcerer.ics.uci.edu,                                   2
+sourcerer http.ics.uci.edu,                              2
+sourcerer http www.ics.uci.edu,                          2
+sprout.ics.uci.edu,                                      52
+sprout http.ics.uci.edu,                                 49
+sprout http sprout.ics.uci.edu,                          18
+sprout http wics.ics.uci.edu,                            8
+sprout http www.ics.uci.edu,                             23
+sprout https.ics.uci.edu,                                3
+sprout https cbcl.ics.uci.edu,                           1
+sprout https grape.ics.uci.edu,                          1
+sprout https sli.ics.uci.edu,                            1
+student.ics.uci.edu,                                     1627
+student council.ics.uci.edu,                             1627
+student council http.ics.uci.edu,                        27
+student council https.ics.uci.edu,                       1600
+support.ics.uci.edu,                                     18
+support http.ics.uci.edu,                                13
+support http alumni.ics.uci.edu,                         1
+support http calendar.ics.uci.edu,                       1
+support http ftp.ics.uci.edu,                            1
+support http sli.ics.uci.edu,                            1
+support http www.ics.uci.edu,                            9
+support https.ics.uci.edu,                               5
+support https duttgroup.ics.uci.edu,                     1
+support https grape.ics.uci.edu,                         1
+support https mailman.ics.uci.edu,                       2
+support https student.ics.uci.edu,                       1
+swiki.ics.uci.edu,                                       207
+swiki http.ics.uci.edu,                                  5
+swiki http calendar.ics.uci.edu,                         1
+swiki http www.ics.uci.edu,                              4
+swiki https.ics.uci.edu,                                 202
+swiki https calendar.ics.uci.edu,                        2
+swiki https checkin.ics.uci.edu,                         18
+swiki https duttgroup.ics.uci.edu,                       62
+swiki https mailman.ics.uci.edu,                         22
+swiki https student.ics.uci.edu,                         1
+swiki https support.ics.uci.edu,                         1
+swiki https swiki.ics.uci.edu,                           92
+swiki https wearablegames.ics.uci.edu,                   4
+tastier.ics.uci.edu,                                     1
+tastier http.ics.uci.edu,                                1
+tastier http www.ics.uci.edu,                            1
+testlab.ics.uci.edu,                                     9
+testlab http.ics.uci.edu,                                7
+testlab http sli.ics.uci.edu,                            3
+testlab http testlab.ics.uci.edu,                        3
+testlab http www.ics.uci.edu,                            1
+testlab https.ics.uci.edu,                               2
+testlab https ngs.ics.uci.edu,                           1
+testlab https student.ics.uci.edu,                       1
+timesheet.ics.uci.edu,                                   4
+timesheet http.ics.uci.edu,                              2
+timesheet http sli.ics.uci.edu,                          2
+timesheet https.ics.uci.edu,                             2
+timesheet https mailman.ics.uci.edu,                     2
+tps.ics.uci.edu,                                         7
+tps http.ics.uci.edu,                                    7
+tps http www.ics.uci.edu,                                7
+transformativeplay.ics.uci.edu,                          155
+transformativeplay http.ics.uci.edu,                     3
+transformativeplay http www.ics.uci.edu,                 3
+transformativeplay https.ics.uci.edu,                    152
+transformativeplay https calendar.ics.uci.edu,           35
+transformativeplay https duttgroup.ics.uci.edu,          72
+transformativeplay https mailman.ics.uci.edu,            6
+transformativeplay https transformativeplay.ics.uci.edu, 27
+transformativeplay https www.ics.uci.edu,                12
+ugradforms.ics.uci.edu,                                  1
+ugradforms http.ics.uci.edu,                             1
+ugradforms http www.ics.uci.edu,                         1
+vcp.ics.uci.edu,                                         28
+vcp http.ics.uci.edu,                                    28
+vcp http archive.ics.uci.edu,                            28
+vip.ics.uci.edu,                                         2
+vip http.ics.uci.edu,                                    2
+vip http www.ics.uci.edu,                                2
+vision.ics.uci.edu,                                      187
+vision http.ics.uci.edu,                                 185
+vision http cml.ics.uci.edu,                             2
+vision http evoke.ics.uci.edu,                           16
+vision http graphics.ics.uci.edu,                        4
+vision http hombao.ics.uci.edu,                          1
+vision http vision.ics.uci.edu,                          141
+vision http www.ics.uci.edu,                             21
+vision https.ics.uci.edu,                                2
+vision https duttgroup.ics.uci.edu,                      1
+vision https www.ics.uci.edu,                            1
+w3.ics.uci.edu,                                          1
+w3 https.ics.uci.edu,                                    1
+w3 https cbcl.ics.uci.edu,                               1
+wearablegames.ics.uci.edu,                               10
+wearablegames https.ics.uci.edu,                         10
+wearablegames https duttgroup.ics.uci.edu,               5
+wearablegames https swiki.ics.uci.edu,                   5
+webmail.ics.uci.edu,                                     1
+webmail http.ics.uci.edu,                                1
+webmail http www.ics.uci.edu,                            1
+wics.ics.uci.edu,                                        595
+wics http.ics.uci.edu,                                   573
+wics http calendar.ics.uci.edu,                          1
+wics http fano.ics.uci.edu,                              26
+wics http flamingo.ics.uci.edu,                          19
+wics http ngs.ics.uci.edu,                               3
+wics http sdcl.ics.uci.edu,                              3
+wics http sprout.ics.uci.edu,                            5
+wics http wics.ics.uci.edu,                              383
+wics http www.ics.uci.edu,                               133
+wics https.ics.uci.edu,                                  22
+wics https duttgroup.ics.uci.edu,                        2
+wics https grape.ics.uci.edu,                            14
+wics https ngs.ics.uci.edu,                              6
+wildhog.ics.uci.edu,                                     1
+wildhog http.ics.uci.edu,                                1
+wildhog http calendar.ics.uci.edu,                       1
+woda15.ics.uci.edu,                                      1
+woda15 http.ics.uci.edu,                                 1
+woda15 http www.ics.uci.edu,                             1
+www.ics.uci.edu,                                         20306
+www db.ics.uci.edu,                                      13
+www db http.ics.uci.edu,                                 12
+www db https.ics.uci.edu,                                1
+www http.ics.uci.edu,                                    18005
+www http alumni.ics.uci.edu,                             3
+www http archive.ics.uci.edu,                            278
+www http asterix.ics.uci.edu,                            14
+www http asterixdb.ics.uci.edu,                          8
+www http auge.ics.uci.edu,                               3
+www http calendar.ics.uci.edu,                           275
+www http ccsw.ics.uci.edu,                               3
+www http cert.ics.uci.edu,                               2
+www http cgvw.ics.uci.edu,                               24
+www http chime.ics.uci.edu,                              1
+www http cml.ics.uci.edu,                                6
+www http computableplant.ics.uci.edu,                    13
+www http cradl.ics.uci.edu,                              22
+www http djp3.ics.uci.edu,                               40
+www http drzaius.ics.uci.edu,                            5
+www http dsm.ics.uci.edu,                                1
+www http dynamo.ics.uci.edu,                             1
+www http emj.ics.uci.edu,                                21
+www http emme.ics.uci.edu,                               5
+www http evoke.ics.uci.edu,                              42
+www http fano.ics.uci.edu,                               366
+www http flamingo.ics.uci.edu,                           267
+www http frost.ics.uci.edu,                              2
+www http ftp.ics.uci.edu,                                13
+www http graphics.ics.uci.edu,                           1
+www http graphmod.ics.uci.edu,                           114
+www http hcc.ics.uci.edu,                                2
+www http hobbes.ics.uci.edu,                             9
+www http hombao.ics.uci.edu,                             10
+www http i.ics.uci.edu,                                  2
+www http ipubmed.ics.uci.edu,                            2
+www http isg.ics.uci.edu,                                5
+www http jujube.ics.uci.edu,                             5
+www http lolth.ics.uci.edu,                              1
+www http luci.ics.uci.edu,                               58
+www http malek.ics.uci.edu,                              1
+www http metaviz.ics.uci.edu,                            1
+www http mondego.ics.uci.edu,                            25
+www http motifmap.ics.uci.edu,                           1
+www http ngs.ics.uci.edu,                                92
+www http omni.ics.uci.edu,                               2
+www http pasteur.ics.uci.edu,                            1
+www http pertea.ics.uci.edu,                             1
+www http piki.ics.uci.edu,                               1
+www http ppopp2013.ics.uci.edu,                          1
+www http pregelix.ics.uci.edu,                           2
+www http psearch.ics.uci.edu,                            1
+www http radicle.ics.uci.edu,                            1
+www http riscit.ics.uci.edu,                             2
+www http sconce.ics.uci.edu,                             4
+www http sdcl.ics.uci.edu,                               116
+www http seal.ics.uci.edu,                               1
+www http sherlock.ics.uci.edu,                           6
+www http sli.ics.uci.edu,                                75
+www http sourcerer.ics.uci.edu,                          2
+www http sprout.ics.uci.edu,                             23
+www http tastier.ics.uci.edu,                            1
+www http testlab.ics.uci.edu,                            3
+www http tps.ics.uci.edu,                                7
+www http vip.ics.uci.edu,                                2
+www http vision.ics.uci.edu,                             20
+www http wics.ics.uci.edu,                               132
+www http woda15.ics.uci.edu,                             1
+www http www.ics.uci.edu,                                15850
+www http www1.ics.uci.edu,                               1
+www http xtune.ics.uci.edu,                              5
+www https.ics.uci.edu,                                   2287
+www https asterix.ics.uci.edu,                           6
+www https asterixdb.ics.uci.edu,                         1
+www https calendar.ics.uci.edu,                          12
+www https cbcl.ics.uci.edu,                              248
+www https checkin.ics.uci.edu,                           2
+www https duttgroup.ics.uci.edu,                         619
+www https elms.ics.uci.edu,                              1
+www https gats.ics.uci.edu,                              1
+www https grape.ics.uci.edu,                             152
+www https intranet.ics.uci.edu,                          3
+www https mailboss.ics.uci.edu,                          1
+www https mailman.ics.uci.edu,                           203
+www https ngs.ics.uci.edu,                               63
+www https seal.ics.uci.edu,                              10
+www https sli.ics.uci.edu,                               94
+www https student.ics.uci.edu,                           12
+www https support.ics.uci.edu,                           10
+www https swiki.ics.uci.edu,                             5
+www https timesheet.ics.uci.edu,                         1
+www https transformativeplay.ics.uci.edu,                13
+www https ugradforms.ics.uci.edu,                        1
+www https webmail.ics.uci.edu,                           1
+www https www.ics.uci.edu,                               828
+www1.ics.uci.edu,                                        1
+www1 http.ics.uci.edu,                                   1
+www1 http www.ics.uci.edu,                               1
+xtune.ics.uci.edu,                                       6
+xtune http.ics.uci.edu,                                  2
+xtune http computableplant.ics.uci.edu,                  1
+xtune http www.ics.uci.edu,                              1
+xtune https.ics.uci.edu,                                 4
+xtune https www.ics.uci.edu,                             4

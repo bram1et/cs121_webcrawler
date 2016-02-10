@@ -1,8 +1,8 @@
 package ir.assignments.three;
 
 import java.util.Collection;
-import ir.assignments.three.basic.BasicCrawlController;
-import ir.assignments.three.helpers.LogChecker;
+import ir.assignments.basic.BasicCrawlController;
+import ir.assignments.helpers.LogChecker;
 
 public class Crawler {
 	/**
