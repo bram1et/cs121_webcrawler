@@ -209,7 +209,7 @@ public class BasicCrawlController {
      * want to start a fresh crawl, you need to delete the contents of
      * rootFolder manually.
      */
-    config.setResumableCrawling(false);
+    config.setResumableCrawling(true);
 
     config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410 49859223");
 

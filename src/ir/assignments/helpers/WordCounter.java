@@ -1,10 +1,8 @@
 package ir.assignments.helpers;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.nio.file.Paths;
+import java.util.*;
 
 /**
  * Created by Chris on 1/31/16.
@@ -29,30 +27,39 @@ public class WordCounter {
                     try {
                         Scanner sc = new Scanner(freqFile);
                         String url = sc.nextLine();
+                        String anchor = sc.nextLine();
+                        String outGoingURLs = sc.nextLine();
                         String total = sc.nextLine().split(": ")[1];
                         String unique = sc.nextLine();
-
                         if (Integer.parseInt(total) > maxTotal) {
                             maxTotal = Integer.parseInt(total);
                             maxURL = url;
                         }
                         while (sc.hasNext()) {
-                            List<String> wordAndCount = Utilities.tokenizeString(sc.nextLine());
-                            if (wordAndCount.size() == 2) {
-                                String word = wordAndCount.get(0);
-                                Integer count = Integer.parseInt(wordAndCount.get(1));
+//                            List<String> wordAndCount = Utilities.tokenizeString(sc.nextLine());
+                            List<String> wordAndCount = Arrays.asList(sc.nextLine().split("\\s+"));
+                            if (wordAndCount.size() >= 2) {
 
+                                String word = Utilities.stringCombiner(0, wordAndCount.size() - 2, true, wordAndCount);
+                                /*
+                                Commenting out. This is for counting total frequencies of words
                                 if (wordFrequencies.containsKey(word)) {
                                     wordFrequencies.get(word).increaseFrequencyByAmount(count);
                                 } else {
                                     wordFrequencies.put(word, new Frequency(word, count));
                                 }
+                                */
+                                /*
+                                This is for counting document frequency
+                                 */
+                                if (wordFrequencies.containsKey(word)) {
+                                    wordFrequencies.get(word).incrementFrequency();
+                                } else {
+                                    wordFrequencies.put(word, new Frequency(word, 1));
+                                }
+
                             }
-
-
                         }
-
-
                     } catch (FileNotFoundException e) {
                         System.err.println("File not found...");
                     }
@@ -73,7 +80,8 @@ public class WordCounter {
         for (String key : wordFrequencies.keySet()) {
             freqList.add(wordFrequencies.get(key));
         }
-        String freqFileName = "totalFreqs.txt";
-        Utilities.printFrequenciesToFile(freqList, freqFileName, "yooo");
+        String pathString = Paths.get("").toAbsolutePath().toString();
+        String dfFolder = pathString + "/documentFrequencies/";
+        Utilities.writeDocumentFrequencyToFile(freqList, dfFolder, "", true);
     }
 }

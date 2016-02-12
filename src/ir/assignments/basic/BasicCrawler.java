@@ -17,6 +17,7 @@
 
 package ir.assignments.basic;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import ir.assignments.crawler.Page;
 import ir.assignments.crawler.WebCrawler;
 import ir.assignments.parser.HtmlParseData;
@@ -54,8 +55,18 @@ public class BasicCrawler extends WebCrawler {
     String href = url.getURL().toLowerCase();
     Boolean notEppsteinPics = !href.contains("~eppstein/pix/");
     Boolean notDuttGroup = !href.contains("duttgroup.ics.uci.edu/doku.php/") && !href.contains("do=media&image");
+    Boolean notArchiveDatasets = !href.contains("archive.ics.uci.edu/ml/datasets");
+    Boolean notArchiveDtabases = !href.contains("archive.ics.uci.edu/ml/machine-learning-databases/");
+    Boolean notMailman = !href.contains("mailman.ics.uci.edu/");
+    Boolean notMlearnDatasets = !href.contains("mlearn.ics.uci.edu/databases");
+    Boolean notFano = !href.contains("fano.ics.uci.edu/cites");
+    Boolean notGraphMod = !href.contains("graphmod.ics.uci.edu");
+    Boolean notDonCode = !href.contains("djp3-pc2.ics.uci.edu/LUCICodeRepository");
     Boolean uciDomain = href.contains(".ics.uci.edu/");
-    Boolean okayToVisit = !BINARY_FILES_EXTENSIONS.matcher(href).matches() && uciDomain && notDuttGroup && notEppsteinPics;
+    Boolean okayToVisit = !BINARY_FILES_EXTENSIONS.matcher(href).matches() &&
+                          uciDomain && notDuttGroup && notEppsteinPics && notArchiveDatasets &&
+                          notMailman && notFano && notArchiveDtabases && notGraphMod &&
+                          notMlearnDatasets && notDonCode;
     return okayToVisit;
   }
 
@@ -111,7 +122,7 @@ public class BasicCrawler extends WebCrawler {
         System.err.println(e);
       }
 
-      Utilities.printFrequenciesToFile(frequencies, freqFilePath, url);
+      Utilities.printFrequenciesToFile(frequencies, freqFilePath, url, false);
     }
 
     Header[] responseHeaders = page.getFetchResponseHeaders();

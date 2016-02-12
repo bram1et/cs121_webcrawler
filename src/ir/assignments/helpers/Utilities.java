@@ -176,7 +176,7 @@ public class Utilities {
 		}
 	}
 
-	public static void printFrequenciesToFile(List<Frequency> frequencies, String fileName, String url) {
+	public static void printFrequenciesToFile(List<Frequency> frequencies, String fileName, String url, Boolean alphaNumeric) {
 		/*
 			Sorts list of frequencies then iterates through sorted list
 			and prints out frequencies.
@@ -188,8 +188,11 @@ public class Utilities {
 		String totalString = "Total " + type + " count: %d\n";
 		String uniqueString = "Unique " + type +  " count: %d\n";
 		String wordCountString;
-
-		Collections.sort(frequencies, new FreqComparator());
+		if (alphaNumeric) {
+			Collections.sort(frequencies, new AlphabeticalComparator());
+		} else {
+			Collections.sort(frequencies, new FreqComparator());
+		}
 		for (Frequency freq: frequencies) {
 			unique_count += 1;
 			total_count += freq.getFrequency();
@@ -210,6 +213,52 @@ public class Utilities {
 			}
 		} catch (IOException e) {
 			System.err.println(e);
+		}
+	}
+
+	public static void writeDocumentFrequencyToFile(List<Frequency> frequencies, String folderName, String url, Boolean alphaNumeric) {
+		/*
+			Sorts list of frequencies then iterates through sorted list
+			and prints out frequencies.
+		*/
+		int total_count = 0;
+		int unique_count = 0;
+		int longest_word = 0;
+		String type = "item";
+		String totalString = "Total " + type + " count: %d\n";
+		String uniqueString = "Unique " + type +  " count: %d\n";
+		String wordCountString;
+		String fileName;
+
+		File dfFile;
+
+		Collections.sort(frequencies, new AlphabeticalComparator());
+
+		for (Frequency freq: frequencies) {
+			unique_count += 1;
+			total_count += freq.getFrequency();
+			longest_word = Math.max(longest_word, freq.getText().length());
+		}
+
+		longest_word += 2;
+		wordCountString = "%-" + longest_word +"s%1d\n";
+		for (Frequency freq: frequencies) {
+			fileName = folderName + freq.getText().charAt(0) + ".txt";
+			dfFile = new File(fileName);
+			if (!dfFile.exists()) {
+				try {
+					dfFile.createNewFile();
+				} catch (IOException e) {
+					System.err.println(e);
+				}
+
+			}
+			try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(fileName, true))) {
+				freqWriter.write(String.format(wordCountString, freq.getText(), freq.getFrequency()));
+				freqWriter.flush();
+			} catch (IOException e) {
+				System.err.println(e);
+			}
 		}
 	}
 
@@ -238,5 +287,22 @@ public class Utilities {
 		catch (IOException e) {
 			System.err.println(e);
 		}
+	}
+
+	public static String stringCombiner(Integer startIndex, Integer endIndex, Boolean spaces, List<String> words) {
+		/*
+			Helper function to concatenate separate strings from list of words
+			given the start index and index from list. Option to include space
+			while concatenating strings
+		*/
+		StringBuilder sb = new StringBuilder(words.get(startIndex));
+		startIndex += 1;
+		for (int index = startIndex; index < endIndex + 1; index++) {
+			if (spaces) {
+				sb.append(" ");
+			}
+			sb.append(words.get(index));
+		}
+		return sb.toString();
 	}
 }
