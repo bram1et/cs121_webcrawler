@@ -1,11 +1,8 @@
 package ir.assignments.helpers;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Collections;
-import java.util.Comparator;
+import java.nio.file.Paths;
+import java.util.*;
 import java.lang.Math;
 
 
@@ -133,6 +130,18 @@ public class Utilities {
 			} else {
 				return freq2.getFrequency() - freq1.getFrequency();
 			}
+		}
+	}
+
+	public static class PostingsListComparator implements Comparator<PostingsEntry> {
+		public int compare(PostingsEntry postingsEntry1, PostingsEntry postingsEntry2) {
+			return Double.compare(postingsEntry2.getTfidf(), postingsEntry1.getTfidf());
+		}
+	}
+
+	public static class InfluenceComparator implements Comparator<Influence> {
+		public int compare(Influence influenceEntry1, Influence influenceEntry2) {
+			return Double.compare(influenceEntry1.getInfluence(), influenceEntry2.getInfluence());
 		}
 	}
 
@@ -304,5 +313,103 @@ public class Utilities {
 			sb.append(words.get(index));
 		}
 		return sb.toString();
+	}
+
+	public static Integer getDocumentFrequency(String searchTerm) {
+		String pathString = Paths.get("").toAbsolutePath().toString();
+		String dfFolder = pathString + "/documentFrequencies/";
+		String dfFile = dfFolder + searchTerm.charAt(0) + ".txt";
+		Integer frequency = -1;
+		String term = "this is dog";
+		String line;
+		searchTerm = searchTerm.trim();
+		try {
+			BufferedReader fileReader = new BufferedReader(new FileReader(dfFile));
+			while (((line = fileReader.readLine()) != null)) {
+				List<String> wordAndCount = Arrays.asList(line.split("\\s+"));
+				term = Utilities.stringCombiner(0, wordAndCount.size() - 2, true, wordAndCount).trim();
+				frequency = Integer.parseInt(wordAndCount.get(wordAndCount.size() - 1));
+				if (term.equals(searchTerm)) {
+					break;
+				}
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+		return frequency;
+	}
+
+	public static HashMap<String, Integer> getDocumentFrequencyMap() {
+		HashMap<String, Integer> documentFrequency= new HashMap<String, Integer>();
+		String pathString = Paths.get("").toAbsolutePath().toString();
+		String dfFile = pathString + "/documentFrequencies.txt";
+		String line;
+		String term;
+		Integer frequency;
+		try {
+			BufferedReader fileReader = new BufferedReader(new FileReader(dfFile));
+			while (((line = fileReader.readLine()) != null)) {
+				List<String> wordAndCount = Arrays.asList(line.split("\\s+"));
+				term = Utilities.stringCombiner(0, wordAndCount.size() - 2, true, wordAndCount).trim();
+				frequency = Integer.parseInt(wordAndCount.get(wordAndCount.size() - 1));
+				documentFrequency.put(term, frequency);
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+			System.exit(1);
+		}
+		return documentFrequency;
+	}
+
+	public static void writePostingsListToFile(TreeMap<String, List<PostingsEntry>> postingsList, String postingsListFolder) {
+		for (String key : postingsList.keySet()) {
+			String postingsFileName = postingsListFolder + key.charAt(0) + ".txt";
+			File postingsFile = new File(postingsFileName);
+			if (!postingsFile.exists()) {
+				try {
+					postingsFile.createNewFile();
+				} catch (IOException e) {
+					System.err.println(e);
+				}
+			}
+			List<PostingsEntry> aPostingsList = postingsList.get(key);
+			Collections.sort(aPostingsList, new PostingsListComparator());
+			try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(postingsFileName, true))) {
+				freqWriter.write(key + " : ");
+				freqWriter.write(aPostingsList.toString());
+				freqWriter.newLine();
+				freqWriter.flush();
+			} catch (IOException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public static void writeInfluenceToFile(HashMap<String, Influence> linkInFluence) {
+		String pathString = Paths.get("").toAbsolutePath().toString();
+		String influenceFileName = pathString + "/influenceFilex3.txt";
+		File postingsFile = new File(influenceFileName);
+		ArrayList<Influence> influenceList = new ArrayList<Influence>();
+		if (!postingsFile.exists()) {
+			try {
+				postingsFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println(e);
+			}
+		}
+		for (String influence : linkInFluence.keySet()) {
+			influenceList.add(linkInFluence.get(influence));
+		}
+		Collections.sort(influenceList, new InfluenceComparator());
+		for (Influence influence : influenceList) {
+			try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(influenceFileName, true))) {
+				freqWriter.write(influence.getUrlHashCode() + " : ");
+				freqWriter.write(influence.toString());
+				freqWriter.newLine();
+				freqWriter.flush();
+			} catch (IOException e) {
+				System.err.println(e);
+			}
+		}
 	}
 }

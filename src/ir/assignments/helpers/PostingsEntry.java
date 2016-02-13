@@ -5,10 +5,10 @@ package ir.assignments.helpers;
  */
 public class PostingsEntry {
     private int urlHashCode;
-    private int tfidf;
+    private double tfidf;
     private String url;
 
-    public PostingsEntry(int urlHashCode, int tfidf, String url) {
+    public PostingsEntry(int urlHashCode, double tfidf, String url) {
         this.url = url;
         this.urlHashCode = urlHashCode;
         this.tfidf = tfidf;
@@ -18,7 +18,7 @@ public class PostingsEntry {
         this.urlHashCode = urlHashCode;
     }
 
-    public void setTfidf(int tfidf) {
+    public void setTfidf(double tfidf) {
         this.tfidf = tfidf;
     }
 
@@ -26,7 +26,7 @@ public class PostingsEntry {
         return urlHashCode;
     }
 
-    public int getTfidf() {
+    public double getTfidf() {
         return tfidf;
     }
 

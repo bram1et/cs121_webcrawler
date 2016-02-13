@@ -61,12 +61,13 @@ public class BasicCrawler extends WebCrawler {
     Boolean notMlearnDatasets = !href.contains("mlearn.ics.uci.edu/databases");
     Boolean notFano = !href.contains("fano.ics.uci.edu/cites");
     Boolean notGraphMod = !href.contains("graphmod.ics.uci.edu");
-    Boolean notDonCode = !href.contains("djp3-pc2.ics.uci.edu/LUCICodeRepository");
+    Boolean notDonCode = !href.contains("djp3-pc2");
+    Boolean notDrazius = !href.contains("drzaius.ics.uci.edu");
     Boolean uciDomain = href.contains(".ics.uci.edu/");
     Boolean okayToVisit = !BINARY_FILES_EXTENSIONS.matcher(href).matches() &&
                           uciDomain && notDuttGroup && notEppsteinPics && notArchiveDatasets &&
                           notMailman && notFano && notArchiveDtabases && notGraphMod &&
-                          notMlearnDatasets && notDonCode;
+                          notMlearnDatasets && notDonCode && notDrazius;
     return okayToVisit;
   }
 
@@ -81,7 +82,9 @@ public class BasicCrawler extends WebCrawler {
     String anchor = page.getWebURL().getAnchor();
     String freqFileName = url.hashCode() + ".txt";
     String pathString = Paths.get("").toAbsolutePath().toString();
-
+    if (!shouldVisit(page, page.getWebURL())) {
+      return;
+    }
 
     if (page.getParseData() instanceof HtmlParseData) {
       HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
