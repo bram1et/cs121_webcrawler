@@ -3,6 +3,7 @@ package ir.assignments.helpers;
 import com.google.gson.Gson;
 import com.google.gson.internal.Streams;
 import com.google.gson.reflect.TypeToken;
+import ir.assignments.util.Util;
 import javafx.geometry.Pos;
 
 import java.io.*;
@@ -92,7 +93,7 @@ public class WordCounter {
 
         if (numFiles > 0) {
             System.out.println("|--------------------------------------------------| 100%");
-            System.out.print(" ");
+            System.out.print("|");
             for (File freqFile : directoryListing) {
                 fileName = freqFile.toString();
                 if (freqFile.isFile() && !fileName.contains(".DS_Store")) {
@@ -143,6 +144,7 @@ public class WordCounter {
         } else {
             System.err.println("Hmmm...");
         }
+        System.out.println("| Index loaded");
         return postingsList;
     }
 
@@ -259,7 +261,39 @@ public class WordCounter {
         return anchorTextMap;
     }
 
+    public static HashMap<String, List<String>> getAnchorTextFromFile(Integer numAnchorTexts) {
+        HashMap<String, List<String>> anchorTexts = new HashMap<>();
+        String pathString = Paths.get("").toAbsolutePath().toString();
+        String anchorTextFile = pathString + "/anchorTextsFile.txt";
+        String line;
+        String urlHashCode;
+        Double progressCount = 0.0;
+        Double lineCount = 0.0;
+        List<String> anchorTextList = new ArrayList<>();
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(anchorTextFile));
+            System.out.println("|--------------------------------------------------| 100%");
+            System.out.print("|");
+            while (((line = fileReader.readLine()) != null)) {
+                String[] splitLine = line.split(" : ");
+                urlHashCode = splitLine[0];
+                anchorTextList = Arrays.asList(splitLine[1].replace("[", "").replace("]", "").split(", "));
+                anchorTexts.put(urlHashCode, anchorTextList);
+                lineCount += 1;
+                if((100 * lineCount / numAnchorTexts) > progressCount) {
+                    System.out.print("-");
+                    progressCount += 2;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Could not load anchor texts");
+            System.exit(1);
+        }
+        System.out.println("| Anchor Text Loaded");
+        return anchorTexts;
+    }
+
     public static void main(String[] args) {
-        getAnchorText();
+        Utilities.writeAnchorListsToFile(getAnchorText());
     }
 }

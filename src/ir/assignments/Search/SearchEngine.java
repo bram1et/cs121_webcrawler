@@ -16,6 +16,8 @@ public class SearchEngine {
     HashMap<String, Integer> documentFrequencies;
     HashMap<String, List<String>> anchorText;
 
+    Integer numDocuments;
+
     public SearchEngine() {
         loadFiles();
     }
@@ -23,7 +25,7 @@ public class SearchEngine {
     public void run(){
         Boolean running = true;
         List<String> queryTokenized;
-        List<String> queryTerms;
+        HashSet<String> queryTerms;
         while (running) {
             List<PostingsEntry> postingsEntryList = new ArrayList<PostingsEntry>();
             List<String> anchorText = new ArrayList<String>();
@@ -36,10 +38,11 @@ public class SearchEngine {
                 break;
             }
             queryTokenized = Arrays.asList(query.split("\\s+"));
-            queryTerms = new ArrayList<String>();
+            queryTerms = new HashSet<String>();
             String minusTwo = "";
             String minusOne = "";
             String current = "";
+            Integer documentFrequency = 0;
             for (String queryToken : queryTokenized) {
                 current = queryToken.toLowerCase().trim();
                 queryTerms.add((current).trim());
@@ -59,14 +62,22 @@ public class SearchEngine {
                 if (postingsEntryList.size() == 0) {
                     continue;
                 }
+                if (documentFrequencies.containsKey(token)) {
+                    documentFrequency = documentFrequencies.get(token);
+                } else {
+                    documentFrequency = 1;
+                }
                 for (PostingsEntry postings : postingsEntryList) {
                     String urlHashCode = String.valueOf(postings.getUrlHashCode());
                     String url = postings.getUrl();
                     double tfidf = postings.getTfidf();
-                    double siteInfluence = 1 + Math.log10(linkInfluence.get(urlHashCode).getInfluence());
+                    Double influnece;
+                    if (linkInfluence.containsKey(urlHashCode)) influnece = linkInfluence.get(urlHashCode).getInfluence();
+                    else influnece = 1.0;
+                    double siteInfluence = 1 + Math.log10(influnece);
                     if (searchResults.containsKey(urlHashCode)) {
                         double score = searchResults.get(urlHashCode).getSearchScore();
-                        score += tfidf * siteInfluence;
+                        score += tfidf * siteInfluence * Math.log10(this.numDocuments/documentFrequency);
                         searchResults.get(urlHashCode).setSearchScore(score);
                     } else {
                         searchResults.put(urlHashCode, new ResultNode(urlHashCode, url, tfidf * siteInfluence));
@@ -96,17 +107,24 @@ public class SearchEngine {
                     System.out.println(sortedResults.get(i).getUrl() + " : " + sortedResults.get(i).getSearchScore());
                 }
             } else {
-                System.out.println(sortedResults);
+                for (int i = 0; i < sortedResults.size(); i++) {
+                    System.out.println(sortedResults.get(i).getUrl() + " : " + sortedResults.get(i).getSearchScore());
+                }
             }
         }
     }
 
     private void loadFiles() {
         System.out.println("Loading files...");
+        System.out.println("Loading index...");
         postingsList = WordCounter.calculatetfidf();
+        System.out.println("Loading pagerank scores...");
         linkInfluence = LinkInfluenceCalculator.getInfluenceFromFile();
+        System.out.println("Loading document frequencies...");
         documentFrequencies = Utilities.getDocumentFrequencyMap();
-        anchorText = WordCounter.getAnchorText();
+        System.out.println("Loading anchor texts map...");
+        anchorText = WordCounter.getAnchorTextFromFile(67090);
+        this.numDocuments = anchorText.size();
     }
 
     public static void main(String[] args) {
