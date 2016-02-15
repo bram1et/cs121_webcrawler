@@ -64,10 +64,14 @@ public class BasicCrawler extends WebCrawler {
     Boolean notDonCode = !href.contains("djp3-pc2");
     Boolean notDrazius = !href.contains("drzaius.ics.uci.edu");
     Boolean uciDomain = href.contains(".ics.uci.edu/");
+    Boolean notAlreadyVisited = !this.visitedMap.containsKey(url.hashCode());
     Boolean okayToVisit = !BINARY_FILES_EXTENSIONS.matcher(href).matches() &&
                           uciDomain && notDuttGroup && notEppsteinPics && notArchiveDatasets &&
                           notMailman && notFano && notArchiveDtabases && notGraphMod &&
-                          notMlearnDatasets && notDonCode && notDrazius;
+                          notMlearnDatasets && notDonCode && notDrazius && notAlreadyVisited;
+    if (!okayToVisit) {
+      System.out.println("Skipping : " + url.toString());
+    }
     return okayToVisit;
   }
 

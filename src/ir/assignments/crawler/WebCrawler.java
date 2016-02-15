@@ -25,6 +25,7 @@ import ir.assignments.fetcher.PageFetchResult;
 import ir.assignments.fetcher.PageFetcher;
 import ir.assignments.frontier.DocIDServer;
 import ir.assignments.frontier.Frontier;
+import ir.assignments.helpers.LogChecker;
 import ir.assignments.parser.NotAllowedContentException;
 import ir.assignments.parser.ParseData;
 import ir.assignments.parser.Parser;
@@ -39,6 +40,7 @@ import uk.org.lidalia.slf4jext.Logger;
 import uk.org.lidalia.slf4jext.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -102,6 +104,8 @@ public class WebCrawler implements Runnable {
    */
   private boolean isWaitingForNewURLs;
 
+  protected HashMap<Integer, String> visitedMap;
+
   public String logFileName;
 
   /**
@@ -121,6 +125,7 @@ public class WebCrawler implements Runnable {
     this.parser = new Parser(crawlController.getConfig());
     this.myController = crawlController;
     this.isWaitingForNewURLs = false;
+    this.visitedMap = LogChecker.getVisitedURLs();
   }
 
   /**

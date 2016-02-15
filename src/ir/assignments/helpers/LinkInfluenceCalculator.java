@@ -1,8 +1,8 @@
 package ir.assignments.helpers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -10,8 +10,7 @@ import java.util.*;
  */
 public class LinkInfluenceCalculator {
 
-
-    private static HashMap<String, Influence> calculateLinkInfluence() {
+    public static HashMap<String, Influence> calculateLinkInfluence() {
         HashMap<String, Influence> linkInfluence = new HashMap<String, Influence>();
         List<Double> linkRanks;
         String frequencyFlder = "freqFiles";
@@ -22,6 +21,7 @@ public class LinkInfluenceCalculator {
         File[] directoryListing = dir.listFiles();
         double numFiles = directoryListing.length;
         Integer fileCount = 0;
+        Integer iterations = 3;
         if (numFiles > 0) {
             for (int i = 0; i < 3; i++) {
                 linkRanks = new ArrayList<Double>();
@@ -36,6 +36,10 @@ public class LinkInfluenceCalculator {
                         try {
                             Scanner sc = new Scanner(freqFile);
                             String url = sc.nextLine().split(": ")[1];
+                            if (url.contains("djp3-pc2") || url.contains("luci.ics.uci.edu") || url.contains("LUCICodeRepository")) {
+                                linkInfluence.put(fileName, new Influence(fileName));
+                                continue;
+                            }
                             String anchor = sc.nextLine();
                             String outGoingString = sc.nextLine().split(":")[1].replace("[", "").replace("]", "");
                             List<String> outGoingURLs = Arrays.asList(outGoingString.split(", "));
@@ -50,8 +54,13 @@ public class LinkInfluenceCalculator {
                                     linkInfluence.put(outGoingURL, new Influence(outGoingURL));
                                 }
                             }
+                            if (i == (iterations - 1)) {
+                                sc.close();
+                            }
+
                         } catch (FileNotFoundException e) {
                             System.err.println("File not found...");
+                        } finally {
                         }
                     }
                 }
@@ -93,6 +102,28 @@ public class LinkInfluenceCalculator {
             System.err.println("Hmmm...");
         }
         return linkInfluence;
+    }
+
+    public static HashMap<String, Influence> getInfluenceFromFile() {
+        HashMap<String, Influence> linkInfluenceMap = new HashMap<>();
+        String pathString = Paths.get("").toAbsolutePath().toString();
+        String influenceFile = pathString + "/influenceFilev5.txt";
+        String line;
+        String urlHashCode;
+        Double influence;
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(influenceFile));
+            while (((line = fileReader.readLine()) != null)) {
+                String[] splitLine = line.split(" : ");
+                urlHashCode = splitLine[0];
+                influence = Double.parseDouble(splitLine[1]);
+                linkInfluenceMap.put(urlHashCode, new Influence(urlHashCode, influence));
+            }
+        } catch (IOException e) {
+            System.err.println("Could not load influence");
+            System.exit(1);
+        }
+        return linkInfluenceMap;
     }
     public static void main(String[] args) {
         Utilities.writeInfluenceToFile(calculateLinkInfluence());

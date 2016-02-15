@@ -37,25 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../crawler4j-4.1-jar-with-dependencies.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Dependencies/slf4j-simple-1.7.14.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../Dependencies/commons-io-2.4-bin/commons-io-2.4/commons-io-2.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/dependencies/gson-2.6.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

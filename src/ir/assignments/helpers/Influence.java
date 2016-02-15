@@ -15,6 +15,13 @@ public class Influence {
 
     }
 
+    public Influence(String urlHashCode, double influence) {
+        this.urlHashCode = urlHashCode;
+        this.influence = influence;
+        this.count = 1.0;
+
+    }
+
     public double getCount() {
         return count;
     }

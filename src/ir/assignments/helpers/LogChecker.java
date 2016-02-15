@@ -1,9 +1,7 @@
 package ir.assignments.helpers;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Chris on 2/1/16.
@@ -74,6 +72,35 @@ public class LogChecker {
         return urls;
     }
 
+    public static HashMap<Integer, String> getVisitedURLs() {
+        HashMap<Integer, String> hashCodeMap = new HashMap<Integer, String>();
+        String logFolder = "logs";
+        String fileName = "";
+        File dir = new File(logFolder);
+        File[] directoryListing = dir.listFiles();
+        Integer count = 0;
+        if (directoryListing != null) {
+            for (File logFile : directoryListing) {
+                fileName = logFile.toString();
+                if (logFile.isFile() && fileName.contains("log.txt") && !fileName.contains(".DS_Store")) {
+                    try {
+                        Scanner sc = new Scanner(logFile);
+                        while (sc.hasNext()) {
+                            List<String> logLine = Arrays.asList(sc.nextLine().split(": "));
+                            String url = logLine.get(1).trim();
+                            Integer hashCode = Integer.parseInt(logLine.get(2).trim());
+                            hashCodeMap.put(hashCode, url);
+                            count += 1;
+                        }
+                    } catch (FileNotFoundException e) {
+                        System.err.println(e.toString());
+                    }
+                }
+            }
+        }
+        return hashCodeMap;
+    }
+
     public static void getSubdomains(List<String> urls) {
         String subdomainFileName = "subdomainsTemp.txt";
         String subDomain = "";
@@ -91,9 +118,7 @@ public class LogChecker {
             }
         }
     }
-
     public static void main(String[] args) {
-        List<String> urls = getURLsFromLogs();
-        getSubdomains(urls);
+        getVisitedURLs();
     }
 }

@@ -227,7 +227,59 @@ public class BasicCrawlController {
      * which are found in these pages
      */
     controller.addSeed(seedURL);
+    controller.addSeed("http://mondego.ics.uci.edu/");
+    controller.addSeed("http://www.ics.uci.edu/~lopes/");
+    controller.addSeed("http://nile.ics.uci.edu:9000/wifi");
+    controller.addSeed("http://mondego.ics.uci.edu/projects/SourcererCC/");
+    controller.addSeed("http://mondego.ics.uci.edu/projects/clonedetection/");
+    controller.addSeed("http://sdcl.ics.uci.edu/mondego-group/");
+    controller.addSeed("http://archive.ics.uci.edu/ml/");
+    controller.addSeed("http://mlearn.ics.uci.edu/");
+    controller.addSeed("http://mlearn.ics.uci.edu/MLSummary.html");
+    controller.addSeed("http://ftp.ics.uci.edu/pub/machine-learning-databases/");
 
+    controller.addSeed("https://kdd.ics.uci.edu/");
+    controller.addSeed("http://www.ics.uci.edu/prospective/en/degrees/software-engineering/");
+    controller.addSeed("https://www.ics.uci.edu/ugrad/degrees/degree_se.php");
+    controller.addSeed("http://www.informatics.uci.edu/phd-software-engineering/");
+    controller.addSeed("https://www.ics.uci.edu/prospective/pdf/se.pdf");
+    controller.addSeed("http://catalogue.uci.edu/donaldbrenschoolofinformationandcomputersciences/");
+    controller.addSeed("http://www.ics.uci.edu/grad/degrees/");
+    controller.addSeed("https://www.ics.uci.edu/ugrad/degrees/");
+    controller.addSeed("https://www.ics.uci.edu/grad/admissions/Prospective_ApplicationProcess.php");
+    controller.addSeed("https://www.ics.uci.edu/ugrad/degrees/second_baccs.php");
+
+    controller.addSeed("https://www.ics.uci.edu/faculty/area/area_security.php");
+    controller.addSeed("http://sconce.ics.uci.edu/");
+    controller.addSeed("http://sprout.ics.uci.edu/");
+    controller.addSeed("https://www.ics.uci.edu/about/search/search_sao.php");
+    controller.addSeed("http://www.ics.uci.edu/prospective/en/contact/student-affairs/");
+    controller.addSeed("https://www.ics.uci.edu/ugrad/");
+    controller.addSeed("http://www.ics.uci.edu/grad/sao/");
+    controller.addSeed("http://www.ics.uci.edu/about/visit/");
+    controller.addSeed("https://www.ics.uci.edu/grad/");
+    controller.addSeed("http://www.ics.uci.edu/grad/courses/");
+
+    controller.addSeed("http://www.ics.uci.edu/grad/degrees/");
+    controller.addSeed("https://www.ics.uci.edu/grad/degrees/degree_cs.php");
+    controller.addSeed("http://www.ics.uci.edu/grad/admissions/");
+    controller.addSeed("http://www.ics.uci.edu/grad/qa/");
+    controller.addSeed("https://www.ics.uci.edu/ugrad/degrees/degree_in4matx.php");
+    controller.addSeed("https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm");
+    controller.addSeed("http://www.ics.uci.edu/~fielding/talks/webarch_9805/");
+    controller.addSeed("http://www.ics.uci.edu/prospective/en/degrees/computer-game-science/");
+    controller.addSeed("https://www.ics.uci.edu/ugrad/degrees/degree_cgs.php");
+    controller.addSeed("http://cgvw.ics.uci.edu/");
+
+    controller.addSeed("http://www.ics.uci.edu/~lopes/teaching/cs221W12/");
+    controller.addSeed("http://www.ics.uci.edu/~lopes/teaching/cs221W13/");
+    controller.addSeed("http://www.ics.uci.edu/~lopes/");
+    controller.addSeed("http://www.ics.uci.edu/~djp3/classes/2010_01_CS221/");
+    controller.addSeed("http://www.ics.uci.edu/~djp3/classes/2014_01_INF141/calendar.html");
+    controller.addSeed("http://www.ics.uci.edu/~djp3/classes/2014_01_INF141/structure.html");
+    controller.addSeed("http://www.ics.uci.edu/~djp3/classes/2009_01_02_INF141/");
+    controller.addSeed("http://www.ics.uci.edu/~kay/courses/i141/w15.html");
+    controller.addSeed("http://www.ics.uci.edu/~djp3/classes/2009_01_02_INF141/");
     /*
      * Start the crawl. This is a blocking operation, meaning that your code
      * will reach the line after this only when crawling is finished.

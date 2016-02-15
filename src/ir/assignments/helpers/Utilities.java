@@ -354,6 +354,7 @@ public class Utilities {
 				frequency = Integer.parseInt(wordAndCount.get(wordAndCount.size() - 1));
 				documentFrequency.put(term, frequency);
 			}
+			fileReader.close();
 		} catch (IOException e) {
 			System.err.println(e);
 			System.exit(1);
@@ -387,7 +388,7 @@ public class Utilities {
 
 	public static void writeInfluenceToFile(HashMap<String, Influence> linkInFluence) {
 		String pathString = Paths.get("").toAbsolutePath().toString();
-		String influenceFileName = pathString + "/influenceFilex3.txt";
+		String influenceFileName = pathString + "/influenceFilev5.txt";
 		File postingsFile = new File(influenceFileName);
 		ArrayList<Influence> influenceList = new ArrayList<Influence>();
 		if (!postingsFile.exists()) {
@@ -400,11 +401,33 @@ public class Utilities {
 		for (String influence : linkInFluence.keySet()) {
 			influenceList.add(linkInFluence.get(influence));
 		}
-		Collections.sort(influenceList, new InfluenceComparator());
 		for (Influence influence : influenceList) {
 			try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(influenceFileName, true))) {
 				freqWriter.write(influence.getUrlHashCode() + " : ");
-				freqWriter.write(influence.toString());
+				freqWriter.write(String.valueOf(influence.getInfluence()));
+				freqWriter.newLine();
+				freqWriter.flush();
+			} catch (IOException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public static void writeAnchorListsToFile(HashMap<String, List<String>> anchorTextsMap) {
+		String pathString = Paths.get("").toAbsolutePath().toString();
+		String anchorTextFileName = pathString + "/anchorTextsFile.txt";
+		File anchorTextFile = new File(anchorTextFileName);
+		if (!anchorTextFile.exists()) {
+			try {
+				anchorTextFile.createNewFile();
+			} catch (IOException e) {
+				System.err.println(e);
+			}
+		}
+		for (String urlHashcode : anchorTextsMap.keySet()) {
+			try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(anchorTextFileName, true))) {
+				freqWriter.write(urlHashcode + " : ");
+				freqWriter.write(anchorTextsMap.get(urlHashcode).toString());
 				freqWriter.newLine();
 				freqWriter.flush();
 			} catch (IOException e) {
