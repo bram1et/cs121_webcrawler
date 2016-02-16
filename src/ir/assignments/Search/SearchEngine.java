@@ -12,7 +12,6 @@ public class SearchEngine {
     private TreeMap<String, List<PostingsEntry>> postingsList;
     private HashMap<String, Influence> linkInfluence;
     private HashMap<String, ResultNode> searchResults;
-    private PriorityQueue<ResultNode> searchResultsHeap;
     HashMap<String, Integer> documentFrequencies;
     HashMap<String, List<String>> anchorText;
 
@@ -29,6 +28,7 @@ public class SearchEngine {
         while (running) {
             List<PostingsEntry> postingsEntryList = new ArrayList<PostingsEntry>();
             List<String> anchorText = new ArrayList<String>();
+            PriorityQueue<ResultNode> searchResultsHeap = new PriorityQueue<ResultNode>();
             searchResults = new HashMap<String, ResultNode>();
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a query");
@@ -79,6 +79,10 @@ public class SearchEngine {
                         double score = searchResults.get(urlHashCode).getSearchScore();
                         score += tfidf * siteInfluence * Math.log10(this.numDocuments/documentFrequency);
                         searchResults.get(urlHashCode).setSearchScore(score);
+                        double tfidfScore = searchResults.get(urlHashCode).getTfidfScore();
+                        double siteInfluenceScore = searchResults.get(urlHashCode).getPageRankScore();
+                        searchResults.get(urlHashCode).setTfidfScore(tfidfScore + (tfidf *Math.log10(this.numDocuments/documentFrequency)));
+                        searchResults.get(urlHashCode).setPageRankScore(siteInfluenceScore + siteInfluence);
                     } else {
                         searchResults.put(urlHashCode, new ResultNode(urlHashCode, url, tfidf * siteInfluence));
                     }
@@ -89,13 +93,20 @@ public class SearchEngine {
                 ResultNode resultNode = searchResults.get(result);
                 String urlHashCode = resultNode.getUrlHashCode();
                 Double searchSore = resultNode.getSearchScore();
+                double anchorScore = resultNode.getAnchorScore();
                 double termsInAchor = 0;
-                List<String> anchorTextList = this.anchorText.get(urlHashCode);
-                for (String term : queryTerms) {
-                    if (anchorTextList.contains(term)) termsInAchor += 1;
+                Integer singleQueryTerms = queryTerms.size();
+                if (this.anchorText.containsKey(urlHashCode)) {
+                    List<String> anchorTextList = this.anchorText.get(urlHashCode);
+                    for (String term : queryTerms) {
+                        if (anchorTextList.contains(term)) termsInAchor += 1;
+                        if (term.contains(" ")) singleQueryTerms -= 1;
+                    }
                 }
-                resultNode.setSearchScore(searchSore * (1 + (termsInAchor / queryTerms.size())));
+                resultNode.setSearchScore(searchSore * (2 + (termsInAchor / singleQueryTerms)));
+                resultNode.setAnchorScore(anchorScore + (2 + (termsInAchor / singleQueryTerms)));
                 sortedResults.add(resultNode);
+                searchResultsHeap.add(resultNode);
             }
             if (sortedResults.isEmpty()) {
                 System.out.println("No results found");
@@ -104,11 +115,13 @@ public class SearchEngine {
             Collections.sort(sortedResults);
             if (sortedResults.size() > 20) {
                 for (int i = 0; i < 20; i++) {
-                    System.out.println(sortedResults.get(i).getUrl() + " : " + sortedResults.get(i).getSearchScore());
+                    ResultNode searchResult = searchResultsHeap.poll();
+//                    System.out.println(sortedResults.get(i).getUrl() + " : " + sortedResults.get(i).getSearchScore());
+                    System.out.println(searchResult.getUrl() + " : " + searchResult.getSearchScore() + " : " + searchResult.getTfidfScore() + " : " + searchResult.getAnchorScore() + " : " + searchResult.getPageRankScore());
                 }
             } else {
                 for (int i = 0; i < sortedResults.size(); i++) {
-                    System.out.println(sortedResults.get(i).getUrl() + " : " + sortedResults.get(i).getSearchScore());
+                    System.out.println(searchResultsHeap.poll().getUrl() + " : " + sortedResults.get(i).getSearchScore());
                 }
             }
         }
@@ -123,7 +136,7 @@ public class SearchEngine {
         System.out.println("Loading document frequencies...");
         documentFrequencies = Utilities.getDocumentFrequencyMap();
         System.out.println("Loading anchor texts map...");
-        anchorText = WordCounter.getAnchorTextFromFile(67090);
+        anchorText = WordCounter.getAnchorTextFromFile(67237);
         this.numDocuments = anchorText.size();
     }
 

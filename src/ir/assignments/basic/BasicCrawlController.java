@@ -227,7 +227,6 @@ public class BasicCrawlController {
      * which are found in these pages
      */
     controller.addSeed(seedURL);
-    controller.addSeed("http://mlearn.ics.uci.edu");
     /*
      * Start the crawl. This is a blocking operation, meaning that your code
      * will reach the line after this only when crawling is finished.

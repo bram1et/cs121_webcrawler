@@ -125,6 +125,7 @@ public class LinkInfluenceCalculator {
         }
         return linkInfluenceMap;
     }
+    
     public static void main(String[] args) {
         Utilities.writeInfluenceToFile(calculateLinkInfluence());
     }
