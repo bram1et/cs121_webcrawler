@@ -59,7 +59,7 @@ public class LinkInfluenceCalculator {
                             }
 
                         } catch (FileNotFoundException e) {
-                            System.err.println("File not found...");
+                            System.err.println(e);
                         } finally {
                         }
                     }
@@ -107,12 +107,14 @@ public class LinkInfluenceCalculator {
     public static HashMap<String, Influence> getInfluenceFromFile() {
         HashMap<String, Influence> linkInfluenceMap = new HashMap<>();
         String pathString = Paths.get("").toAbsolutePath().toString();
-        String influenceFile = pathString + "/influenceFilev5.txt";
+        String influenceFileName = pathString + "/influenceFile.txt";
         String line;
         String urlHashCode;
         Double influence;
+
+
         try {
-            BufferedReader fileReader = new BufferedReader(new FileReader(influenceFile));
+            BufferedReader fileReader = new BufferedReader(new FileReader(influenceFileName));
             while (((line = fileReader.readLine()) != null)) {
                 String[] splitLine = line.split(" : ");
                 urlHashCode = splitLine[0];

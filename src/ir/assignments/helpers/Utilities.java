@@ -47,7 +47,7 @@ public class Utilities {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			System.out.println("File not Found :(");
+			System.err.println(e);
 		}
 
 		return returnList;
@@ -69,12 +69,10 @@ public class Utilities {
 				if (nextWord.length() > 0) {
 					returnList.add(nextWord);
 				}
-
 			}
 		} catch (Exception e) {
-			System.out.println("File not Found :(");
+			System.err.println(e);
 		}
-
 		return returnList;
 
 	}
@@ -388,16 +386,19 @@ public class Utilities {
 
 	public static void writeInfluenceToFile(HashMap<String, Influence> linkInFluence) {
 		String pathString = Paths.get("").toAbsolutePath().toString();
-		String influenceFileName = pathString + "/influenceFilev5.txt";
-		File postingsFile = new File(influenceFileName);
+		String influenceFileName = pathString + "/influenceFile.txt";
 		ArrayList<Influence> influenceList = new ArrayList<Influence>();
-		if (!postingsFile.exists()) {
-			try {
-				postingsFile.createNewFile();
-			} catch (IOException e) {
-				System.err.println(e);
-			}
+		File influenceFile = new File(influenceFileName);
+
+		if (influenceFile.exists()) {
+			influenceFile.delete();
 		}
+		try {
+			influenceFile.createNewFile();
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+
 		for (String influence : linkInFluence.keySet()) {
 			influenceList.add(linkInFluence.get(influence));
 		}
@@ -417,12 +418,13 @@ public class Utilities {
 		String pathString = Paths.get("").toAbsolutePath().toString();
 		String anchorTextFileName = pathString + "/anchorTextsFile.txt";
 		File anchorTextFile = new File(anchorTextFileName);
-		if (!anchorTextFile.exists()) {
-			try {
-				anchorTextFile.createNewFile();
-			} catch (IOException e) {
-				System.err.println(e);
-			}
+		if (anchorTextFile.exists()) {
+			anchorTextFile.delete();
+		}
+		try {
+			anchorTextFile.createNewFile();
+		} catch (IOException e) {
+			System.err.println(e);
 		}
 		for (String urlHashcode : anchorTextsMap.keySet()) {
 			try (BufferedWriter freqWriter = new BufferedWriter(new FileWriter(anchorTextFileName, true))) {

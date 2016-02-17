@@ -124,7 +124,7 @@ public class WordCounter {
                                 } else {
                                     continue;
                                 }
-                                double tfidf = Math.log10(frequency) * Math.log10(numFiles/documentFrequency);
+                                double tfidf = (1 + Math.log10(frequency)) * Math.log10(numFiles/documentFrequency);
                                 PostingsEntry postingsEntry = new PostingsEntry(url.hashCode(), tfidf, url);
                                 if (postingsList.containsKey(word)) {
                                     postingsList.get(word).add(postingsEntry);

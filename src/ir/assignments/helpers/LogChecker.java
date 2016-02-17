@@ -2,6 +2,8 @@ package ir.assignments.helpers;
 
 import java.io.*;
 import java.util.*;
+import java.nio.file.Paths;
+
 
 /**
  * Created by Chris on 2/1/16.
@@ -101,6 +103,66 @@ public class LogChecker {
         return hashCodeMap;
     }
 
+    public static void writeURLMapToFile(HashMap<Integer, String> hashCodeMap) {
+        String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
+        String hashMapFileName = pathString + "hash_to_URL.txt";
+        File hashCodeMapFile = new File(hashMapFileName);
+        if (hashCodeMapFile.exists()) {
+            hashCodeMapFile.delete();
+        }
+        try {
+            hashCodeMapFile.createNewFile();
+        } catch (IOException e) {
+            System.err.println(e);
+            System.exit(1);
+        }
+        for (Integer urlHashCode : hashCodeMap.keySet()) {
+            try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(hashMapFileName, true))) {
+                fileWriter.write(urlHashCode.toString() + " : " + hashCodeMap.get(urlHashCode));
+                fileWriter.newLine();
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    public static HashMap<String, String> getURLMapFromFile (Integer numURLs) {
+        HashMap<String, String> hashCodeMap = new HashMap<String, String>();
+        String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
+        String hashMapFileName = pathString + "hash_to_URL.txt";
+        File hashCodeMapFile = new File(hashMapFileName);
+        Integer progressCount = 0;
+        Integer lineCount = 0;
+        String inputLine;
+        String urlHashCode;
+        String url;
+        if (!hashCodeMapFile.exists()) {
+            System.err.println("Error opening hash_to_URL.txt");
+            System.exit(1);
+        }
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(hashMapFileName));
+            System.out.println("|--------------------------------------------------| 100%");
+            System.out.print("|");
+            while (((inputLine = fileReader.readLine()) != null)) {
+                String[] splitLine = inputLine.split(" : ");
+                urlHashCode = splitLine[0];
+                url = splitLine[1];
+                hashCodeMap.put(urlHashCode, url);
+                lineCount += 1;
+                if((100 * lineCount / numURLs) > progressCount) {
+                    System.out.print("-");
+                    progressCount += 2;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Could not load hashcode map");
+            System.exit(1);
+        }
+        System.out.println("| Hashcode Map Loaded");
+        return hashCodeMap;
+    }
+
     public static void getSubdomains(List<String> urls) {
         String subdomainFileName = "subdomainsTemp.txt";
         String subDomain = "";
@@ -119,6 +181,6 @@ public class LogChecker {
         }
     }
     public static void main(String[] args) {
-        getVisitedURLs();
+        HashMap<String, String> urlHashMap = getURLMapFromFile(67697);
     }
 }

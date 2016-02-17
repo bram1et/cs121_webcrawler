@@ -23,6 +23,6 @@ public class Crawler {
 		return LogChecker.getURLsFromLogs();
 	}
 	public static void main (String[] args) {
-		crawl("http://cml.ics.uci.edu/home/about-us/");
+		crawl("http://cml.ics.uci.edu");
 	}
 }

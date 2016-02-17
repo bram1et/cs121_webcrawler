@@ -69,9 +69,6 @@ public class BasicCrawler extends WebCrawler {
                           uciDomain && notDuttGroup && notEppsteinPics && notArchiveDatasets &&
                           notMailman && notFano && notArchiveDtabases && notGraphMod &&
                           notDonCode && notDrazius && notAlreadyVisited;
-    if (!okayToVisit) {
-      System.out.println("Skipping : " + url.toString());
-    }
     return okayToVisit;
   }
 
@@ -86,9 +83,6 @@ public class BasicCrawler extends WebCrawler {
     String anchor = page.getWebURL().getAnchor();
     String freqFileName = url.hashCode() + ".txt";
     String pathString = Paths.get("").toAbsolutePath().toString();
-    if (!shouldVisit(page, page.getWebURL())) {
-      return;
-    }
 
     if (page.getParseData() instanceof HtmlParseData) {
       HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
@@ -99,7 +93,7 @@ public class BasicCrawler extends WebCrawler {
       /**
        * Writing urls to log file. Might be helpful...
        */
-
+      /*
       for (WebURL link : links) {
         if (shouldVisit(page, link)) {
           outGoingLinks.add(link.hashCode());
@@ -128,8 +122,27 @@ public class BasicCrawler extends WebCrawler {
       } catch (IOException e) {
         System.err.println(e);
       }
+      */
+      String dataFilesFolder = pathString + "/dataFiles/";
 
-      Utilities.printFrequenciesToFile(frequencies, freqFilePath, url, false);
+      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "title_info.txt", true))) {
+        infoWrite.write(url.hashCode() + " : " + Utilities.tokenizeString(htmlParseData.getTitle()));
+        infoWrite.newLine();
+        infoWrite.flush();
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "date_info.txt", true))) {
+        if (htmlParseData.getMetaTags().containsKey("date")) {
+          infoWrite.write(url.hashCode() + " : " + htmlParseData.getMetaTags().get("date"));
+          infoWrite.newLine();
+          infoWrite.flush();
+        }
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+
+//      Utilities.printFrequenciesToFile(frequencies, freqFilePath, url, false);
     }
 
     Header[] responseHeaders = page.getFetchResponseHeaders();

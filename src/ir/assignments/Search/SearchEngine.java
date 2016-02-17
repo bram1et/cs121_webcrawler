@@ -94,6 +94,7 @@ public class SearchEngine {
                 String urlHashCode = resultNode.getUrlHashCode();
                 Double searchSore = resultNode.getSearchScore();
                 double anchorScore = resultNode.getAnchorScore();
+                double anchorPercent = 0.0;
                 double termsInAchor = 0;
                 Integer singleQueryTerms = queryTerms.size();
                 if (this.anchorText.containsKey(urlHashCode)) {
@@ -103,8 +104,9 @@ public class SearchEngine {
                         if (term.contains(" ")) singleQueryTerms -= 1;
                     }
                 }
-                resultNode.setSearchScore(searchSore * (2 + (termsInAchor / singleQueryTerms)));
-                resultNode.setAnchorScore(anchorScore + (2 + (termsInAchor / singleQueryTerms)));
+                anchorPercent = 1 + 1 * (termsInAchor / singleQueryTerms);
+                resultNode.setSearchScore(searchSore * anchorPercent);
+                resultNode.setAnchorScore(anchorScore + anchorPercent);
                 sortedResults.add(resultNode);
                 searchResultsHeap.add(resultNode);
             }
@@ -136,7 +138,7 @@ public class SearchEngine {
         System.out.println("Loading document frequencies...");
         documentFrequencies = Utilities.getDocumentFrequencyMap();
         System.out.println("Loading anchor texts map...");
-        anchorText = WordCounter.getAnchorTextFromFile(67237);
+        anchorText = WordCounter.getAnchorTextFromFile(67696);
         this.numDocuments = anchorText.size();
     }
 
