@@ -3,8 +3,7 @@ package ir.assignments.mapreduce;
 import ir.assignments.helpers.PostingsEntry;
 import ir.assignments.helpers.Utilities;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -37,7 +36,7 @@ public class Mapper {
         Take hash of term, say learning.hashCode() = 1574204190
         Take last two digits of hash, 90
         In 90.txt append:
-            word hash : document hash+tfidf <- use word hash as opposed to word to save space. '+' is delimeter
+            word hash : document hash+tfidf <- use word hash as opposed to word to save space. '+' is delimiter
             ie 1574204190 : 1009367760+3.14
 
      */
@@ -46,14 +45,14 @@ public class Mapper {
         String fileName;
         String pathString = Paths.get("").toAbsolutePath().toString();
         String mappedFolder = pathString + "/mapped/";
-        String frequencyFlder = "freqFiles";
+        String frequencyFolder = "freqFiles";
         Integer fileCount = 0;
         Integer progressCount = 0;
         /*
-            Opens folder containg frequency documents
+            Opens folder containing frequency documents
             and if there are no documents, will exit.
          */
-        File dir = new File(frequencyFlder);
+        File dir = new File(frequencyFolder);
         File[] directoryListing = dir.listFiles();
         double numFiles =  directoryListing.length;
         if (numFiles == 0) {
@@ -92,6 +91,16 @@ public class Mapper {
                             if (documentFrequencies.containsKey(word)) documentFrequency = documentFrequencies.get(word);
                             else continue;
                             double tfidf = Math.log10(frequency) * Math.log10(numFiles / documentFrequency);
+
+                            String wordHashCode = Integer.toString(word.hashCode());
+                            String mapFile = mappedFolder + wordHashCode.substring(wordHashCode.length()-2, wordHashCode.length()) +".txt";
+                            try (BufferedWriter mapWriter = new BufferedWriter(new FileWriter(mapFile, true))) {
+                                mapWriter.write(wordHashCode + " : " + fileName.hashCode() + "+" + tfidf);
+                                mapWriter.newLine();
+                                mapWriter.flush();
+                            } catch (IOException e) {
+                                System.err.println(e);
+                            }
                         }
                     }
                     scanner.close();
@@ -100,5 +109,9 @@ public class Mapper {
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+       map();
     }
 }

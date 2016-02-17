@@ -437,4 +437,17 @@ public class Utilities {
 			}
 		}
 	}
+
+	public static void writeReduceFile(String filename, HashMap<String, List<String>> reducedMap) {
+		try (BufferedWriter reduceWriter = new BufferedWriter(new FileWriter(filename, true))) {
+			for (Map.Entry<String, List<String>> entry : reducedMap.entrySet()) {
+				reduceWriter.write(entry.getKey() + " : " + entry.getValue());
+				reduceWriter.newLine();
+				reduceWriter.flush();
+			}
+		} catch (IOException e) {
+			System.err.println(e);
+		}
+	}
+
 }
