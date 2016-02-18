@@ -1,5 +1,6 @@
 package ir.assignments.mapreduce;
 
+import ir.assignments.helpers.PostingsEntry;
 import ir.assignments.helpers.Utilities;
 
 import java.io.*;
@@ -66,6 +67,40 @@ public class Reducer {
         }
     }
 
+    public static HashMap<String, HashMap<String, List<PostingsEntry>>> getPostingsListFromFile() {
+        /*
+            Iterates through all the 'reduced' files in /reduced and turns content
+            of each into a hashmap. Each hashmap will be added to an encompasssing
+            hashmap holds all the hashmaps of each file.
+
+            For example in /reduced is
+            00.txt
+            01.txt
+            02.txt
+            etc...
+
+            in 00.txt is
+            -814063400 : [1361071648+1.36..., etc, etc, etc]
+            -1186233000 : [-969445495+2.54..
+            -2003616400 : [1037410422+1.36...
+            ...
+            ...
+
+            Create Hashmap<String, Hashmap> for all files, say PostingsListLevel1
+            Iterate through each file in /reduced
+                Create Hashmap<String, List<PostingsEntry>> for file ie. PostingsListLevel2
+                Iterate through each line in file
+                    Parse line into wordHash and postingEntryListString. Line is in format- wordHash : [urlHash+tfidf, urlHash+tfidf, etc]
+                    Create a PostingsEntryList to store posting entries.
+                    Parse postingEntryListString by using ", " as delimeter and saving into delimetedList
+                        Iterate through delimtedList
+                            create new PostingsEntry(urlHash, tfidf)
+                            Add new PostingsEntry to PostingsEntryList
+                    PostingsListLevel2.put(wordHash, PostingsEntryList)
+                PostingsListLevel1.put(fileName, PostingsListLevel2) ## for fileName, remove ".txt"
+         */
+        return null;
+    }
     public static void main(String[] args) {
         reduce();
     }

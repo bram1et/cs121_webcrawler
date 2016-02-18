@@ -64,11 +64,11 @@ public class BasicCrawler extends WebCrawler {
     Boolean notDonCode = !href.contains("djp3-pc2");
     Boolean notDrazius = !href.contains("drzaius.ics.uci.edu");
     Boolean uciDomain = href.contains(".ics.uci.edu");
-    Boolean notAlreadyVisited = !this.visitedMap.containsKey(url.hashCode());
+//    Boolean notAlreadyVisited = !this.visitedMap.containsKey(url.hashCode());
     Boolean okayToVisit = !BINARY_FILES_EXTENSIONS.matcher(href).matches() &&
                           uciDomain && notDuttGroup && notEppsteinPics && notArchiveDatasets &&
                           notMailman && notFano && notArchiveDtabases && notGraphMod &&
-                          notDonCode && notDrazius && notAlreadyVisited;
+                          notDonCode && notDrazius;// && notAlreadyVisited;
     return okayToVisit;
   }
 
@@ -88,8 +88,45 @@ public class BasicCrawler extends WebCrawler {
       HtmlParseData htmlParseData = (HtmlParseData) page.getParseData();
       String text = htmlParseData.getText();
       Set<WebURL> links = htmlParseData.getOutgoingUrls();
-      Set<Integer> outGoingLinks = new HashSet<Integer>();
       System.out.println("URL: " + url + " : " + url.hashCode());
+      for (WebURL link : links) {
+        if (shouldVisit(page, link)) {
+          String siteAnchorFileName = pathString + "/dataFiles/anchorTextFiles/" + link.hashCode() + ".txt";
+          File siteAnchorFile = new File(siteAnchorFileName);
+          if (!siteAnchorFile.exists()) {
+            try {
+              siteAnchorFile.createNewFile();
+            } catch (IOException e) {
+              System.err.println(e);
+            }
+          }
+          try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(siteAnchorFileName, true))) {
+            fileWriter.write(link.getAnchor());
+            fileWriter.newLine();
+            fileWriter.flush();
+          } catch (IOException e) {
+            System.err.println(e);
+          }
+        }
+      }
+      String dataFilesFolder = pathString + "/dataFiles/";
+
+      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "title_info.txt", true))) {
+        infoWrite.write(url.hashCode() + " : " + Utilities.tokenizeString(htmlParseData.getTitle()));
+        infoWrite.newLine();
+        infoWrite.flush();
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "date_info.txt", true))) {
+        if (htmlParseData.getMetaTags().containsKey("date")) {
+          infoWrite.write(url.hashCode() + " : " + htmlParseData.getMetaTags().get("date"));
+          infoWrite.newLine();
+          infoWrite.flush();
+        }
+      } catch (IOException e) {
+        System.err.println(e);
+      }
       /**
        * Writing urls to log file. Might be helpful...
        */
@@ -123,24 +160,6 @@ public class BasicCrawler extends WebCrawler {
         System.err.println(e);
       }
       */
-      String dataFilesFolder = pathString + "/dataFiles/";
-
-      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "title_info.txt", true))) {
-        infoWrite.write(url.hashCode() + " : " + Utilities.tokenizeString(htmlParseData.getTitle()));
-        infoWrite.newLine();
-        infoWrite.flush();
-      } catch (IOException e) {
-        System.err.println(e);
-      }
-      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "date_info.txt", true))) {
-        if (htmlParseData.getMetaTags().containsKey("date")) {
-          infoWrite.write(url.hashCode() + " : " + htmlParseData.getMetaTags().get("date"));
-          infoWrite.newLine();
-          infoWrite.flush();
-        }
-      } catch (IOException e) {
-        System.err.println(e);
-      }
 
 //      Utilities.printFrequenciesToFile(frequencies, freqFilePath, url, false);
     }
