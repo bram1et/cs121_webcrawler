@@ -1,5 +1,6 @@
 package ir.assignments.mapreduce;
 
+import ir.assignments.helpers.LoadingProgressTracker;
 import ir.assignments.helpers.PostingsEntry;
 import ir.assignments.helpers.Utilities;
 
@@ -37,9 +38,7 @@ public class Reducer {
             if (mapFile.isFile() && !fileName.contains(".DS_Store")) {
                 try {
                     Scanner scanner = new Scanner(mapFile);
-
                     HashMap<String, List<String>> reducedMap = new HashMap<String, List<String>>();
-
                     while (scanner.hasNext()) {
                         /*
                             Gets term, document hash and tfidf and adds them to the HashMap.
@@ -99,10 +98,56 @@ public class Reducer {
                     PostingsListLevel2.put(wordHash, PostingsEntryList)
                 PostingsListLevel1.put(fileName, PostingsListLevel2) ## for fileName, remove ".txt"
          */
-        return null;
+        HashMap<String, HashMap<String, List<PostingsEntry>>> PostingsList = new HashMap<>();
+        LoadingProgressTracker loadingProgressTracker = new LoadingProgressTracker(1243101);
+        String pathString = Paths.get("").toAbsolutePath().toString();
+        String reducedFolder = pathString + "/reduced/";
+        File dir = new File(reducedFolder);
+        File[] directoryListing = dir.listFiles();
+        double numFiles =  directoryListing.length;
+        int termCount = 0;
+        int totalCount = 0;
+        if (numFiles == 0) {
+            System.err.println("Error reducing");
+            System.exit(1);
+        }
+        for (File reducedFile : directoryListing) {
+            String fileName = reducedFile.toString().split(".txt")[0];
+            if (reducedFile.isFile() && !fileName.contains(".DS_Store")) {
+                try {
+                    Scanner scanner = new Scanner(reducedFile);
+                    HashMap<String, List<PostingsEntry>> hashMapForFile = new HashMap<>();
+                    while (scanner.hasNext()) {
+                        /*
+                            Gets term, document hash and tfidf and adds them to the HashMap.
+                         */
+                        List<String> termDocumentInfo = Arrays.asList(scanner.nextLine().split(" : "));
+                        if (termDocumentInfo.size() >= 2) {
+                            String term = termDocumentInfo.get(0);
+                            List<String> postingsListAsString = Arrays.asList(termDocumentInfo.get(1).replace("[", "").replace("]", "").split(", "));
+                            List<PostingsEntry> postingsEntryList = new ArrayList<>();
+                            for (String docHashTfidf : postingsListAsString) {
+                                String[] docHashTfidfSplit = docHashTfidf.split("\\+");
+                                postingsEntryList.add(new PostingsEntry(docHashTfidfSplit[0], docHashTfidfSplit[1]));
+                            }
+                            hashMapForFile.put(term, postingsEntryList);
+                            loadingProgressTracker.incrementProgress();
+                        }
+                    }
+                    scanner.close();
+                    //termCount += hashMapForFile.size();
+                    PostingsList.put(fileName, hashMapForFile);
+                } catch (FileNotFoundException e) {
+                    System.err.println("File not found...");
+                }
+            }
+        }
+        //System.out.println(termCount);
+        loadingProgressTracker.printFinished();
+        return PostingsList;
     }
     public static void main(String[] args) {
-        reduce();
+        getPostingsListFromFile().size();
     }
 
 }
