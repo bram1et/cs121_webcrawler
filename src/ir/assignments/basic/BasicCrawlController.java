@@ -17,6 +17,7 @@
 
 package ir.assignments.basic;
 
+import com.sun.prism.impl.BaseMesh;
 import ir.assignments.crawler.CrawlConfig;
 import ir.assignments.crawler.CrawlController;
 import ir.assignments.fetcher.PageFetcher;
@@ -217,8 +218,10 @@ public class BasicCrawlController {
   }
 
   public static void crawl(String seedURL) throws Exception{
-    int numberOfCrawlers = 4;
+    int numberOfCrawlers = 1;
     CrawlConfig config = setupConfig();
+    config.setMaxDepthOfCrawling(0);
+    config.setResumableCrawling(false);
     /*
      * Instantiate the controller for this crawl.
      */
@@ -233,8 +236,7 @@ public class BasicCrawlController {
      * which are found in these pages
      */
     controller.addSeed(seedURL);
-    controller.addSeed("http://www.ics.uci.edu/ugrad/courses/listing.php?year=2015&level=ALL&department=ALL&program=ALL");
-    controller.addSeed("http://www.ics.uci.edu/grad/courses/listing.php?year=2015&level=ALL&department=ALL&program=ALL");
+
     /*
      * Start the crawl. This is a blocking operation, meaning that your code
      * will reach the line after this only when crawling is finished.
@@ -248,7 +250,8 @@ public class BasicCrawlController {
   public static void crawl(List<String> seedURLs) throws Exception {
     int numberOfCrawlers = 4;
     CrawlConfig config = setupConfig();
-    config.setMaxDepthOfCrawling(2);
+    config.setMaxDepthOfCrawling(0);
+    config.setResumableCrawling(true);
     /*
      * Instantiate the controller for this crawl.
      */
@@ -275,6 +278,6 @@ public class BasicCrawlController {
   }
 
   public static void main(String[] args) throws Exception {
-    crawl();
+    crawl("http://cml.ics.uci.edu/");
   }
 }

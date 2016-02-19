@@ -1,5 +1,7 @@
 package ir.assignments.helpers;
 
+import ir.assignments.basic.BasicCrawlController;
+
 import java.io.*;
 import java.util.*;
 import java.nio.file.Paths;
@@ -128,6 +130,7 @@ public class LogChecker {
 
     public static HashMap<String, String> getURLMapFromFile (Integer numURLs) {
         HashMap<String, String> hashCodeMap = new HashMap<String, String>();
+        LoadingProgressTracker loadingProgressTracker;
         String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
         String hashMapFileName = pathString + "hash_to_URL.txt";
         File hashCodeMapFile = new File(hashMapFileName);
@@ -140,10 +143,10 @@ public class LogChecker {
             System.err.println("Error opening hash_to_URL.txt");
             System.exit(1);
         }
+        loadingProgressTracker = new LoadingProgressTracker(numURLs, "URL Map");
         try {
             BufferedReader fileReader = new BufferedReader(new FileReader(hashMapFileName));
-            System.out.println("|--------------------------------------------------| 100%");
-            System.out.print("|");
+            loadingProgressTracker.incrementProgress();
             while (((inputLine = fileReader.readLine()) != null)) {
                 String[] splitLine = inputLine.split(" : ");
                 urlHashCode = splitLine[0];
@@ -159,7 +162,7 @@ public class LogChecker {
             System.err.println("Could not load hashcode map");
             System.exit(1);
         }
-        System.out.println("| Hashcode Map Loaded");
+        loadingProgressTracker.printFinished();
         return hashCodeMap;
     }
 
@@ -181,6 +184,17 @@ public class LogChecker {
         }
     }
     public static void main(String[] args) {
-        HashMap<String, String> urlHashMap = getURLMapFromFile(67697);
+        List<String> visitedURLS = new ArrayList<>();
+        HashMap<String, String> hashToURLMap = getURLMapFromFile(67696);
+
+        for (String urlHashCode : getURLMapFromFile(67697).keySet()) {
+            visitedURLS.add(hashToURLMap.get(urlHashCode));
+        }
+        try {
+            BasicCrawlController.crawl(visitedURLS);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
     }
 }

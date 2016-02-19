@@ -99,7 +99,7 @@ public class Reducer {
                 PostingsListLevel1.put(fileName, PostingsListLevel2) ## for fileName, remove ".txt"
          */
         HashMap<String, HashMap<String, List<PostingsEntry>>> PostingsList = new HashMap<>();
-        LoadingProgressTracker loadingProgressTracker = new LoadingProgressTracker(1243101);
+        LoadingProgressTracker loadingProgressTracker = new LoadingProgressTracker(1243101, "Postings List");
         String pathString = Paths.get("").toAbsolutePath().toString();
         String reducedFolder = pathString + "/reduced/";
         File dir = new File(reducedFolder);
@@ -113,6 +113,7 @@ public class Reducer {
         }
         for (File reducedFile : directoryListing) {
             String fileName = reducedFile.toString().split(".txt")[0];
+            fileName = fileName.substring(fileName.length() - 2);
             if (reducedFile.isFile() && !fileName.contains(".DS_Store")) {
                 try {
                     Scanner scanner = new Scanner(reducedFile);

@@ -90,12 +90,12 @@ public class Mapper {
                             Integer frequency = Integer.parseInt(wordAndCount.get(wordAndCount.size() - 1));
                             if (documentFrequencies.containsKey(word)) documentFrequency = documentFrequencies.get(word);
                             else continue;
-                            double tfidf = Math.log10(frequency) * Math.log10(numFiles / documentFrequency);
+                            double tfidf = (1 + Math.log10(frequency)) * Math.log10(numFiles / documentFrequency);
 
                             String wordHashCode = Integer.toString(word.hashCode());
                             String mapFile = mappedFolder + wordHashCode.substring(wordHashCode.length()-2, wordHashCode.length()) +".txt";
                             try (BufferedWriter mapWriter = new BufferedWriter(new FileWriter(mapFile, true))) {
-                                mapWriter.write(wordHashCode + " : " + fileName.hashCode() + "+" + tfidf);
+                                mapWriter.write(wordHashCode + " : " + fileName.split("/")[1] + "+" + tfidf);
                                 mapWriter.newLine();
                                 mapWriter.flush();
                             } catch (IOException e) {
@@ -112,6 +112,10 @@ public class Mapper {
     }
 
     public static void main(String[] args) {
-       map();
+        long startTime = System.nanoTime();
+        map();
+        Reducer.reduce();
+        long endTime = System.nanoTime();
+        System.out.println(endTime - startTime);
     }
 }

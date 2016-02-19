@@ -346,8 +346,8 @@ public class WebCrawler implements Runnable {
             webURL.setDocid(-1);
             webURL.setAnchor(curURL.getAnchor());
             if (shouldVisit(page, webURL)) {
-              if (robotstxtServer.allows(webURL)) {
-//              if (true) {
+//              if (robotstxtServer.allows(webURL)) {
+              if (true) {
                 webURL.setDocid(docIdServer.getNewDocID(movedToUrl));
                 frontier.schedule(webURL);
               } else {
@@ -394,8 +394,8 @@ public class WebCrawler implements Runnable {
             webURL.setDepth((short) (curURL.getDepth() + 1));
             if (maxCrawlDepth == -1 || curURL.getDepth() < maxCrawlDepth) {
               if (shouldVisit(page, webURL)) {
-                if (robotstxtServer.allows(webURL)) {
-//                if (true) {
+//                if (robotstxtServer.allows(webURL)) {
+                if (true) {
                   webURL.setDocid(docIdServer.getNewDocID(webURL.getURL()));
                   toSchedule.add(webURL);
                 } else {

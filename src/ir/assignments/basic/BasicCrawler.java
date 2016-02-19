@@ -96,7 +96,7 @@ public class BasicCrawler extends WebCrawler {
           if (!siteAnchorFile.exists()) {
             try {
               siteAnchorFile.createNewFile();
-            } catch (IOException e) {
+            } catch (Exception e) {
               System.err.println(e);
             }
           }
@@ -106,6 +106,7 @@ public class BasicCrawler extends WebCrawler {
             fileWriter.flush();
           } catch (IOException e) {
             System.err.println(e);
+          } catch (NullPointerException n) {
           }
         }
       }

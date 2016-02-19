@@ -1,6 +1,7 @@
 package ir.assignments.Search;
 
 import ir.assignments.helpers.*;
+import ir.assignments.mapreduce.Reducer;
 
 import java.util.*;
 
@@ -9,11 +10,13 @@ import java.util.*;
  */
 public class SearchEngine {
 
-    private TreeMap<String, List<PostingsEntry>> postingsList;
+    private HashMap<String, HashMap<String, List<PostingsEntry>>> postingsList;
     private HashMap<String, Influence> linkInfluence;
     private HashMap<String, ResultNode> searchResults;
-    HashMap<String, Integer> documentFrequencies;
-    HashMap<String, List<String>> anchorText;
+    private HashMap<String, Integer> documentFrequencies;
+    private HashMap<String, List<String>> anchorText;
+    private HashMap<String, List<String>> titleText;
+    private HashMap<String, String> hashToURLMap;
 
     Integer numDocuments;
 
@@ -35,7 +38,7 @@ public class SearchEngine {
             String query = scanner.nextLine();
             if (query.equals("q")) {
                 running = false;
-                break;
+                continue;
             }
             queryTokenized = Arrays.asList(query.split("\\s+"));
             queryTerms = new HashSet<String>();
@@ -51,13 +54,15 @@ public class SearchEngine {
                 minusTwo = minusOne;
                 minusOne = current;
             }
-
             for (String token : queryTerms) {
+                postingsEntryList = new ArrayList<>();
+                String tokenHash = String.valueOf(token.hashCode());
+                String fileOfToken = tokenHash.substring(tokenHash.length() - 2, tokenHash.length());
                 if (token.length() == 0) continue;
-                if (postingsList.containsKey(token)) {
-                    postingsEntryList = postingsList.get(token);
-                } else {
-                    continue;
+                if (postingsList.containsKey(fileOfToken)) {
+                    if (postingsList.get(fileOfToken).containsKey(tokenHash)) {
+                        postingsEntryList = postingsList.get(fileOfToken).get(tokenHash);
+                    }
                 }
                 if (postingsEntryList.size() == 0) {
                     continue;
@@ -84,7 +89,7 @@ public class SearchEngine {
                         searchResults.get(urlHashCode).setTfidfScore(tfidfScore + (tfidf *Math.log10(this.numDocuments/documentFrequency)));
                         searchResults.get(urlHashCode).setPageRankScore(siteInfluenceScore + siteInfluence);
                     } else {
-                        searchResults.put(urlHashCode, new ResultNode(urlHashCode, url, tfidf * siteInfluence));
+                        searchResults.put(urlHashCode, new ResultNode(urlHashCode, url, tfidf * siteInfluence * Math.log10(this.numDocuments/documentFrequency)));
                     }
                 }
             }
@@ -96,16 +101,25 @@ public class SearchEngine {
                 double anchorScore = resultNode.getAnchorScore();
                 double anchorPercent = 0.0;
                 double termsInAchor = 0;
-                Integer singleQueryTerms = queryTerms.size();
+                double termsinTitle = 0;
+                double titlePercent = 0.0;
+                Integer singleQueryTerms = queryTokenized.size();
                 if (this.anchorText.containsKey(urlHashCode)) {
                     List<String> anchorTextList = this.anchorText.get(urlHashCode);
                     for (String term : queryTerms) {
                         if (anchorTextList.contains(term)) termsInAchor += 1;
-                        if (term.contains(" ")) singleQueryTerms -= 1;
+//                        if (term.contains(" ")) singleQueryTerms -= 1;
+                    }
+                }
+                if (this.titleText.containsKey(urlHashCode)) {
+                    List<String> titleTextList = this.titleText.get(urlHashCode);
+                    for (String term : queryTerms) {
+                        if (titleTextList.contains(term)) termsinTitle += 1;
                     }
                 }
                 anchorPercent = 1 + 1 * (termsInAchor / singleQueryTerms);
-                resultNode.setSearchScore(searchSore * anchorPercent);
+                titlePercent = 1 + 1 * (termsinTitle / singleQueryTerms);
+                resultNode.setSearchScore(searchSore * anchorPercent * titlePercent);
                 resultNode.setAnchorScore(anchorScore + anchorPercent);
                 sortedResults.add(resultNode);
                 searchResultsHeap.add(resultNode);
@@ -118,8 +132,7 @@ public class SearchEngine {
             if (sortedResults.size() > 20) {
                 for (int i = 0; i < 20; i++) {
                     ResultNode searchResult = searchResultsHeap.poll();
-//                    System.out.println(sortedResults.get(i).getUrl() + " : " + sortedResults.get(i).getSearchScore());
-                    System.out.println(searchResult.getUrl() + " : " + searchResult.getSearchScore() + " : " + searchResult.getTfidfScore() + " : " + searchResult.getAnchorScore() + " : " + searchResult.getPageRankScore());
+                    System.out.println(hashToURLMap.get(searchResult.getUrlHashCode()) + " : " + searchResult.getSearchScore() + " : " + searchResult.getTfidfScore() + " : " + searchResult.getAnchorScore() + " : " + searchResult.getPageRankScore());
                 }
             } else {
                 for (int i = 0; i < sortedResults.size(); i++) {
@@ -132,13 +145,18 @@ public class SearchEngine {
     private void loadFiles() {
         System.out.println("Loading files...");
         System.out.println("Loading index...");
-        postingsList = WordCounter.calculatetfidf();
+        postingsList = Reducer.getPostingsListFromFile();
         System.out.println("Loading pagerank scores...");
         linkInfluence = LinkInfluenceCalculator.getInfluenceFromFile();
         System.out.println("Loading document frequencies...");
         documentFrequencies = Utilities.getDocumentFrequencyMap();
         System.out.println("Loading anchor texts map...");
         anchorText = WordCounter.getAnchorTextFromFile(67696);
+        System.out.println("Loading title texts map...");
+        titleText = WordCounter.getTitleTextsFromFile(49226);
+        System.out.println("Loading hash to URL map...");
+        hashToURLMap = LogChecker.getURLMapFromFile(67696);
+
         this.numDocuments = anchorText.size();
     }
 

@@ -293,7 +293,35 @@ public class WordCounter {
         return anchorTexts;
     }
 
+    public static HashMap<String, List<String>> getTitleTextsFromFile(Integer numTitleTexts) {
+        HashMap<String, List<String>> titleTexts = new HashMap<>();
+        String pathString = Paths.get("").toAbsolutePath().toString();
+        String anchorTextFile = pathString + "/dataFiles/title_info.txt";
+        String line;
+        String urlHashCode;
+        List<String> titleTextList = new ArrayList<>();
+        LoadingProgressTracker loadingProgressTracker;
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(anchorTextFile));
+            loadingProgressTracker = new LoadingProgressTracker(numTitleTexts, "Title Texts");
+            while (((line = fileReader.readLine()) != null)) {
+                String[] splitLine = line.split(" : ");
+                urlHashCode = splitLine[0];
+                titleTextList = Arrays.asList(splitLine[1].replace("[", "").replace("]", "").split(", "));
+                titleTexts.put(urlHashCode, titleTextList);
+                loadingProgressTracker.incrementProgress();
+            }
+            loadingProgressTracker.printFinished();
+        } catch (Exception e) {
+            System.err.println();
+            System.err.println("Could not load title texts");
+            System.err.println(e);
+            System.exit(1);
+        }
+        return titleTexts;
+    }
+
     public static void main(String[] args) {
-        Utilities.writeAnchorListsToFile(getAnchorText());
+        getTitleTextsFromFile(49226);
     }
 }

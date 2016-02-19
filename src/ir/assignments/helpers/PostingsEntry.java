@@ -17,6 +17,7 @@ public class PostingsEntry {
     public PostingsEntry(String urlHashCode, String tfidf) {
         this.urlHashCode = Integer.parseInt(urlHashCode);
         this.tfidf = Double.parseDouble(tfidf);
+        this.url = "a url";
     }
 
     public void setUrlHashCode(int urlHashCode) {
