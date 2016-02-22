@@ -3,6 +3,7 @@ package ir.assignments.helpers;
 import com.google.gson.Gson;
 import com.google.gson.internal.Streams;
 import com.google.gson.reflect.TypeToken;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import ir.assignments.util.Util;
 import javafx.geometry.Pos;
 
@@ -15,7 +16,7 @@ import java.util.*;
  * Created by Chris on 1/31/16.
  */
 public class WordCounter {
-    public static HashMap<String, Frequency> getWordCounts() {
+    public static HashMap<String, Frequency> getWordCounts(boolean total_count) {
         HashMap<String, Frequency> wordFrequencies = new HashMap<String, Frequency>();
         String frequencyFlder = "freqFiles";
         String fileName = "";
@@ -43,26 +44,30 @@ public class WordCounter {
                             maxURL = url;
                         }
                         while (sc.hasNext()) {
-//                            List<String> wordAndCount = Utilities.tokenizeString(sc.nextLine());
-                            List<String> wordAndCount = Arrays.asList(sc.nextLine().split("\\s+"));
+                            List<String> wordAndCount = Utilities.tokenizeString(sc.nextLine());
+//                            List<String> wordAndCount = Arrays.asList(sc.nextLine().split("\\s+"));
                             if (wordAndCount.size() >= 2) {
 
                                 String word = Utilities.stringCombiner(0, wordAndCount.size() - 2, true, wordAndCount);
+                                if (total_count) {
+                                    Integer count = Integer.parseInt(wordAndCount.get(wordAndCount.size() - 1));
                                 /*
                                 Commenting out. This is for counting total frequencies of words
-                                if (wordFrequencies.containsKey(word)) {
-                                    wordFrequencies.get(word).increaseFrequencyByAmount(count);
-                                } else {
-                                    wordFrequencies.put(word, new Frequency(word, count));
-                                }
                                 */
+                                    if (wordFrequencies.containsKey(word)) {
+                                        wordFrequencies.get(word).increaseFrequencyByAmount(count);
+                                    } else {
+                                        wordFrequencies.put(word, new Frequency(word, count));
+                                    }
+                                } else {
                                 /*
                                 This is for counting document frequency
                                  */
-                                if (wordFrequencies.containsKey(word)) {
-                                    wordFrequencies.get(word).incrementFrequency();
-                                } else {
-                                    wordFrequencies.put(word, new Frequency(word, 1));
+                                    if (wordFrequencies.containsKey(word)) {
+                                        wordFrequencies.get(word).incrementFrequency();
+                                    } else {
+                                        wordFrequencies.put(word, new Frequency(word, 1));
+                                    }
                                 }
 
                             }
@@ -321,7 +326,38 @@ public class WordCounter {
         return titleTexts;
     }
 
+    public static void getNumberCountToFile() {
+        HashMap<String, Frequency> wordFrequencies = getWordCounts(true);
+        List<Frequency> frequencyList = new ArrayList<Frequency>();
+        for (String key : wordFrequencies.keySet()) {
+            frequencyList.add(wordFrequencies.get(key));
+        }
+        Utilities.printFrequenciesToFile(frequencyList, "totalCounts.txt", "yooo", false);
+    }
+
     public static void main(String[] args) {
-        getTitleTextsFromFile(49226);
+//        getTitleTextsFromFile(49226);
+        HashMap<String, Frequency> wordFrequencies = getWordCounts(true);
+        List<Frequency> frequencyList = new ArrayList<Frequency>();
+        for (String key : wordFrequencies.keySet()) {
+            if (wordFrequencies.get(key).getFrequency() <= 5) {
+                frequencyList.add(wordFrequencies.get(key));
+                continue;
+            }
+            if (key.length() == 1) {
+                frequencyList.add(wordFrequencies.get(key));
+                continue;
+            }
+            try {
+                Integer int_key = Integer.parseInt(key);
+                if (int_key < 999 || int_key > 3000) {
+                    frequencyList.add(wordFrequencies.get(key));
+                }
+
+            } catch (NumberFormatException nfe) {
+                continue;
+            }
+        }
+        Utilities.printFrequenciesToFile(frequencyList, "./dataFiles/do_not_include.txt", "yooo", false);
     }
 }

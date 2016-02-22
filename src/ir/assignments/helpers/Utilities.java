@@ -1,3 +1,10 @@
+/*
+Team Members:
+Christopher Dang 75542500
+Emily Puth 28239807
+Namirud Yegezu 26447410
+Kevin Chen 49859223
+*/
 package ir.assignments.helpers;
 
 import java.io.*;

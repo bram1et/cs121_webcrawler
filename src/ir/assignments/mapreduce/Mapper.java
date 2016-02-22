@@ -1,3 +1,10 @@
+/*
+Team Members:
+Christopher Dang 75542500
+Emily Puth 28239807
+Namirud Yegezu 26447410
+Kevin Chen 49859223
+*/
 package ir.assignments.mapreduce;
 
 import ir.assignments.helpers.PostingsEntry;
@@ -7,9 +14,6 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
 
-/**
- * Created by Chris on 2/16/16.
- */
 public class Mapper {
     /*
         Starting with document files saved as a bag of words, creates
@@ -42,6 +46,8 @@ public class Mapper {
      */
     public static void map() {
         HashMap<String, Integer> documentFrequencies = Utilities.getDocumentFrequencyMap();
+        HashSet<String> doNotIncludeTerms = getDoNotIncludeTerms();
+
         String fileName;
         String pathString = Paths.get("").toAbsolutePath().toString();
         String mappedFolder = pathString + "/mapped/";
@@ -87,11 +93,11 @@ public class Mapper {
                         List<String> wordAndCount = Arrays.asList(scanner.nextLine().split("\\s+"));
                         if (wordAndCount.size() >= 2) {
                             String word = Utilities.stringCombiner(0, wordAndCount.size() - 2, true, wordAndCount);
+                            if (doNotIncludeTerms.contains(word)) continue;
                             Integer frequency = Integer.parseInt(wordAndCount.get(wordAndCount.size() - 1));
                             if (documentFrequencies.containsKey(word)) documentFrequency = documentFrequencies.get(word);
                             else continue;
                             double tfidf = (1 + Math.log10(frequency)) * Math.log10(numFiles / documentFrequency);
-
                             String wordHashCode = Integer.toString(word.hashCode());
                             String mapFile = mappedFolder + wordHashCode.substring(wordHashCode.length()-2, wordHashCode.length()) +".txt";
                             try (BufferedWriter mapWriter = new BufferedWriter(new FileWriter(mapFile, true))) {
@@ -109,6 +115,32 @@ public class Mapper {
                 }
             }
         }
+
+
+    }
+    private static HashSet<String> getDoNotIncludeTerms() {
+        HashSet<String> doNotIncludeTerms = new HashSet<>();
+        String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
+        String doNotIncludeTermFileName = pathString + "do_not_include.txt";
+        File doNotIncludeTermFile = new File(doNotIncludeTermFileName);
+        String inputLine;
+        if (!doNotIncludeTermFile.exists()) {
+            System.err.println("Error opening do_not_include.txt");
+            System.exit(1);
+        }
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(doNotIncludeTermFileName));
+
+            while (((inputLine = fileReader.readLine()) != null)) {
+                List<String> wordAndCount = Utilities.tokenizeString(inputLine);
+                String word = Utilities.stringCombiner(0, wordAndCount.size() - 2, true, wordAndCount);
+                doNotIncludeTerms.add(word);
+            }
+        } catch (IOException e) {
+            System.err.println("Could not load hashcode map");
+            System.exit(1);
+        }
+        return doNotIncludeTerms;
     }
 
     public static void main(String[] args) {

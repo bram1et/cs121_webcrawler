@@ -1,3 +1,10 @@
+/*
+Team Members:
+Christopher Dang 75542500
+Emily Puth 28239807
+Namirud Yegezu 26447410
+Kevin Chen 49859223
+*/
 package ir.assignments.mapreduce;
 
 import ir.assignments.helpers.LoadingProgressTracker;
@@ -8,9 +15,6 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
 
-/**
- * Created by Chris on 2/16/16.
- */
 public class Reducer {
 
     public static void reduce() {
@@ -98,7 +102,7 @@ public class Reducer {
                     PostingsListLevel2.put(wordHash, PostingsEntryList)
                 PostingsListLevel1.put(fileName, PostingsListLevel2) ## for fileName, remove ".txt"
          */
-        HashMap<String, HashMap<String, List<PostingsEntry>>> PostingsList = new HashMap<>();
+        HashMap<String, HashMap<String, List<PostingsEntry>>> PostingsList = new HashMap<String, HashMap<String, List<PostingsEntry>>>();
         LoadingProgressTracker loadingProgressTracker = new LoadingProgressTracker(1243101, "Postings List");
         String pathString = Paths.get("").toAbsolutePath().toString();
         String reducedFolder = pathString + "/reduced/";
@@ -124,6 +128,7 @@ public class Reducer {
                          */
                         List<String> termDocumentInfo = Arrays.asList(scanner.nextLine().split(" : "));
                         if (termDocumentInfo.size() >= 2) {
+                            termCount += 1;
                             String term = termDocumentInfo.get(0);
                             List<String> postingsListAsString = Arrays.asList(termDocumentInfo.get(1).replace("[", "").replace("]", "").split(", "));
                             List<PostingsEntry> postingsEntryList = new ArrayList<>();
@@ -143,12 +148,12 @@ public class Reducer {
                 }
             }
         }
-        //System.out.println(termCount);
+        System.out.println(termCount);
         loadingProgressTracker.printFinished();
         return PostingsList;
     }
     public static void main(String[] args) {
-        getPostingsListFromFile().size();
+        reduce();
     }
 
 }
