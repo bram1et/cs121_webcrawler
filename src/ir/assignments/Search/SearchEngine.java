@@ -2,12 +2,11 @@ package ir.assignments.Search;
 
 import ir.assignments.helpers.*;
 import ir.assignments.mapreduce.Reducer;
+import sun.rmi.runtime.Log;
 
 import java.util.*;
 
-/**
- * Created by Chris on 2/12/16.
- */
+
 public class SearchEngine {
 
     private HashMap<String, HashMap<String, List<PostingsEntry>>> postingsList;
@@ -17,6 +16,7 @@ public class SearchEngine {
     private HashMap<String, List<String>> anchorText;
     private HashMap<String, List<String>> titleText;
     private HashMap<String, String> hashToURLMap;
+    private HashMap<String, String> normalizingMap;
 
     Integer numDocuments;
 
@@ -36,6 +36,8 @@ public class SearchEngine {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a query");
             String query = scanner.nextLine();
+            if (query.trim().length() == 0) continue;
+            long startTime = System.nanoTime();
             if (query.equals("q")) {
                 running = false;
                 continue;
@@ -54,6 +56,7 @@ public class SearchEngine {
                 minusTwo = minusOne;
                 minusOne = current;
             }
+            System.out.println(queryTerms.size());
             for (String token : queryTerms) {
                 postingsEntryList = new ArrayList<>();
                 String tokenHash = String.valueOf(token.hashCode());
@@ -74,7 +77,7 @@ public class SearchEngine {
                 }
                 for (PostingsEntry postings : postingsEntryList) {
                     String urlHashCode = String.valueOf(postings.getUrlHashCode());
-                    String url = postings.getUrl();
+                    String url = hashToURLMap.get(urlHashCode);
                     double tfidf = postings.getTfidf();
                     Double influnece;
                     if (linkInfluence.containsKey(urlHashCode)) influnece = linkInfluence.get(urlHashCode).getInfluence();
@@ -108,7 +111,6 @@ public class SearchEngine {
                     List<String> anchorTextList = this.anchorText.get(urlHashCode);
                     for (String term : queryTerms) {
                         if (anchorTextList.contains(term)) termsInAchor += 1;
-//                        if (term.contains(" ")) singleQueryTerms -= 1;
                     }
                 }
                 if (this.titleText.containsKey(urlHashCode)) {
@@ -124,28 +126,77 @@ public class SearchEngine {
                 sortedResults.add(resultNode);
                 searchResultsHeap.add(resultNode);
             }
-            if (sortedResults.isEmpty()) {
+            List<String> urlsToRemove = new ArrayList<String>();
+            for (String result : searchResults.keySet()) {
+                ResultNode resultNode = searchResults.get(result);
+                String urlToFold = resultNode.getUrl();
+                String urlHashCode = String.valueOf(urlToFold.hashCode());
+                if (normalizingMap.containsKey(urlHashCode)) {
+                    String foldedURLHash = normalizingMap.get(urlHashCode);
+                    if (foldedURLHash.equals(resultNode.getUrlHashCode())) continue;
+                    if (searchResults.containsKey(foldedURLHash)) {
+                        ResultNode foldToHere = searchResults.get(foldedURLHash);
+                        foldToHere.setSearchScore(foldToHere.getSearchScore() * resultNode.getPageRankScore());
+                        if (searchResultsHeap.contains(resultNode)) {
+                            searchResultsHeap.remove(resultNode);
+                        }
+                    }
+                }
+            }
+
+            if (searchResultsHeap.isEmpty()) {
                 System.out.println("No results found");
                 continue;
             }
-            Collections.sort(sortedResults);
-            if (sortedResults.size() > 20) {
+
+            if (searchResultsHeap.size() > 20) {
                 for (int i = 0; i < 20; i++) {
                     ResultNode searchResult = searchResultsHeap.poll();
-                    System.out.println(hashToURLMap.get(searchResult.getUrlHashCode()) + " : " + searchResult.getSearchScore() + " : " + searchResult.getTfidfScore() + " : " + searchResult.getAnchorScore() + " : " + searchResult.getPageRankScore());
+//                    System.out.println(hashToURLMap.get(searchResult.getUrlHashCode()) + " : " + searchResult.getSearchScore() + " : " + searchResult.getTfidfScore() + " : " + searchResult.getAnchorScore() + " : " + searchResult.getPageRankScore());
+                    System.out.println(searchResult.getUrl());
                 }
             } else {
                 for (int i = 0; i < sortedResults.size(); i++) {
                     System.out.println(searchResultsHeap.poll().getUrl() + " : " + sortedResults.get(i).getSearchScore());
                 }
             }
+            long endTime = System.nanoTime();
+            System.out.println(endTime - startTime);
         }
+    }
+
+    private String urlLinkFolder( String url) {
+        int urlSize = url.length();
+        String urlToReturn = url;
+        if (url.contains("https")) {
+            url = url.replace("https", "http");
+            urlToReturn = url;
+
+        }
+        if (url.contains("index")) {
+            int index_loc = url.lastIndexOf("index");
+            url = url.substring(0, index_loc);
+            if (hashToURLMap.containsKey(String.valueOf(url.hashCode()))) {
+                urlToReturn = url;
+                return String.valueOf(urlToReturn.hashCode());
+            }
+        }
+        if (url.contains(".php") || url.contains(".html")) {
+            int exten_loc = url.lastIndexOf(".");
+            url = url.substring(0, exten_loc);
+            if (hashToURLMap.containsKey(String.valueOf(url.hashCode()))) {
+                urlToReturn = url;
+                return String.valueOf(urlToReturn.hashCode());
+            }
+        }
+        return String.valueOf(urlToReturn.hashCode());
+
     }
 
     private void loadFiles() {
         System.out.println("Loading files...");
         System.out.println("Loading index...");
-        postingsList = Reducer.getPostingsListFromFile();
+        postingsList = Reducer.getPostingsListFromFile(419029);
         System.out.println("Loading pagerank scores...");
         linkInfluence = LinkInfluenceCalculator.getInfluenceFromFile();
         System.out.println("Loading document frequencies...");
@@ -156,7 +207,8 @@ public class SearchEngine {
         titleText = WordCounter.getTitleTextsFromFile(49226);
         System.out.println("Loading hash to URL map...");
         hashToURLMap = LogChecker.getURLMapFromFile(67696);
-
+        System.out.println("Loading URL normalizing map...");
+        normalizingMap = LogChecker.getNormURLsFromFile(3574);
         this.numDocuments = anchorText.size();
     }
 

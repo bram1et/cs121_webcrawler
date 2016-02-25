@@ -26,7 +26,7 @@ public class WordCounter {
         File[] directoryListing = dir.listFiles();
         float numFiles =  directoryListing.length;
         Integer fileCount = 0;
-        if (directoryListing != null) {
+        if (numFiles > 0) {
             for (File freqFile : directoryListing) {
                 fileName = freqFile.toString();
                 if (freqFile.isFile() && !fileName.contains(".DS_Store")) {

@@ -6,11 +6,6 @@ import java.io.*;
 import java.util.*;
 import java.nio.file.Paths;
 
-
-/**
- * Created by Chris on 2/1/16.
- */
-
 public class LogChecker {
     private static void getLongestText() {
         String logFolder = "logs";
@@ -183,7 +178,98 @@ public class LogChecker {
             }
         }
     }
+
+    public static void urlNormalizingMap() {
+        String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
+        String hashMapFileName = pathString + "url_to_norm_url.txt";
+        File hashCodeMapFile = new File(hashMapFileName);
+        if (hashCodeMapFile.exists()) {
+            hashCodeMapFile.delete();
+        }
+        try {
+            hashCodeMapFile.createNewFile();
+        } catch (IOException e) {
+            System.err.println(e);
+            System.exit(1);
+        }
+        HashMap<String, String> hashToURLMap = getURLMapFromFile(67696);
+        for (String key : hashToURLMap.keySet()) {
+            String url = hashToURLMap.get(key);
+            String urlMapsTohere = urlLinkFolder(hashToURLMap, url);
+            if (!key.equals(urlMapsTohere)) {
+                try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(hashMapFileName, true))) {
+                    fileWriter.write(key + " : " + urlMapsTohere);
+                    fileWriter.newLine();
+                } catch (IOException e) {
+                    System.err.println(e);
+                }
+            }
+        }
+    }
+
+    private static String urlLinkFolder(HashMap<String, String> hashToURLMap, String url) {
+        int urlSize = url.length();
+        String urlToReturn = url;
+        if (url.contains("https")) {
+            url = url.replace("https", "http");
+            if (hashToURLMap.containsKey(String.valueOf(url.hashCode()))) {
+                urlToReturn = url;
+            }
+
+        }
+        if (url.contains("index")) {
+            int index_loc = url.lastIndexOf("index");
+            url = url.substring(0, index_loc);
+            if (hashToURLMap.containsKey(String.valueOf(url.hashCode()))) {
+                urlToReturn = url;
+                return String.valueOf(urlToReturn.hashCode());
+            }
+        }
+        if (url.contains(".php") || url.contains(".html")) {
+            int exten_loc = url.lastIndexOf(".");
+            url = url.substring(0, exten_loc);
+            if (hashToURLMap.containsKey(String.valueOf(url.hashCode()))) {
+                urlToReturn = url;
+                return String.valueOf(urlToReturn.hashCode());
+            }
+        }
+        return String.valueOf(urlToReturn.hashCode());
+    }
+
+    public static HashMap<String, String> getNormURLsFromFile(int numURLs) {
+        HashMap<String, String> hashCodeMap = new HashMap<String, String>();
+        LoadingProgressTracker loadingProgressTracker;
+        String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
+        String hashMapFileName = pathString + "url_to_norm_url.txt";
+        File hashCodeMapFile = new File(hashMapFileName);
+        Integer progressCount = 0;
+        Integer lineCount = 0;
+        String inputLine;
+        String urlHashCode;
+        String url;
+        if (!hashCodeMapFile.exists()) {
+            System.err.println("Error opening hash_to_URL.txt");
+            System.exit(1);
+        }
+        loadingProgressTracker = new LoadingProgressTracker(numURLs, "URL Normalizer Map");
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader(hashMapFileName));
+            while (((inputLine = fileReader.readLine()) != null)) {
+                String[] splitLine = inputLine.split(" : ");
+                urlHashCode = splitLine[0];
+                url = splitLine[1];
+                hashCodeMap.put(urlHashCode, url);
+                loadingProgressTracker.incrementProgress();
+            }
+        } catch (IOException e) {
+            System.err.println("Could not load hashcode map");
+            System.exit(1);
+        }
+        loadingProgressTracker.printFinished();
+        return hashCodeMap;
+    }
     public static void main(String[] args) {
+        /*
         List<String> visitedURLS = new ArrayList<>();
         HashMap<String, String> hashToURLMap = getURLMapFromFile(67696);
 
@@ -195,6 +281,7 @@ public class LogChecker {
         } catch (Exception e) {
             System.err.println(e);
         }
-
+        */
+        urlNormalizingMap();
     }
 }

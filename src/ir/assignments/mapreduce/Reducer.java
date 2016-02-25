@@ -70,7 +70,7 @@ public class Reducer {
         }
     }
 
-    public static HashMap<String, HashMap<String, List<PostingsEntry>>> getPostingsListFromFile() {
+    public static HashMap<String, HashMap<String, List<PostingsEntry>>> getPostingsListFromFile(Integer totalCount) {
         /*
             Iterates through all the 'reduced' files in /reduced and turns content
             of each into a hashmap. Each hashmap will be added to an encompasssing
@@ -103,14 +103,13 @@ public class Reducer {
                 PostingsListLevel1.put(fileName, PostingsListLevel2) ## for fileName, remove ".txt"
          */
         HashMap<String, HashMap<String, List<PostingsEntry>>> PostingsList = new HashMap<String, HashMap<String, List<PostingsEntry>>>();
-        LoadingProgressTracker loadingProgressTracker = new LoadingProgressTracker(1243101, "Postings List");
+        LoadingProgressTracker loadingProgressTracker = new LoadingProgressTracker(totalCount, "Postings List");
         String pathString = Paths.get("").toAbsolutePath().toString();
         String reducedFolder = pathString + "/reduced/";
         File dir = new File(reducedFolder);
         File[] directoryListing = dir.listFiles();
         double numFiles =  directoryListing.length;
         int termCount = 0;
-        int totalCount = 0;
         if (numFiles == 0) {
             System.err.println("Error reducing");
             System.exit(1);
@@ -148,7 +147,7 @@ public class Reducer {
                 }
             }
         }
-        System.out.println(termCount);
+        //System.out.println(termCount);
         loadingProgressTracker.printFinished();
         return PostingsList;
     }

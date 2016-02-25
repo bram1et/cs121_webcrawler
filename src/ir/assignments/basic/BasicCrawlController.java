@@ -132,65 +132,7 @@ public class BasicCrawlController {
   }
 
   public static void crawl() throws Exception{
-    /*
-     * crawlStorageFolder is a folder where intermediate crawl data is
-     * stored.
-     */
-    String crawlStorageFolder = "./";
-
-    /*
-     * numberOfCrawlers shows the number of concurrent threads that should
-     * be initiated for crawling.
-     */
-    int numberOfCrawlers = 4;
-
-    CrawlConfig config = new CrawlConfig();
-
-    config.setCrawlStorageFolder(crawlStorageFolder);
-
-    /*
-     * Be polite: Make sure that we don't send more than 1 request per
-     * second (1000 milliseconds between requests).
-     */
-    config.setPolitenessDelay(600);
-
-    /*
-     * You can set the maximum crawl depth here. The default value is -1 for
-     * unlimited depth
-     */
-    config.setMaxDepthOfCrawling(-1);
-
-    /*
-     * You can set the maximum number of pages to crawl. The default value
-     * is -1 for unlimited number of pages
-     */
-    config.setMaxPagesToFetch(10);
-
-    /**
-     * Do you want crawler4j to crawl also binary data ?
-     * example: the contents of pdf, or the metadata of images etc
-     */
-    config.setIncludeBinaryContentInCrawling(false);
-
-    /*
-     * Do you need to set a proxy? If so, you can use:
-     * config.setProxyHost("proxyserver.example.com");
-     * config.setProxyPort(8080);
-     *
-     * If your proxy also needs authentication:
-     * config.setProxyUsername(username); config.getProxyPassword(password);
-     */
-
-    /*
-     * This config parameter can be used to set your crawl to be resumable
-     * (meaning that you can resume the crawl from a previously
-     * interrupted/crashed crawl). Note: if you enable resuming feature and
-     * want to start a fresh crawl, you need to delete the contents of
-     * rootFolder manually.
-     */
-    config.setResumableCrawling(true);
-
-    config.setUserAgentString("UCI Inf141-CS121 crawler 75542500 28239807 26447410 49859223");
+    CrawlConfig config = setupConfig();
 
     /*
      * Instantiate the controller for this crawl.
@@ -212,7 +154,7 @@ public class BasicCrawlController {
      * will reach the line after this only when crawling is finished.
      */
     stuffToDoBeforeCrawl();
-    controller.start(BasicCrawler.class, numberOfCrawlers);
+    controller.start(BasicCrawler.class, 4);
     stuffToDoAfterCrawl();
 
   }

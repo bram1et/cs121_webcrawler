@@ -1,8 +1,5 @@
 package ir.assignments.Search;
 
-/**
- * Created by Chris on 2/13/16.
- */
 public class ResultNode implements Comparable<ResultNode>{
     @Override
     public String toString() {
