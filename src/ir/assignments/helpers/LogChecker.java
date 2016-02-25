@@ -282,6 +282,6 @@ public class LogChecker {
             System.err.println(e);
         }
         */
-        urlNormalizingMap();
+        getNormURLsFromFile(3574);
     }
 }

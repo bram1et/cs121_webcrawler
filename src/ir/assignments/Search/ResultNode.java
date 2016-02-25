@@ -1,5 +1,7 @@
 package ir.assignments.Search;
 
+import java.util.PriorityQueue;
+
 public class ResultNode implements Comparable<ResultNode>{
     @Override
     public String toString() {
@@ -15,6 +17,24 @@ public class ResultNode implements Comparable<ResultNode>{
     private double anchorScore;
     private double tfidfScore;
     private double pageRankScore;
+    private PriorityQueue<ResultNode> subPages;
+
+    public void addToSubPages(ResultNode subPage) {
+        if (this.subPages == null) {
+            this.subPages = new PriorityQueue<ResultNode>();
+        }
+        this.subPages.add(subPage);
+    }
+
+    public void printSubPages() {
+        if (this.subPages != null && !this.subPages.isEmpty()) {
+            for (int i=0; i < 4; i++) {
+                ResultNode rn = subPages.poll();
+                System.out.println("\t" + rn.getUrl());
+                if (subPages.isEmpty()) break;
+            }
+        }
+    }
 
     public double getAnchorScore() {
         return anchorScore;
@@ -67,6 +87,10 @@ public class ResultNode implements Comparable<ResultNode>{
 
     public double getSearchScore() {
         return searchScore;
+    }
+
+    public void incrementSearchSCore(double score) {
+        this.searchScore += score;
     }
 
     public void setSearchScore(double searchScore) {

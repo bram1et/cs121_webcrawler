@@ -99,6 +99,7 @@ public class SearchEngine {
             List<ResultNode> sortedResults = new ArrayList<ResultNode>();
             for (String result : searchResults.keySet()) {
                 ResultNode resultNode = searchResults.get(result);
+                String url = resultNode.getUrl();
                 String urlHashCode = resultNode.getUrlHashCode();
                 Double searchSore = resultNode.getSearchScore();
                 double anchorScore = resultNode.getAnchorScore();
@@ -106,6 +107,8 @@ public class SearchEngine {
                 double termsInAchor = 0;
                 double termsinTitle = 0;
                 double titlePercent = 0.0;
+                double mailModifier = 1.0;
+                if (url.contains("mailman.ics.uci")) mailModifier = 0.5;
                 Integer singleQueryTerms = queryTokenized.size();
                 if (this.anchorText.containsKey(urlHashCode)) {
                     List<String> anchorTextList = this.anchorText.get(urlHashCode);
@@ -121,25 +124,62 @@ public class SearchEngine {
                 }
                 anchorPercent = 1 + 1 * (termsInAchor / singleQueryTerms);
                 titlePercent = 1 + 1 * (termsinTitle / singleQueryTerms);
-                resultNode.setSearchScore(searchSore * anchorPercent * titlePercent);
+                resultNode.setSearchScore(searchSore * anchorPercent * titlePercent * mailModifier);
                 resultNode.setAnchorScore(anchorScore + anchorPercent);
                 sortedResults.add(resultNode);
                 searchResultsHeap.add(resultNode);
             }
-            List<String> urlsToRemove = new ArrayList<String>();
+            ArrayList<String> resultsToremove = new ArrayList<String>();
             for (String result : searchResults.keySet()) {
                 ResultNode resultNode = searchResults.get(result);
                 String urlToFold = resultNode.getUrl();
-                String urlHashCode = String.valueOf(urlToFold.hashCode());
-                if (normalizingMap.containsKey(urlHashCode)) {
-                    String foldedURLHash = normalizingMap.get(urlHashCode);
-                    if (foldedURLHash.equals(resultNode.getUrlHashCode())) continue;
-                    if (searchResults.containsKey(foldedURLHash)) {
-                        ResultNode foldToHere = searchResults.get(foldedURLHash);
-                        foldToHere.setSearchScore(foldToHere.getSearchScore() * resultNode.getPageRankScore());
-                        if (searchResultsHeap.contains(resultNode)) {
-                            searchResultsHeap.remove(resultNode);
+                if (urlToFold != null) {
+                    String urlHashCode = String.valueOf(urlToFold.hashCode());
+                    if (normalizingMap.containsKey(urlHashCode)) {
+                        String foldedURLHash = normalizingMap.get(urlHashCode);
+                        if (foldedURLHash.equals(resultNode.getUrlHashCode())) continue;
+                        if (searchResults.containsKey(foldedURLHash)) {
+                            ResultNode foldToHere = searchResults.get(foldedURLHash);
+                            searchResultsHeap.remove(foldToHere);
+                            double foldScore = foldToHere.getSearchScore();
+                            double resultScore = resultNode.getSearchScore();
+                            foldToHere.setSearchScore(Math.max(foldScore, resultScore));
+//                        if (foldToHere.getSearchScore() < resultNode.getSearchScore()) {
+//                            foldToHere.setSearchScore(resultNode.getSearchScore());
+//                        }
+//                        foldToHere.setSearchScore(foldToHere.getSearchScore() * (1 + resultNode.getPageRankScore()));
+                            if (searchResultsHeap.contains(resultNode)) {
+                                searchResultsHeap.remove(resultNode);
+                                resultsToremove.add(result);
+                            }
+                            searchResultsHeap.add(foldToHere);
                         }
+                    }
+                }
+            }
+
+            for (String resultToRemove: resultsToremove) {
+                searchResults.remove(resultToRemove);
+            }
+            resultsToremove = new ArrayList<String>();
+            for (String result : searchResults.keySet()) {
+                ResultNode resultNode = searchResults.get(result);
+                String urlToFold = resultNode.getUrl();
+                if (urlToFold == null) continue;
+                String homePage = foldLinkToHomePage(urlToFold);
+                String urlFoldedHash = String.valueOf(homePage.hashCode());
+                if (searchResults.containsKey(urlFoldedHash)) {
+                    ResultNode homeResultNode = searchResults.get(urlFoldedHash);
+                    if (homeResultNode.getUrlHashCode().equals(resultNode.getUrlHashCode())) continue;
+                    if (searchResultsHeap.contains(homeResultNode)) {
+                        searchResultsHeap.remove(homeResultNode);
+                        homeResultNode.addToSubPages(resultNode);
+                        double homeScore = homeResultNode.getSearchScore();
+                        double resultScore = resultNode.getSearchScore();
+                        homeResultNode.setSearchScore(Math.max(homeScore, resultScore));
+                        homeResultNode.setSearchScore(homeResultNode.getSearchScore() + .05 * (resultNode.getSearchScore()));
+                        searchResultsHeap.remove(resultNode);
+                        searchResultsHeap.add(homeResultNode);
                     }
                 }
             }
@@ -148,16 +188,17 @@ public class SearchEngine {
                 System.out.println("No results found");
                 continue;
             }
-
             if (searchResultsHeap.size() > 20) {
                 for (int i = 0; i < 20; i++) {
+//                while (!searchResultsHeap.isEmpty()) {
                     ResultNode searchResult = searchResultsHeap.poll();
 //                    System.out.println(hashToURLMap.get(searchResult.getUrlHashCode()) + " : " + searchResult.getSearchScore() + " : " + searchResult.getTfidfScore() + " : " + searchResult.getAnchorScore() + " : " + searchResult.getPageRankScore());
-                    System.out.println(searchResult.getUrl());
+                    System.out.println(searchResult.getUrl() + " : " + searchResult.getSearchScore());
+                    searchResult.printSubPages();
                 }
             } else {
-                for (int i = 0; i < sortedResults.size(); i++) {
-                    System.out.println(searchResultsHeap.poll().getUrl() + " : " + sortedResults.get(i).getSearchScore());
+                while (!searchResultsHeap.isEmpty()) {
+                    System.out.println(searchResultsHeap.poll().getUrl());
                 }
             }
             long endTime = System.nanoTime();
@@ -190,6 +231,28 @@ public class SearchEngine {
             }
         }
         return String.valueOf(urlToReturn.hashCode());
+
+    }
+
+    private String foldLinkToHomePage(String url) {
+        String originalURL = url;
+        String subDomain = url.split("ics.uci.edu")[0] + "ics.uci.edu";
+        subDomain = subDomain.replace("https", "http");
+        String urlPath = url.split("ics.uci.edu")[1];
+        List<String> paths = Arrays.asList(urlPath.split("/"));
+        if (paths.size() > 0) {
+            if (originalURL.contains("www.ics.uci.edu")) {
+                paths = paths.subList(1, paths.size());
+                subDomain += "/";
+            }
+            for (String path : paths) {
+                subDomain += path + "/";
+                if (hashToURLMap.containsKey(String.valueOf(subDomain.hashCode()))) {
+                    return subDomain;
+                }
+            }
+        }
+        return originalURL;
 
     }
 
