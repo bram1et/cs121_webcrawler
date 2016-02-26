@@ -5,9 +5,6 @@ import java.lang.reflect.Array;
 import java.nio.file.Paths;
 import java.util.*;
 
-/**
- * Created by Chris on 2/12/16.
- */
 public class LinkInfluenceCalculator {
 
     public static HashMap<String, Influence> calculateLinkInfluence() {
@@ -22,14 +19,19 @@ public class LinkInfluenceCalculator {
         double numFiles = directoryListing.length;
         Integer fileCount = 0;
         Integer iterations = 3;
+        LoadingProgressTracker loadingProgressTracker;
+        double amountChanged = 0.0;
         if (numFiles > 0) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 10; i++) {
+                System.out.println("Iteration starting");
+                loadingProgressTracker = new LoadingProgressTracker((int)numFiles, "Pages");
+                amountChanged = 0.0;
+                fileCount = 0;
                 linkRanks = new ArrayList<Double>();
                 for (File freqFile : directoryListing) {
                     if (freqFile.isFile() && !freqFile.toString().contains("DS_Store")) {
                         fileName = freqFile.getName().split("\\.")[0];
-                        fileCount += 1;
-                        System.out.println(100 * fileCount / numFiles);
+                        loadingProgressTracker.incrementProgress();
                         if (!linkInfluence.containsKey(fileName)) {
                             linkInfluence.put(fileName, new Influence(fileName));
                         }
@@ -54,9 +56,9 @@ public class LinkInfluenceCalculator {
                                     linkInfluence.put(outGoingURL, new Influence(outGoingURL));
                                 }
                             }
-                            if (i == (iterations - 1)) {
-                                sc.close();
-                            }
+//                            if (i == (iterations - 1)) {
+                            sc.close();
+//                            }
 
                         } catch (FileNotFoundException e) {
                             System.err.println(e);
@@ -87,16 +89,24 @@ public class LinkInfluenceCalculator {
                 double stddev = Math.sqrt(variance);
 
                 double influenceFactor = 0.0;
+                double prevInfluence;
+
                 for (String key : linkInfluence.keySet()) {
                     count = linkInfluence.get(key).getCount();
+                    prevInfluence = linkInfluence.get(key).getInfluence();
                     influenceFactor = (count - mean) / stddev;
                     if (influenceFactor > 1.0) {
                         linkInfluence.get(key).setInfluence(influenceFactor);
+                        amountChanged += Math.abs(influenceFactor - prevInfluence);
                     } else {
                         linkInfluence.get(key).setInfluence(1.0);
+                        amountChanged += Math.abs(1 - prevInfluence);
                     }
                     linkInfluence.get(key).setCount(1.0);
                 }
+                loadingProgressTracker.printFinished();
+                System.out.println(amountChanged / numFiles);
+
             }
         } else {
             System.err.println("Hmmm...");

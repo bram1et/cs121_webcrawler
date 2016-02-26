@@ -114,7 +114,7 @@ public class Mapper {
             }
         }
     }
-    private static HashSet<String> getDoNotIncludeTerms() {
+    public static HashSet<String> getDoNotIncludeTerms() {
         HashSet<String> doNotIncludeTerms = new HashSet<>();
         String pathString = Paths.get("").toAbsolutePath().toString() + "/dataFiles/";
         String doNotIncludeTermFileName = pathString + "do_not_include.txt";

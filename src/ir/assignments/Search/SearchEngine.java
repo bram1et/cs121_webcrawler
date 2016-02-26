@@ -17,9 +17,9 @@ public class SearchEngine {
     private HashMap<String, List<String>> titleText;
     private HashMap<String, String> hashToURLMap;
     private HashMap<String, String> normalizingMap;
+    private Spelling spelling;
 
     Integer numDocuments;
-
     public SearchEngine() {
         loadFiles();
     }
@@ -231,7 +231,6 @@ public class SearchEngine {
             }
         }
         return String.valueOf(urlToReturn.hashCode());
-
     }
 
     private String foldLinkToHomePage(String url) {
@@ -272,6 +271,7 @@ public class SearchEngine {
         hashToURLMap = LogChecker.getURLMapFromFile(67696);
         System.out.println("Loading URL normalizing map...");
         normalizingMap = LogChecker.getNormURLsFromFile(3574);
+        spelling = new Spelling();
         this.numDocuments = anchorText.size();
     }
 
