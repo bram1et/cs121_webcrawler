@@ -29,6 +29,7 @@ public class LoadingProgressTracker {
     private void initializeProgressBar() {
         System.out.println("|--------------------------------------------------| 100%");
         System.out.print("|");
+        System.out.flush();
     }
 
     public void printFinished() {
@@ -39,6 +40,7 @@ public class LoadingProgressTracker {
         this.count += 1;
         if((100 * this.count/ this.totalCount) > this.progressCount) {
             System.out.print("-");
+            System.out.flush();
             this.progressCount += 2;
         }
     }

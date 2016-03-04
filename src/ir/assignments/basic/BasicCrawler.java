@@ -89,6 +89,7 @@ public class BasicCrawler extends WebCrawler {
       String text = htmlParseData.getText();
       Set<WebURL> links = htmlParseData.getOutgoingUrls();
       System.out.println("URL: " + url + " : " + url.hashCode());
+      /*
       for (WebURL link : links) {
         if (shouldVisit(page, link)) {
           String siteAnchorFileName = pathString + "/dataFiles/anchorTextFiles/" + link.hashCode() + ".txt";
@@ -110,8 +111,26 @@ public class BasicCrawler extends WebCrawler {
           }
         }
       }
-      String dataFilesFolder = pathString + "/dataFiles/";
+      */
+//      String dataFilesFolder = pathString + "/dataFiles/";
+      String dataFilesFolder = pathString + "/dataFiles/savedTextFiles/";
+      File textFile = new File(dataFilesFolder +  url.hashCode() + ".txt");
+      if (!textFile.exists()) {
+        try {
+          textFile.createNewFile();
+        } catch (IOException e) {
+          System.err.println(e);
+        }
 
+      }
+      try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder +  url.hashCode() + ".txt"))) {
+        infoWrite.write(text);
+        infoWrite.newLine();
+        infoWrite.flush();
+      } catch (IOException e) {
+        System.err.println(e);
+      }
+      /*
       try (BufferedWriter infoWrite = new BufferedWriter(new FileWriter(dataFilesFolder + "title_info.txt", true))) {
         infoWrite.write(url.hashCode() + " : " + Utilities.tokenizeString(htmlParseData.getTitle()));
         infoWrite.newLine();
@@ -128,6 +147,7 @@ public class BasicCrawler extends WebCrawler {
       } catch (IOException e) {
         System.err.println(e);
       }
+      */
       /**
        * Writing urls to log file. Might be helpful...
        */

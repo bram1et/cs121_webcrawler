@@ -7,6 +7,8 @@ Kevin Chen 49859223
 */
 package ir.assignments.helpers;
 
+import javafx.scene.paint.Stop;
+
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.*;
@@ -315,7 +317,30 @@ public class Utilities {
 			if (spaces) {
 				sb.append(" ");
 			}
-			sb.append(words.get(index));
+			if (words.get(index).length() < 4 && !StopWords.isAStopword(words.get(index))) {
+				sb.append(words.get(index).toUpperCase());
+			} else {
+				sb.append(words.get(index));
+			}
+		}
+		return sb.toString();
+	}
+
+	public static String titleCreator(List<String> words) {
+		/*
+			Helper function to concatenate separate strings from list of words
+			given the start index and index from list. Option to include space
+			while concatenating strings
+		*/
+		StringBuilder sb = new StringBuilder("");
+		for (String word : words) {
+			if (word.length() < 4) {
+				if (!StopWords.isAStopword(word)) sb.append(word.toUpperCase());
+				else sb.append(word);
+			} else {
+				sb.append(word.substring(0,1).toUpperCase() + word.substring(1,word.length()));
+			}
+			sb.append(" ");
 		}
 		return sb.toString();
 	}

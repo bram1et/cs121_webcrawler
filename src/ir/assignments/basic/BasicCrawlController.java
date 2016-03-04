@@ -193,7 +193,7 @@ public class BasicCrawlController {
     int numberOfCrawlers = 4;
     CrawlConfig config = setupConfig();
     config.setMaxDepthOfCrawling(0);
-    config.setResumableCrawling(true);
+    config.setResumableCrawling(false);
     /*
      * Instantiate the controller for this crawl.
      */

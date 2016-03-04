@@ -39,6 +39,7 @@ public class Reducer {
          */
         for (File mapFile : directoryListing) {
             String fileName = mapFile.toString().split(".txt")[0];
+
             if (mapFile.isFile() && !fileName.contains(".DS_Store")) {
                 try {
                     Scanner scanner = new Scanner(mapFile);

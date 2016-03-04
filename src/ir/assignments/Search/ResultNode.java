@@ -1,5 +1,7 @@
 package ir.assignments.Search;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class ResultNode implements Comparable<ResultNode>{
@@ -36,6 +38,20 @@ public class ResultNode implements Comparable<ResultNode>{
         }
     }
 
+    public boolean hasSubPages() {
+        return this.subPages != null && !subPages.isEmpty();
+    }
+
+    public List<ResultNode> getSubPages() {
+        List<ResultNode> subPagesList = new ArrayList<ResultNode>();
+        for (int i=0; i < 4; i++) {
+            ResultNode rn = subPages.poll();
+            subPagesList.add(rn);
+            if (subPages.isEmpty()) break;
+        }
+        return subPagesList;
+
+    }
     public double getAnchorScore() {
         return anchorScore;
     }
