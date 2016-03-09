@@ -1,3 +1,8 @@
+/*
+Team Members:
+Christopher Dang 75542500
+Emily Puth 28239807
+*/
 package ir.assignments.helpers;
 
 import ir.assignments.basic.BasicCrawlController;
@@ -12,9 +17,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Created by Chris on 2/17/16.
- */
 public class TitleInfoGetter {
     private static HashSet<String> getTitlesFromFile() {
         HashSet<String> hasTitleInfo = new HashSet<>();

@@ -1,3 +1,8 @@
+/*
+Team Members:
+Christopher Dang 75542500
+Emily Puth 28239807
+*/
 package ir.assignments.Search;
 
 import com.google.gson.Gson;
@@ -35,14 +40,31 @@ public class SearchEngine {
 
 
     public ResultsWrapper handleQuery(String query) {
+        /*
+            Takes a string and returns related links found by our webcrawler
+             sorted by perceived relevancy.
+
+             Parameters
+             ----------
+             query: String
+                String containing query with which we search
+
+         */
+
+         //Initializing timer and variables.
+
         long startTime = System.nanoTime();
         ResultsWrapper resultsWrapper = new ResultsWrapper();
         List<Result> results = new ArrayList<Result>();
         HashSet<String> queryTerms = new HashSet<String>();
         List<PostingsEntry> postingsEntryList = new ArrayList<PostingsEntry>();
-//        List<String> anchorTextList = new ArrayList<String>();
         PriorityQueue<ResultNode> searchResultsHeap = new PriorityQueue<ResultNode>();
         searchResults = new HashMap<String, ResultNode>();
+
+        /*
+        Get spell correction. If spell corrected, change query to corrected
+        spelling. If '~' ignore spell correction.
+        */
         String correctedQuery = spelling.correct(query);
         String originalQuery = query;
 
@@ -55,6 +77,9 @@ public class SearchEngine {
             query = query.substring(1, query.length());
             originalQuery = query;
         }
+        /*
+            Tokenize query and add two-grams and three-grams to query set.
+         */
         List<String> queryTokenized = Arrays.asList(query.trim().split("\\s+"));
         String minusTwo = "";
         String minusOne = "";
@@ -70,6 +95,13 @@ public class SearchEngine {
             minusTwo = minusOne;
             minusOne = current;
         }
+
+        /*
+            For term in query set, get postings list of documents. Create a resulteNode
+            for each document and add to hashMap. For each document, sum up tfidf over
+            separate query terms
+         */
+
         for (String token : queryTerms) {
             postingsEntryList = new ArrayList<>();
             String tokenHash = String.valueOf(token.hashCode());
@@ -109,6 +141,12 @@ public class SearchEngine {
                 }
             }
         }
+
+        /*
+            For each document multiply score by anchor text and title text
+            modifiers. Add search results to result heap.
+         */
+
         List<ResultNode> sortedResults = new ArrayList<ResultNode>();
         for (String result : searchResults.keySet()) {
             ResultNode resultNode = searchResults.get(result);
@@ -142,6 +180,12 @@ public class SearchEngine {
             sortedResults.add(resultNode);
             searchResultsHeap.add(resultNode);
         }
+
+        /*
+            For results, fold links into normalized form. Set score to the
+            higher of the two. Removed folded links.
+         */
+
         ArrayList<String> resultsToremove = new ArrayList<String>();
         for (String result : searchResults.keySet()) {
             ResultNode resultNode = searchResults.get(result);
@@ -170,6 +214,13 @@ public class SearchEngine {
         for (String resultToRemove: resultsToremove) {
             searchResults.remove(resultToRemove);
         }
+
+        /*
+            Fold links into homepage if homepage is contained within
+            search results. Increase homepage score/set to highest of
+            contained links.
+         */
+
         resultsToremove = new ArrayList<String>();
         for (String result : searchResults.keySet()) {
             ResultNode resultNode = searchResults.get(result);
@@ -196,6 +247,13 @@ public class SearchEngine {
         if (searchResultsHeap.isEmpty()) {
             System.out.print("");
         }
+
+        /*
+            Removes top 20 results from heap, packages them into wrapper class.
+            Retrieve title text, anchor text, snippet (if possible) for link.
+            Returns json-ified version of wrapper class.
+         */
+
         if (!searchResultsHeap.isEmpty()) {
             for (int i = 0; i < 20; i++) {
                 if (searchResultsHeap.isEmpty()) break;
@@ -268,13 +326,7 @@ public class SearchEngine {
 
     public void run() {
         Boolean running = true;
-//        List<String> queryTokenized;
-//        HashSet<String> queryTerms;
         while (running) {
-//            List<PostingsEntry> postingsEntryList = new ArrayList<PostingsEntry>();
-//            List<String> anchorText = new ArrayList<String>();
-//            PriorityQueue<ResultNode> searchResultsHeap = new PriorityQueue<ResultNode>();
-//            searchResults = new HashMap<String, ResultNode>();
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter a query");
             String query = scanner.nextLine();
@@ -333,6 +385,9 @@ public class SearchEngine {
     }
 
     private void loadFiles() {
+        /*
+            Loads all the necessary files into hashmaps for quick lookup.
+         */
         System.out.println("Loading files...");
         System.out.println("Loading index...");
         postingsList = Reducer.getPostingsListFromFile(419029);

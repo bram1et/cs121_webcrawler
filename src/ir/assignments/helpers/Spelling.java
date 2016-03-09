@@ -8,6 +8,11 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.*;
 
+/*
+    Based on the coding example created by Peter Norvig. Found
+    here: http://norvig.com/spell-correct.html. Translated to java by
+    Rael Cunha. Slightly modified for our purposes.
+ */
 public class Spelling {
 
     private final HashMap<String, Integer> nWords = new HashMap<String, Integer>();

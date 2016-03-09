@@ -1,3 +1,8 @@
+/*
+Team Members:
+Christopher Dang 75542500
+Emily Puth 28239807
+*/
 package ir.assignments.Search;
 
 import java.util.ArrayList;
